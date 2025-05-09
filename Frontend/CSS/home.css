@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.hero {
+  background: url('pp.jpg') no-repeat center center/cover;
+  height: 80vh;
+  position: relative;
+}
+
+.hero .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.highlight {
+  color: #d946ef;
+  font-weight: bold;
+}
+
+.kategori {
+  padding: 2em;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.icon-box {
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  border-radius: 10px;
+  line-height: 120px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.campaign,
+.kisah,
+.cara-kerja,
+.merchandise {
+  padding: 2em;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.card {
+  background: #fff;
+  padding: 1em;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card button {
+  background: #a855f7;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  background: #e9d5ff;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
