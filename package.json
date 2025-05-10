@@ -1,0 +1,23 @@
+{
+  "name": "softdev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thenokzzz/SoftDev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thenokzzz/SoftDev/issues"
+  },
+  "homepage": "https://github.com/thenokzzz/SoftDev#readme",
+  "description": "",
+  "dependencies": {
+    "pg": "^8.15.6"
+  }
+}
