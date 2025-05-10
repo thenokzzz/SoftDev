@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Untuk Kita</title>
   <link rel="stylesheet" href="/Frontend/CSS/home.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav>
+  <nav class="navbar">
     <div class="logo">
-      <img src="/Frontend/img/logo untukkita.png" alt="" />
+      <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
       Untuk<span>Kita</span>
     </div>
-    <ul>
+    <ul class="nav-links">
       <li><a href="#">Home</a></li>
       <li><a href="#">Tentang</a></li>
       <li><a href="#">Our Causes</a></li>
@@ -30,6 +31,90 @@
       DIMULAI DARI <span class="highlight">UNTAR</span><br />
       MENUJU PERUBAHAN <span class="highlight">BESAR.</span>
     </h1>
+  </section>
+
+  <!-- Kategori Section -->
+  <section class="kategori">
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/50/heart-with-dog-paw.png" alt="Sosial" />
+      <p>Sosial</p>
+    </div>
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/50/plant-under-sun.png" alt="Lingkungan" />
+      <p>Lingkungan</p>
+    </div>
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/50/earthquakes.png" alt="Bencana Alam" />
+      <p>Bencana Alam</p>
+    </div>
+    <div class="icon">
+      <img src="https://img.icons8.com/ios-filled/50/t-shirt.png" alt="Merchandise" />
+      <p>Merchandise</p>
+    </div>
+  </section>
+
+  <!-- Campaign Pilihan Section -->
+  <section class="campaign">
+    <h2>Campaign <span>Pilihan</span></h2>
+    <p>Kami membantu mereka yang tidak memiliki harapan</p>
+
+    <div class="cards">
+      <!-- Card 1 -->
+      <div class="card">
+        <img src="/Frontend/img/IMG_8211.jpg" alt="Pendidikan"/>
+        <h3>Pendidikan</h3>
+        <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak Kurang Mampu...</p>
+       <div class="progress-bar-container">
+        <div class="progress-bar-fill"></div>
+       </div>
+        <div class="progress">
+          <span>43% Donated</span>
+          <span>Goals 100%</span>
+        </div>
+        <div class="buttons">
+          <button>Donate</button>
+          <button class="secondary">Read more</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <img src="/Frontend/img/IMG_8211.jpg" alt="Bencana Alam" />
+        <h3>Bencana Alam</h3>
+        <p>Bencana alam datang tanpa peringatan dan meninggalkan duka. Banyak dari saudara kita kehilangan rumah...</p>
+        <div class="progress-bar-container">
+  <div class="progress-bar-fill"></div>
+</div>
+<div class="progress-text">
+  <span>43% Donated</span>
+  <span>Goals 100%</span>
+</div>
+
+        <div class="buttons">
+          <button>Donate</button>
+          <button class="secondary">Read more</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <img src="/Frontend/img/IMG_8211.jpg" alt="Penanaman Mangrove"/>
+        <h3>Penanaman Mangrove</h3>
+        <p>Hutan mangrove adalah penjaga garis pantai kita. Ia menampung berbagai jenis biota laut...</p>
+       <div class="progress-bar-container">
+  <div class="progress-bar-fill"></div>
+</div>
+<div class="progress-text">
+  <span>43% Donated</span>
+  <span>Goals 100%</span>
+</div>
+
+        <div class="buttons">
+          <button>Donate</button>
+          <button class="secondary">Read more</button>
+        </div>
+      </div>
+    </div>
   </section>
 
 </body>
