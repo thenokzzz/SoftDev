@@ -1,205 +1,225 @@
- * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    /* Navbar */
-    nav {
-      background-color: #e5e5e5;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 50px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    nav .logo {
-      display: flex;
-      align-items: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav .logo img {
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    nav .logo span {
-      color: #9333ea;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      padding: 8px 12px;
-      transition: color 0.2s;
-    }
-
-    nav ul li a:hover {
-      color: #9333ea;
-    }
-
-    nav .btn-donasi {
-      background-color: #9333ea;
-      color: white;
-      padding: 10px 18px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-      transition: background-color 0.3s;
-    }
-
-    nav .btn-donasi:hover {
-      background-color: #7e22ce;
-    }
-
-    /* Hero */
-    .hero {
-      height: 100vh;
-      background-image: url('/Frontend/img/IMG_7127.jpg');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .overlay {
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-    .hero h1 {
-      color: white;
-      font-size: 36px;
-      line-height: 1.4;
-      text-align: center;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+/* Navbar */
+nav {
+  background-color: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
 
-    .hero .highlight {
-      background-color: #9333ea;
-      color: white;
-      padding: 2px 8px;
-      border-radius: 6px;
-      margin: 0 4px;
-    }
+nav .logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-    /* Kategori */
-    .kategori {
-      display: flex;
-      justify-content: center;
-      gap: 290px;
-      padding: 40px 20px;
-      background-color: #fff;
-    }
+nav .logo img {
+  height: 40px;
+  margin-right: 10px;
+}
 
-    .kategori .icon {
-      text-align: center;
-    }
+nav .logo span {
+  color: #9333ea;
+}
 
-    .kategori .icon img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
-      filter: invert(32%) sepia(86%) saturate(5626%) hue-rotate(262deg) brightness(98%) contrast(100%);
-    }
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
 
-    .kategori .icon p {
-      font-weight: bold;
-    }
+nav ul li a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: color 0.2s;
+}
 
-    /* Campaign */
-    .campaign {
-      padding: 60px 20px;
-      text-align: center;
-    }
+nav ul li a:hover {
+  color: #9333ea;
+}
 
-    .campaign h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
+nav .btn-donasi {
+  background-color: #9333ea;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
 
-    .campaign h2 span {
-      color: #9333ea;
-    }
+nav .btn-donasi:hover {
+  background-color: #7e22ce;
+}
 
-    .campaign p {
-      color: #666;
-      margin-bottom: 40px;
-    }
+/* Hero */
+.hero {
+  height: 100vh;
+  background-image: url("/Frontend/img/IMG_7127.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      width: 300px;
-      padding: 20px;
-      text-align: left;
-      transition: transform 0.2s;
-    }
+.hero h1 {
+  color: white;
+  font-size: 36px;
+  line-height: 1.4;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+.hero .highlight {
+  background-color: #9333ea;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin: 0 4px;
+}
 
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
+/* Kategori */
+.kategori {
+  display: flex;
+  justify-content: center;
+  gap: 290px;
+  padding: 40px 20px;
+  background-color: #fff;
+}
 
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-      color: #111;
-    }
+.kategori .icon {
+  text-align: center;
+}
 
-    .card p {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 15px;
-    }
-    /* Progress Bar Styling */
+.kategori .icon img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  filter: invert(32%) sepia(86%) saturate(5626%) hue-rotate(262deg)
+    brightness(98%) contrast(100%);
+}
 
-    .progress{
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    
+.kategori .icon p {
+  font-weight: bold;
+}
+
+/* Campaign */
+.campaign {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.campaign h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.campaign h2 span {
+  color: #9333ea;
+}
+
+.campaign p {
+  color: #666;
+  margin-bottom: 40px;
+}
+.judul-campaign {
+  font-size: 36px;
+  font-weight: 800;
+  position:relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.judul-campaign::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 3px;
+  background-color: gold;
+  bottom: -8px;
+  left: 25%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  width: 300px;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #111;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+/* Progress Bar Styling */
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
 .progress-bar-container {
   width: 100%;
   background-color: #c0c0c0;
@@ -223,60 +243,393 @@
   font-size: 14px;
 }
 
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
 
-    .buttons button {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.buttons button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    .buttons .secondary {
-      background-color: #f0f0f0;
-      color: #333;
-    }
+.buttons .secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
 
-    .buttons button:not(.secondary) {
-      background-color: #9333ea;
-      color: white;
-    }
+.buttons button:not(.secondary) {
+  background-color: #9333ea;
+  color: white;
+}
 
-    .buttons button:hover {
-      opacity: 0.9;
-    }
+.buttons button:hover {
+  opacity: 0.9;
+}
 
-    /* Responsive */
-    @media screen and (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        padding: 10px 20px;
-      }
+/* Responsive */
+@media screen and (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
 
-      nav ul {
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 10px;
-      }
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+  }
 
-      .hero h1 {
-        font-size: 26px;
-        padding: 0 10px;
-      }
+  .hero h1 {
+    font-size: 26px;
+    padding: 0 10px;
+  }
 
-      .kategori {
-        flex-direction: column;
-        align-items: center;
-      }
+  .kategori {
+    flex-direction: column;
+    align-items: center;
+  }
 
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.kisah-kita,
+.bagaimana-kerja {
+  padding: 60px 20px;
+  background-color: #fff;
+}
+
+.kisah-kita .container,
+.bagaimana-kerja .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.kisah-kita .image img,
+.bagaimana-kerja .image img {
+  width: 300px; /* Ukuran sedang */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.kisah-kita .content,
+.bagaimana-kerja .content {
+  max-width: 500px;
+}
+
+.kisah-kita h2,
+.bagaimana-kerja h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.kisah-kita p,
+.bagaimana-kerja p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.kisah-kita .btn {
+  background-color: #fff;
+  border: 1px solid #444;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.kisah-kita .btn:hover {
+  background-color: #eee;
+}
+
+/* Untuk bagian langkah-langkah bagaimana-kerja */
+.bagaimana-kerja ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.bagaimana-kerja li {
+  margin-bottom: 25px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.bagaimana-kerja .dot {
+  height: 12px;
+  width: 12px;
+  background-color: gold;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 6px;
+}
+
+.merchandise {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+.judul-merch {
+  font-size: 36px;
+  font-weight: 800;
+  position:relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.judul-merch::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background-color: gold;
+  bottom: -8px;
+  left: 25%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+
+.merchandise h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.merchandise p {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  color: #555;
+  font-size: 16px;
+}
+
+.merch-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.merch-card {
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 20px;
+  max-width: 300px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.merch-card:hover {
+  transform: translateY(-5px);
+}
+
+.merch-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.merch-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.merch-card p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.merch-card a {
+  font-weight: bold;
+  color: #9333ea;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.merch-card a:hover {
+  text-decoration: underline;
+}
+
+/* ====== Footer ====== */
+.site-footer {
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+/* Footer top */
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #E5C6F0;
+  padding: 40px 5%;
+}
+.footer-brand .logos {
+  display: flex;
+  align-items: center;
+}
+.logo-item img {
+  height: 60px;
+  object-fit: contain;
+}
+.logo-divider {
+  width: 2px;
+  height: 60px;
+  background: #7B1FA2;
+  margin: 0 20px;
+}
+.footer-section {
+  flex: 1 1 200px;
+  margin: 10px 20px;
+}
+.footer-section h4 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Quick links */
+.quick-links {
+  list-style: none;
+}
+.quick-links li + li {
+  margin-top: 10px;
+}
+.quick-links a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s;
+}
+.quick-links a:hover {
+  color: #7B1FA2;
+}
+
+/* Contact us */
+.footer-section p {
+  margin-bottom: 8px;
+}
+.footer-section a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Urgent Causes */
+.causes ul {
+  list-style: none;
+  padding: 0;
+}
+.causes li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.cause-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: #ddd;
+  border-radius: 8px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+.cause-title {
+  flex: 1;
+  font-weight: 600;
+}
+.progress-bar-footer-container {
+  width: 100px;
+  background: #ccc;
+  height: 5px;
+  border-radius: 3px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+.progress-bar-fill-footer {
+  height: 100%;
+  background: #A5D6A7;
+}
+.progress-text {
+  width: 30px;
+  text-align: right;
+  font-size: 0.9rem;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #7B1FA2;
+  color: #fff;
+  padding: 20px 5%;
+}
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 0.9rem;
+}
+.footer-nav .divider {
+  color: rgba(255,255,255,0.5);
+}
+.footer-bottom .copyright {
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+.social-icons a {
+  display: inline-block;
+  margin-left: 15px;
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(0,0,0,0.2);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.social-icons a:hover {
+  background: rgba(0,0,0,0.4);
+}
+
+/* Responsif untuk footer */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-section {
+    margin: 20px 0;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .social-icons {
+    margin-top: 10px;
+  }
+}
+
+
+
