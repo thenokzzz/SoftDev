@@ -116,6 +116,39 @@ nav .btn-donasi:hover {
   padding-top: 80px;
 }
 
+.campaign-search {
+    position: relative;
+    max-width: 530px;
+    margin: 0 auto 20px auto;
+    padding: 0 16px;
+}
+
+.campaign-search .search-icon {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: rgba(0, 0, 0, 0.3); 
+    pointer-events: none;
+}
+
+.campaign-search .search-input {
+    width: 100%;
+    padding: 10px 16px 10px 44px; 
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campaign-search .search-input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
 .campaign-section {
     padding: 40px 20px;
     max-width: 1200px;
