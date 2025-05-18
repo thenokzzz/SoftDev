@@ -8,34 +8,42 @@ body {
   font-family: "Segoe UI", sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  margin: 0;
 }
 /* Navbar */
 nav {
-  background-color: #e5e5e5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 50px;
-  position: sticky;
+  background-color: rgb(195, 195, 195);
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: fixed;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin: 0 auto;
 }
 
 nav .logo {
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
+  color: #fff;
 }
 
 nav .logo img {
-  height: 40px;
-  margin-right: 10px;
+  height: 50px;
+  padding: 0 5px;
 }
 
 nav .logo span {
-  color: #9333ea;
+  color: #9c00bc;
 }
 
 nav ul {
@@ -53,11 +61,11 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #9333ea;
+  color: #9c00bc;
 }
 
 nav .btn-donasi {
-  background-color: #9333ea;
+  background-color: #9c00bc;
   color: white;
   padding: 10px 18px;
   border: none;
@@ -68,13 +76,48 @@ nav .btn-donasi {
   transition: background-color 0.3s;
 }
 
+nav .btn-donasi {
+  background-color: #9c00bc;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+nav .btn-login {
+  background-color: white;
+  color: #9c00bc;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+nav .btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.625);
+}
+
 nav .btn-donasi:hover {
   background-color: #7e22ce;
 }
 
+.home-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
 /* Hero */
 .hero {
-  height: 100vh;
+  height: 70vh;
+  border-radius: 10px;
   background-image: url("/Frontend/img/IMG_7127.jpg");
   background-size: cover;
   background-position: center;
@@ -87,6 +130,7 @@ nav .btn-donasi:hover {
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,175 +145,214 @@ nav .btn-donasi:hover {
 }
 
 .hero .highlight {
-  background-color: #9333ea;
+  background-color: #9c00bc;
   color: white;
-  padding: 2px 8px;
+  padding: 1px 6px;
   border-radius: 6px;
-  margin: 0 4px;
 }
 
 /* Kategori */
 .kategori {
   display: flex;
   justify-content: center;
-  gap: 290px;
-  padding: 40px 20px;
-  background-color: #fff;
+  gap: 220px;
+  flex-wrap: wrap;
+  margin: 50px 0;
 }
 
-.kategori .icon {
+.kategori-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.kategori .icon img {
-  width: 60px;
-  height: 60px;
+.kategori-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f6f5f2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
-  filter: invert(32%) sepia(86%) saturate(5626%) hue-rotate(262deg)
-    brightness(98%) contrast(100%);
 }
 
-.kategori .icon p {
-  font-weight: bold;
+.kategori-icon img {
+  width: 64px;
+  height: 64px;
 }
 
-/* Campaign */
+.kategori-item p {
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+/* Campaign Section */
 .campaign {
-  padding: 60px 20px;
   text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 40px auto;
+  max-width: 1200px;
+  background-color: #fff;
+  position: relative;
+}
+.lihat-lainnya-container {
+  width: 120px;
+  height: 35px;
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  border-radius: 20px;
+  border: 2px solid #9C00BC;
+  background-color: white;
 }
 
-.campaign h2 {
-  font-size: 28px;
+.lihat-lainnya {
+  color: #9C00BC;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  padding: 10px;
+}
+
+.lihat-lainnya:hover {
+  color: #6b0089;
+  text-decoration: none;
+}
+.campaign-header {
+  margin: 30px 0;
+}
+
+.judul-campaign {
+  font-size: 32px;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
   margin-bottom: 10px;
 }
 
-.campaign h2 span {
-  color: #9333ea;
-}
-
-.campaign p {
-  color: #666;
-  margin-bottom: 40px;
-}
-.judul-campaign {
-  font-size: 36px;
-  font-weight: 800;
-  position:relative;
-  display: inline-block;
-  margin-bottom: 20px;
+.judul-campaign span {
+  color: #9c00bc;
 }
 
 .judul-campaign::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 120px;
   height: 3px;
   background-color: gold;
   bottom: -8px;
-  left: 25%;
+  left: 30%;
   transform: translateX(-50%);
   border-radius: 2px;
 }
-
+.campaign p {
+  color: #666;
+  font-size: 0.95rem;
+}
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
+  justify-items: center;
+  margin: 30px 0;
 }
 
-.card {
+.card-campaign {
   background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  width: 300px;
-  padding: 20px;
-  text-align: left;
-  transition: transform 0.2s;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px #9d00bc13;
+  overflow: hidden;
+  transition: transform 0.3s;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
 }
 
-.card:hover {
+.card-campaign:hover {
   transform: translateY(-5px);
 }
 
-.card img {
+.card-campaign img {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  height: 180px;
+  object-fit: cover;
 }
 
-.card h3 {
-  margin-bottom: 10px;
-  font-size: 20px;
-  color: #111;
+.card-content {
+  padding: 15px;
+  text-align: left;
 }
 
-.card p {
+.card-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.card-content p {
   font-size: 14px;
   color: #555;
-  margin-bottom: 15px;
-}
-/* Progress Bar Styling */
-
-.progress {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
   margin-bottom: 10px;
 }
 
-.progress-bar-container {
-  width: 100%;
-  background-color: #c0c0c0;
-  border-radius: 10px;
-  height: 10px;
-  margin-bottom: 8px;
+/* Progress */
+.label {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  background: #ddd;
+  border-radius: 6px;
+  height: 6px;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
-.progress-bar-fill {
-  width: 43%;
+.progress-fill {
+  background: #9c00bc;
   height: 100%;
-  background-color: #9333ea;
-  border-radius: 10px 0 0 10px;
+  width: 0;
+  transition: width 0.3s ease-in-out;
 }
 
-.progress-text {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  font-size: 14px;
+.amount {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .buttons {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
 }
 
-.buttons button {
+.btn-primary{
   flex: 1;
   padding: 8px;
-  border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.buttons .secondary {
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.buttons button:not(.secondary) {
-  background-color: #9333ea;
+.btn-primary {
+  background-color: #9c00bc;
   color: white;
+  border: none;
 }
 
-.buttons button:hover {
-  opacity: 0.9;
+.btn-primary:hover {
+  background-color: #7c0099;
 }
 
 /* Responsive */
@@ -388,13 +471,13 @@ nav .btn-donasi:hover {
 .judul-merch {
   font-size: 36px;
   font-weight: 800;
-  position:relative;
+  position: relative;
   display: inline-block;
   margin-bottom: 20px;
 }
 
 .judul-merch::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100px;
   height: 3px;
@@ -404,7 +487,6 @@ nav .btn-donasi:hover {
   transform: translateX(-50%);
   border-radius: 2px;
 }
-
 
 .merchandise h2 {
   font-size: 32px;
@@ -429,7 +511,7 @@ nav .btn-donasi:hover {
 .merch-card {
   background-color: #f8f8f8;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   padding: 20px;
   max-width: 300px;
   text-align: left;
@@ -460,7 +542,7 @@ nav .btn-donasi:hover {
 
 .merch-card a {
   font-weight: bold;
-  color: #9333ea;
+  color: #9c00bc;
   text-decoration: none;
   font-size: 14px;
 }
@@ -480,7 +562,7 @@ nav .btn-donasi:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background: #E5C6F0;
+  background: #e5c6f0;
   padding: 40px 5%;
 }
 .footer-brand .logos {
@@ -494,7 +576,7 @@ nav .btn-donasi:hover {
 .logo-divider {
   width: 2px;
   height: 60px;
-  background: #7B1FA2;
+  background: #7b1fa2;
   margin: 0 20px;
 }
 .footer-section {
@@ -520,7 +602,7 @@ nav .btn-donasi:hover {
   transition: color 0.2s;
 }
 .quick-links a:hover {
-  color: #7B1FA2;
+  color: #7b1fa2;
 }
 
 /* Contact us */
@@ -533,44 +615,67 @@ nav .btn-donasi:hover {
 }
 
 /* Urgent Causes */
-.causes ul {
+.footer-section.causes ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-.causes li {
+
+.cause-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 20px;
 }
+
 .cause-icon {
-  display: inline-block;
   width: 50px;
   height: 50px;
-  background: #ddd;
-  border-radius: 8px;
-  margin-right: 15px;
+  background-color: #ddd;
+  border-radius: 10px;
   flex-shrink: 0;
 }
-.cause-title {
+
+.cause-details {
   flex: 1;
-  font-weight: 600;
 }
-.progress-bar-footer-container {
-  width: 100px;
-  background: #ccc;
-  height: 5px;
-  border-radius: 3px;
-  margin: 0 10px;
+
+.cause-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cause-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.progress-bar-container {
+  background-color: #ccc;
+  height: 8px;
+  border-radius: 5px;
   overflow: hidden;
 }
-.progress-bar-fill-footer {
+
+.progress-bar-fill {
   height: 100%;
-  background: #A5D6A7;
+  border-radius: 5px;
 }
-.progress-text {
-  width: 30px;
-  text-align: right;
-  font-size: 0.9rem;
+
+.progress-bar-container.purple .progress-bar-fill {
+  background-color: #9c00bc;
+}
+
+.progress-bar-container.green .progress-bar-fill {
+  background-color: #5dd59d;
 }
 
 /* Footer bottom */
@@ -579,7 +684,7 @@ nav .btn-donasi:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background: #7B1FA2;
+  background: #7b1fa2;
   color: #fff;
   padding: 20px 5%;
 }
@@ -590,34 +695,50 @@ nav .btn-donasi:hover {
   font-size: 0.9rem;
 }
 .footer-nav .divider {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 .footer-bottom .copyright {
   font-size: 0.9rem;
   margin: 10px 0;
 }
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
 .social-icons a {
-  display: inline-block;
-  margin-left: 15px;
-  background: rgba(0,0,0,0.2);
-  width: 36px;
-  height: 36px;
-  text-align: center;
+  width: 38px;
+  height: 38px;
+  background-color: rgb(32, 32, 32);
   border-radius: 50%;
-  transition: background 0.2s;
-  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
 }
 
 .social-icons a:hover {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .social-icons a img {
-  width: 24px;
-  height: 24px;
-  margin-top: 6px; 
+  width: 18px;
+  height: 18px;
 }
 
+/* Responsif untuk campaign */
+@media (max-width: 500px) {
+  .judul-campaign {
+    font-size: 24px;
+  }
+
+  .card-content h3 {
+    font-size: 16px;
+  }
+
+  .campaign p {
+    font-size: 0.85rem;
+  }
+}
 
 /* Responsif untuk footer */
 @media (max-width: 768px) {
@@ -636,6 +757,3 @@ nav .btn-donasi:hover {
     margin-top: 10px;
   }
 }
-
-
-

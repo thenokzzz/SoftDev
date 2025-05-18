@@ -14,180 +14,199 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
-      Untuk<span>Kita</span>
+    <div class="navbar-inner">
+      <div class="logo">
+        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+        Untuk<span>Kita</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+        <li><a href="#">Our Causes</a></li>
+        <li><a href="#">Galeri</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+      <ul class="btn-links">
+        <button class="btn-login">Login</button>
+        <button class="btn-donasi">Berdonasi</button>
+      </ul>
     </div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-      <li><a href="#">Our Causes</a></li>
-      <li><a href="#">Galeri</a></li>
-      <li><a href="#">Blog</a></li>
-    </ul>
-    <button class="btn-donasi">Berdonasi</button>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="overlay">
-      <h1>
-        DIMULAI DARI <span class="highlight">UNTAR</span><br />
-        MENUJU PERUBAHAN <span class="highlight">BESAR.</span>
-      </h1>
-    </div>
-  </section>
-
-  <!-- Kategori Section -->
-  <section class="kategori">
-    <div class="icon">
-      <img src="https://img.icons8.com/ios-filled/50/heart-with-dog-paw.png" alt="Sosial" />
-      <p>Sosial</p>
-    </div>
-    <div class="icon">
-      <img src="https://img.icons8.com/ios-filled/50/plant-under-sun.png" alt="Lingkungan" />
-      <p>Lingkungan</p>
-    </div>
-    <div class="icon">
-      <img src="https://img.icons8.com/ios-filled/50/earthquakes.png" alt="Bencana Alam" />
-      <p>Bencana Alam</p>
-    </div>
-    <div class="icon">
-      <img src="https://img.icons8.com/ios-filled/50/t-shirt.png" alt="Merchandise" />
-      <p>Merchandise</p>
-    </div>
-  </section>
-
-  <!-- Campaign Pilihan Section -->
-  <section class="campaign">
-    <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
-    <p>Kami membantu mereka yang tidak memiliki harapan</p>
-
-    <div class="cards">
-      <!-- Card 1 -->
-      <div class="card">
-        <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan" />
-        <h3>Pendidikan</h3>
-        <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak Kurang
-          Mampu...</p>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill"></div>
-        </div>
-        <div class="progress">
-          <span>43% Donated</span>
-          <span>Goals 100%</span>
-        </div>
-        <div class="buttons">
-          <button>Donate</button>
-          <button class="secondary">Read more</button>
-        </div>
+  <div class="home-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="overlay">
+        <h1>
+          DIMULAI DARI <span class="highlight">UNTAR</span><br />
+          <div style="margin-top: 5px;">MENUJU PERUBAHAN <span class="highlight">BESAR.</span></div>
+        </h1>
       </div>
+    </section>
 
-      <!-- Card 2 -->
-      <div class="card">
-        <img src="/Frontend/img/IMG_8211.jpg" alt="Bencana Alam" />
-        <h3>Bencana Alam</h3>
-        <p>Bencana alam datang tanpa peringatan dan meninggalkan duka. Banyak dari saudara kita kehilangan rumah...</p>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill"></div>
+    <!-- Kategori Section -->
+    <div class="kategori">
+      <div class="kategori-item">
+        <div class="kategori-icon">
+          <img src="/Frontend/img/heart (3).png" alt="">
         </div>
-        <div class="progress">
-          <span>43% Donated</span>
-          <span>Goals 100%</span>
-        </div>
-        <div class="buttons">
-          <button>Donate</button>
-          <button class="secondary">Read more</button>
-        </div>
+        <p>Sosial</p>
       </div>
-
-      <!-- Card 3 -->
-      <div class="card">
-        <img src="/Frontend/img/home pelestarianalam.jpeg" alt="Penanaman Mangrove" />
-        <h3>Penanaman Mangrove</h3>
-        <p>Hutan mangrove adalah penjaga garis pantai kita. Ia menampung berbagai jenis biota laut...</p>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill"></div>
+      <div class="kategori-item">
+        <div class="kategori-icon">
+          <img src="/Frontend/img/plant.png" alt="">
         </div>
-        <div class="progress">
-          <span>43% Donated</span>
-          <span>Goals 100%</span>
-        </div>
-        <div class="buttons">
-          <button>Donate</button>
-          <button class="secondary">Read more</button>
-        </div>
+        <p>Lingkungan</p>
       </div>
-  </section>
-
-  <!-- Section Kisah Kita -->
-  <section class="kisah-kita">
-    <div class="container">
-      <div class="image">
-        <img src="/Frontend/img/home pelestarianalam.jpeg" alt="Kisah Kita">
+      <div class="kategori-item">
+        <div class="kategori-icon">
+          <img src="/Frontend/img/earthquake.png" alt="">
+        </div>
+        <p>Bencana Alam</p>
       </div>
-      <div class="content">
-        <h2>Kisah Kita</h2>
-        <p><strong>Siapakah kami?</strong><br>
-          Kami adalah sekumpulan mahasiswa yang ingin berbagi dan membangun kepedulian bersama terhadap sesama manusia.
-          Dengan adanya ini kami harap banyak manusia yang peduli akan sekitar.</p>
-        <p><strong>Mengapa memilih kami?</strong><br>
-          Kami hadir dengan komitmen nyata untuk membantu secara transparan, tepat sasaran, dan berkelanjutan.</p>
-        <button class="btn">Learn More</button>
+      <div class="kategori-item">
+        <div class="kategori-icon">
+          <img src="/Frontend/img/merchandise.png" alt="">
+        </div>
+        <p>Merchandise</p>
       </div>
     </div>
-  </section>
 
-  <!-- Section Bagaimana Kita Bekerja -->
-  <section class="bagaimana-kerja">
-    <div class="container">
-      <div class="content">
-        <h2>Bagaimana kita bekerja</h2>
-        <ul>
-          <li><span class="dot"></span><strong>Menyalurkan Bantuan</strong><br>
-            Bantuan dikirim langsung ke pihak yang membutuhkan secara aman, cepat dan transparan.
-          </li>
-          <li><span class="dot"></span><strong>Menggalang Dukungan</strong><br>
-            Kami membuka donasi atau menjual merchandise untuk mengumpulkan dana dan dukungan dari masyarakat.
-          </li>
-          <li><span class="dot"></span><strong>Memberikan Laporan</strong><br>
-            Semua proses disertai laporan dan dokumentasi, agar semua pihak tahu kemana bantuannya disalurkan.
-          </li>
-        </ul>
+    <!-- Campaign Pilihan Section -->
+    <section class="campaign">
+      <button class="lihat-lainnya-container">
+        <a href="#" class="lihat-lainnya">Lihat lainnya</a>
+      </button>
+      <div class="campaign-header">
+        <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
+        <p>Kami membantu mereka yang tidak memiliki harapan</p>
       </div>
-      <div class="image">
-        <img src="/Frontend/img/home baksos2.jpg" alt="Bakti Sosial">
+
+      <div class="cards">
+        <!-- Card 1-->
+        <div class="card-campaign">
+          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <div class="card-content">
+            <h3>Pendidikan</h3>
+            <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak
+              Kurang Mampu...</p>
+            <p class="label">Dana terkumpul</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 43%;"></div>
+            </div>
+            <p class="amount">43%</p>
+            <div class="buttons">
+              <button class="btn-primary">Donate</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2-->
+        <div class="card-campaign">
+          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <div class="card-content">
+            <h3>Bencana alam</h3>
+            <p>Bencana alam menyapa tanpa isyarat, menyisakan luka dan kehilangan mendalam bagi saudara sebangsa tercinta...</p>
+            <p class="label">Dana terkumpul</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 43%;"></div>
+            </div>
+            <p class="amount">43%</p>
+            <div class="buttons">
+              <button class="btn-primary">Donate</button>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3-->
+        <div class="card-campaign">
+          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <div class="card-content">
+            <h3>Penanaman Mangrove</h3>
+            <p>Mangrove menjaga pantai penuh kasih, menaungi kehidupan laut yang rapuh namun sangat berarti bagi bumi...</p>
+            <p class="label">Dana terkumpul</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 43%;"></div>
+            </div>
+            <p class="amount">43%</p>
+            <div class="buttons">
+              <button class="btn-primary">Donate</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>\
-  <section class="merchandise">
-  <h2 class="judul-merch">Merchandise</h2>
-  <p>penjualan merchandise ini hasil penjualannya digunakan untuk mendukung kegiatan sosial dan kemanusiaan.</p>
+    </section>
 
-  <div class="merch-cards">
-    <div class="merch-card">
-      <img src="/Frontend/img/kaos.jpg" alt="Kaos">
-      <h3>Bersama kita bantu sesama</h3>
-      <p>Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas, setiap pembeliannya berkontribusi langsung pada program bantuan sosial untuk mereka yg membutuhkan.</p>
-      <a href="#">Read More</a>
-    </div>
+    <!-- Section Kisah Kita -->
+    <section class="kisah-kita">
+      <div class="container">
+        <div class="image">
+          <img src="/Frontend/img/home pelestarianalam.jpeg" alt="Kisah Kita">
+        </div>
+        <div class="content">
+          <h2>Kisah Kita</h2>
+          <p><strong>Siapakah kami?</strong><br>
+            Kami adalah sekumpulan mahasiswa yang ingin berbagi dan membangun kepedulian bersama terhadap sesama
+            manusia.
+            Dengan adanya ini kami harap banyak manusia yang peduli akan sekitar.</p>
+          <p><strong>Mengapa memilih kami?</strong><br>
+            Kami hadir dengan komitmen nyata untuk membantu secara transparan, tepat sasaran, dan berkelanjutan.</p>
+          <button class="btn">Learn More</button>
+        </div>
+      </div>
+    </section>
 
-    <div class="merch-card">
-      <img src="/Frontend/img/tas.jpg" alt="Tote Bag">
-      <h3>Bawa tas sebarkan aksi sosial</h3>
-      <p>Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari gerakan kolektif untuk bantuan sesama. Cocok untuk kamu yang ingin tampil sadar sosial dan penuh aksi.</p>
-      <a href="#">Read More</a>
-    </div>
+    <!-- Section Bagaimana Kita Bekerja -->
+    <section class="bagaimana-kerja">
+      <div class="container">
+        <div class="content">
+          <h2>Bagaimana kita bekerja</h2>
+          <ul>
+            <li><span class="dot"></span><strong>Menyalurkan Bantuan</strong><br>
+              Bantuan dikirim langsung ke pihak yang membutuhkan secara aman, cepat dan transparan.
+            </li>
+            <li><span class="dot"></span><strong>Menggalang Dukungan</strong><br>
+              Kami membuka donasi atau menjual merchandise untuk mengumpulkan dana dan dukungan dari masyarakat.
+            </li>
+            <li><span class="dot"></span><strong>Memberikan Laporan</strong><br>
+              Semua proses disertai laporan dan dokumentasi, agar semua pihak tahu kemana bantuannya disalurkan.
+            </li>
+          </ul>
+        </div>
+        <div class="image">
+          <img src="/Frontend/img/home baksos2.jpg" alt="Bakti Sosial">
+        </div>
+      </div>
+    </section>
+    <section class="merchandise">
+      <h2 class="judul-merch">Merchandise</h2>
+      <p>penjualan merchandise ini hasil penjualannya digunakan untuk mendukung kegiatan sosial dan kemanusiaan.</p>
 
-    <div class="merch-card">
-      <img src="/Frontend/img/tumbler.jpg" alt="Tumbler">
-      <h3>Tumbler berisi kebaikan</h3>
-      <p>Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian, aksi nyata dan harapan yang disalurkan lewat bantuan sosial.</p>
-      <a href="#">Read More</a>
-    </div>
+      <div class="merch-cards">
+        <div class="merch-card">
+          <img src="/Frontend/img/kaos.jpg" alt="Kaos">
+          <h3>Bersama kita bantu sesama</h3>
+          <p>Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas, setiap pembeliannya berkontribusi
+            langsung pada program bantuan sosial untuk mereka yg membutuhkan.</p>
+          <a href="#">Read More</a>
+        </div>
+
+        <div class="merch-card">
+          <img src="/Frontend/img/tas.jpg" alt="Tote Bag">
+          <h3>Bawa tas sebarkan aksi sosial</h3>
+          <p>Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari gerakan kolektif untuk bantuan sesama.
+            Cocok untuk kamu yang ingin tampil sadar sosial dan penuh aksi.</p>
+          <a href="#">Read More</a>
+        </div>
+
+        <div class="merch-card">
+          <img src="/Frontend/img/tumbler.jpg" alt="Tumbler">
+          <h3>Tumbler berisi kebaikan</h3>
+          <p>Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian, aksi nyata dan harapan yang disalurkan
+            lewat bantuan sosial.</p>
+          <a href="#">Read More</a>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
-
   <!-- ====== Footer ====== -->
   <footer class="site-footer">
     <div class="footer-top">
@@ -198,7 +217,7 @@
           </div>
           <div class="logo-divider"></div>
           <div class="logo-item">
-            <img src="/Frontend/img/logo mapala fti.jpg" alt="Logo Universitas">
+            <img src="/Frontend/img/logo mapala fti.png" alt="Logo Universitas">
           </div>
         </div>
       </div>
@@ -226,23 +245,23 @@
             <span class="cause-icon"></span>
             <span class="cause-title">Education</span>
             <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:53%;"></div>
+              <div class="progress-bar-fill" style="width:60%;"></div>
             </div>
-            <span class="progress-text">53%</span>
+            <span class="progress-text">60%</span>
           </li>
           <li>
             <span class="cause-icon"></span>
             <span class="cause-title">Health</span>
             <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:53%;"></div>
+              <div class="progress-bar-fill" style="width:80%;"></div>
             </div>
-            <span class="progress-text">53%</span>
+            <span class="progress-text">80%</span>
           </li>
           <li>
             <span class="cause-icon"></span>
             <span class="cause-title">Human rights</span>
-            <div class="progress-bar-footer-container">
-              <div class="progress-bar-fill-footer" style="width:53%;"></div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width:53%;"></div>
             </div>
             <span class="progress-text">53%</span>
           </li>
@@ -260,19 +279,18 @@
         &copy; 2025 copyright all right reserved
       </div>
       <div class="social-icons">
-  <a href="https://facebook.com" target="_blank">
-    <img src="https://th.bing.com/th/id/OIP.4o9oj_JfXV8Qvchbt5LqHwAAAA?cb=iwc2&rs=1&pid=ImgDetMain" alt="Facebook">
-  </a>
-  <a href="https://twitter.com" target="_blank">
-    <img src="https://static.vecteezy.com/system/resources/thumbnails/027/395/710/small_2x/twitter-brand-new-logo-3-d-with-new-x-shaped-graphic-of-the-world-s-most-popular-social-media-free-png.png" alt="Twitter">
-  </a>
-  <a href="https://instagram.com" target="_blank">
-    <img src="https://www.pngarts.com/files/11/IG-Logo-Silhouette-PNG-Download-Image.png" alt="Instagram">
-  </a>
-</div>
-
+        <a href="https://facebook.com" target="_blank">
+          <img src="/Frontend/img/facebook.png" style="width: 25px; height: 25px;" alt="Facebook">
+        </a>
+        <a href="https://twitter.com" target="_blank">
+          <img src="/Frontend/img/twitter.png" alt="Twitter">
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <img src="/Frontend/img/instagram.png" alt="Instagram">
+        </a>
       </div>
     </div>
   </footer>
 </body>
+
 </html>
