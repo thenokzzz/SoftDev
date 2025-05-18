@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Halaman Utama - UntukKita</title>
   <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
-  <link rel="stylesheet" href="/Frontend/CSS/home.css" />
+  <link rel="stylesheet" href="/Frontend/CSS/home.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
@@ -16,19 +16,23 @@
   <nav class="navbar">
     <div class="navbar-inner">
       <div class="logo">
-        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita"/>
         Untuk<span>Kita</span>
       </div>
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
         <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-        <li><a href="#">Our Causes</a></li>
+        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
         <li><a href="#">Galeri</a></li>
         <li><a href="#">Blog</a></li>
       </ul>
       <ul class="btn-links">
-        <button class="btn-login">Login</button>
-        <button class="btn-donasi">Berdonasi</button>
+        <a href="/Frontend/HTML/login.html">
+          <button class="btn-login">Login</button>
+        </a>
+        <a href="#">
+          <button class="btn-donasi">Berdonasi</button>
+        </a>
       </ul>
     </div>
   </nav>
@@ -75,7 +79,7 @@
     <!-- Campaign Pilihan Section -->
     <section class="campaign">
       <button class="lihat-lainnya-container">
-        <a href="#" class="lihat-lainnya">Lihat lainnya</a>
+        <a href="/Frontend/HTML/campaign.html" class="lihat-lainnya">Lihat lainnya</a>
       </button>
       <div class="campaign-header">
         <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
@@ -85,7 +89,7 @@
       <div class="cards">
         <!-- Card 1-->
         <div class="card-campaign">
-          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <img src="/Frontend/img/pendidikan.jpeg" alt="Pendidikan">
           <div class="card-content">
             <h3>Pendidikan</h3>
             <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak
@@ -102,7 +106,7 @@
         </div>
         <!-- Card 2-->
         <div class="card-campaign">
-          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <img src="/Frontend/img/banjir.jpg" alt="Pendidikan">
           <div class="card-content">
             <h3>Bencana alam</h3>
             <p>Bencana alam menyapa tanpa isyarat, menyisakan luka dan kehilangan mendalam bagi saudara sebangsa tercinta...</p>
@@ -118,7 +122,7 @@
         </div>
         <!-- Card 3-->
         <div class="card-campaign">
-          <img src="/Frontend/img/home baksos1.jpg" alt="Pendidikan">
+          <img src="/Frontend/img/tanammangrove.JPG" alt="Pendidikan">
           <div class="card-content">
             <h3>Penanaman Mangrove</h3>
             <p>Mangrove menjaga pantai penuh kasih, menaungi kehidupan laut yang rapuh namun sangat berarti bagi bumi...</p>
