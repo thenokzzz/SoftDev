@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Frontend/CSS/regist.css">
     <title>Registrasi - UntukKita</title>
 </head>
+
 <body>
     <div class="container">
         <div class="right-section">
             <h2>Silahkan Registrasi!</h2>
-            <form action="#">
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Kata Sandi" required>
-                <input type="password" placeholder="Ketik Ulang Kata Sandi" required>
-                <input type="text" placeholder="Nomor Telepon" required>
+            <form>
+                <input type="text" name="name" placeholder="Nama Lengkap" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Kata Sandi" required>
+                <input type="password" name="confirm_password" placeholder="Ketik Ulang Kata Sandi" required>
+                <input type="text" name="number_phone" placeholder="Nomor Telepon" required>
                 <button type="submit">Daftar</button>
             </form>
             <div class="partner-logos">
@@ -27,5 +30,45 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const name = document.querySelector('input[name="name"]').value.trim();
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const confirm_password = document.querySelector('input[name="confirm_password"]').value;
+            const number_phone = document.querySelector('input[name="number_phone"]').value;
+
+            if (password !== confirm_password) {
+                alert("Password dan konfirmasi password tidak cocok.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:4000/api/auth/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ name, email, password, confirm_password, number_phone }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Registrasi berhasil!");
+                    localStorage.setItem("user", JSON.stringify(data.user)); // opsional
+                    window.location.href = "/Frontend/HTML/login.html"; // redirect
+                } else {
+                    alert(data.error || "Registrasi gagal.");
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan pada server.");
+                console.error(err);
+            }
+        });
+    </script>
 </body>
+
 </html>

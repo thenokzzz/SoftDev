@@ -59,6 +59,11 @@ app.post('/api/accounts', async (req, res) => {
   }
 });
 
+app.post("/api/auth/login", (req, res) => {
+  console.log(req.body);
+  res.send("ok");
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
 });
