@@ -25,8 +25,9 @@ exports.createAccount = async (req, res) => {
     res.status(201).json(newUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }
-};
+    console.log(req.body);
+  } 
+};  
 
 exports.deleteAccount = async (req, res) => {
   try {
