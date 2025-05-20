@@ -7,31 +7,44 @@
     <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
     <link rel="stylesheet" href="/Frontend/CSS/about.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
 
 <!-- Navbar -->
 <nav class="navbar">
   <div class="navbar-inner">
+
+    <!-- Logo -->
     <div class="logo">
-        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
-        Untuk<span>Kita</span>
+      <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+      <span>Untuk<span class="highlight">Kita</span></span>
     </div>
+
+    <!-- Search Bar -->
+    <div class="campaign-search">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" placeholder="Cari campaign.." class="search-input" />
+    </div>
+
+    <!-- Nav Links -->
     <ul class="nav-links">
-        <li><a href="/Frontend/HTML/home.html">Home</a></li>
-        <li><a href="/Frontend/HTML/about.html" class="active">Tentang</a></li>
-        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
-        <li><a href="#">Galeri</a></li>
-        <li><a href="#">Blog</a></li>
+      <li><a href="/Frontend/HTML/home.html">Home</a></li>
+      <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+      <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+      <li><a href="#">Galeri</a></li>
+      <!-- <li><a href="#">Blog</a></li> -->
     </ul>
-          <ul class="btn-links">
-        <a href="/Frontend/HTML/login.html">
-          <button class="btn-login">Login</button>
-        </a>
-        <a href="#">
-          <button class="btn-donasi">Berdonasi</button>
-        </a>
-      </ul>
+
+    <!-- Buttons -->
+    <ul class="btn-links">
+      <a href="/Frontend/HTML/login.html">
+        <button class="btn-login">Login</button>
+      </a>
+      <a href="#">
+        <button class="btn-donasi">Berdonasi</button>
+      </a>
+    </ul>
   </div>
 </nav>
 

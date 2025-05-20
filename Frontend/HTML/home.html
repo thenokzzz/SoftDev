@@ -8,34 +8,48 @@
   <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
   <link rel="stylesheet" href="/Frontend/CSS/home.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
 </head>
 
 <body>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-inner">
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <div class="logo">
-        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita"/>
-        Untuk<span>Kita</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
-        <li><a href="#">Galeri</a></li>
-        <li><a href="#">Blog</a></li>
-      </ul>
-      <ul class="btn-links">
-        <a href="/Frontend/HTML/login.html">
-          <button class="btn-login">Login</button>
-        </a>
-        <a href="#">
-          <button class="btn-donasi">Berdonasi</button>
-        </a>
-      </ul>
+    <!-- Logo -->
+    <div class="logo">
+      <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+      <span>Untuk<span class="highlight">Kita</span></span>
     </div>
-  </nav>
+
+    <!-- Search Bar -->
+    <div class="campaign-search">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" placeholder="Cari campaign.." class="search-input" />
+    </div>
+
+    <!-- Nav Links -->
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+      <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+      <li><a href="#">Galeri</a></li>
+      <!-- <li><a href="#">Blog</a></li> -->
+    </ul>
+
+    <!-- Buttons -->
+    <ul class="btn-links">
+      <a href="/Frontend/HTML/login.html">
+        <button class="btn-login">Login</button>
+      </a>
+      <a href="#">
+        <button class="btn-donasi">Berdonasi</button>
+      </a>
+    </ul>
+  </div>
+</nav>
+
 
   <div class="home-content">
     <!-- Hero Section -->
