@@ -1,240 +1,295 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang - UntukKita</title>
-    <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
-    <link rel="stylesheet" href="/Frontend/CSS/about.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang - UntukKita</title>
+  <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
+  <link rel="stylesheet" href="/Frontend/CSS/about.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="navbar-inner">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
 
-    <!-- Logo -->
-    <div class="logo">
-      <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
-      <span>Untuk<span class="highlight">Kita</span></span>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+        <span>Untuk<span class="highlight">Kita</span></span>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="campaign-search">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Cari campaign.." class="search-input" />
+      </div>
+
+      <!-- Nav Links -->
+      <ul class="nav-links">
+        <li><a href="/Frontend/HTML/home.html">Home</a></li>
+        <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+        <li><a href="#">Galeri</a></li>
+        <!-- <li><a href="#">Blog</a></li> -->
+      </ul>
+
+      <!-- Buttons -->
+      <ul class="btn-links">
+        <a href="/Frontend/HTML/login.html" id="login-button">
+          <button class="btn-login">Login</button>
+        </a>
+        <a href="/Frontend/HTML/login.html" id="logout-button" style="display: none;">
+          <button class="btn-login">Logout</button>
+        </a>
+        <a href="/Frontend/HTML/regist.html">
+          <button class="btn-donasi">Berdonasi</button>
+        </a>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Search Bar -->
-    <div class="campaign-search">
-      <span class="material-symbols-outlined search-icon">search</span>
-      <input type="text" placeholder="Cari campaign.." class="search-input" />
-    </div>
-
-    <!-- Nav Links -->
-    <ul class="nav-links">
-      <li><a href="/Frontend/HTML/home.html">Home</a></li>
-      <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-      <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
-      <li><a href="#">Galeri</a></li>
-      <!-- <li><a href="#">Blog</a></li> -->
-    </ul>
-
-    <!-- Buttons -->
-    <ul class="btn-links">
-      <a href="/Frontend/HTML/login.html">
-        <button class="btn-login">Login</button>
-      </a>
-      <a href="#">
-        <button class="btn-donasi">Berdonasi</button>
-      </a>
-    </ul>
-  </div>
-</nav>
-
-<div class="home-content">
+  <div class="home-content">
     <!-- Hero Section -->
     <section class="hero">
-        <div class="overlay">
-            <h1>Tentang <span class="highlight">Kita.</span></h1>
-        </div>
+      <div class="overlay">
+        <h1>Tentang <span class="highlight">Kita.</span></h1>
+      </div>
     </section>
 
     <!-- About Section -->
     <section class="about">
-        <h2>Dimana Semuanya <span class="highlight">Dimulai.</span></h2>
-        <div class="content">
-            <div class="image">
-                <img src="/Frontend/img/baksos about isi.jpg" alt="Gambar Tentang Kita">
-            </div>
-            <div class="description">
-                <p>
-                    <b>UntukKita adalah sebuah platform donasi yang dikembangkan oleh mahasiswa Universitas Tarumanagara sebagai bentuk kontribusi nyata terhadap mahasiswa Universitas Tarumanagara.</b>
-                </p>
-                <p>
-                    Website ini dirancang untuk mempermudah proses donasi secara online dan menghubungkan para dermawan dengan mereka yang membutuhkan.
-                    Projek ini merupakan bagian dari tugas pengembangan teknologi digital dengan misi sosial. Kami percaya bahwa teknologi tidak hanya untuk kemudahan hidup, tetapi juga sebagai jembatan untuk menumbuhkan solidaritas dan kepedulian antar sesama.
-                </p>
-                <div class="mission-vision">
-                    <div class="card">
-                        <h3>Misi</h3>
-                        <ul>
-                            <li>Mempermudah proses donasi di lingkungan Universitas Tarumanagara.</li>
-                            <li>Menumbuhkan kepedulian dan solidaritas antar mahasiswa.</li>
-                            <li>Menyalurkan bantuan secara cepat, tepat, dan transparan.</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3>Visi</h3>
-                        <ul>
-                            Menjadi platform donasi digital terpercaya yang mendukung kesejahteraan dan solidaritas antar mahasiswa di seluruh aktivitas akademis di lingkungan Universitas Tarumanagara.
-                        </ul>
-                    </div>
-                </div>
-            </div>
+      <h2>Dimana Semuanya <span class="highlight">Dimulai.</span></h2>
+      <div class="content">
+        <div class="image">
+          <img src="/Frontend/img/baksos about isi.jpg" alt="Gambar Tentang Kita">
         </div>
+        <div class="description">
+          <p>
+            <b>UntukKita adalah sebuah platform donasi yang dikembangkan oleh mahasiswa Universitas Tarumanagara sebagai
+              bentuk kontribusi nyata terhadap mahasiswa Universitas Tarumanagara.</b>
+          </p>
+          <p>
+            Website ini dirancang untuk mempermudah proses donasi secara online dan menghubungkan para dermawan dengan
+            mereka yang membutuhkan.
+            Projek ini merupakan bagian dari tugas pengembangan teknologi digital dengan misi sosial. Kami percaya bahwa
+            teknologi tidak hanya untuk kemudahan hidup, tetapi juga sebagai jembatan untuk menumbuhkan solidaritas dan
+            kepedulian antar sesama.
+          </p>
+          <div class="mission-vision">
+            <div class="card">
+              <h3>Misi</h3>
+              <ul>
+                <li>Mempermudah proses donasi di lingkungan Universitas Tarumanagara.</li>
+                <li>Menumbuhkan kepedulian dan solidaritas antar mahasiswa.</li>
+                <li>Menyalurkan bantuan secara cepat, tepat, dan transparan.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Visi</h3>
+              <ul>
+                Menjadi platform donasi digital terpercaya yang mendukung kesejahteraan dan solidaritas antar mahasiswa
+                di seluruh aktivitas akademis di lingkungan Universitas Tarumanagara.
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Nilai-Nilai Kami Section -->
     <section class="values">
-        <div class="values-section">
+      <div class="values-section">
         <div class="image-stack">
-            <img src="/Frontend/img/baksos about isi 3.jpg" class="image image-front" alt="Anak-anak 1">
-            <img src="/Frontend/img/baksos about isi 3.jpg" class="image image-back" alt="Anak-anak 2">
+          <img src="/Frontend/img/baksos about isi 3.jpg" class="image image-front" alt="Anak-anak 1">
+          <img src="/Frontend/img/baksos about isi 3.jpg" class="image image-back" alt="Anak-anak 2">
         </div>
         <div class="values-content">
-            <h2>Nilai-Nilai <span class="highlight">Kita.</h2>
-            <div class="value-item">
-                <p><strong>🟣 Kepedulian</strong><br>Kami percaya bahwa perubahan besar dimulai dari rasa peduli terhadap sesama, terutama di lingkungan terdekat.</p>
-            </div>
-            <div class="value-item">
-                <p><strong>🟣 Transparansi</strong><br>Kami menjunjung tinggi kejujuran dan keterbukaan dalam setiap langkah yang kami ambil. Informasi yang jelas dan komunikasi yang terbuka menjadi landasan kami dalam membangun kepercayaan dengan sesama anggota tim dan masyarakat.</p>
-            </div>
-            <div class="value-item">
-                <p><strong>🟣 Kolaborasi</strong><br>Kami percaya bahwa kerja sama adalah kunci keberhasilan. Dengan saling mendukung dan menghargai peran masing-masing, kami menciptakan sinergi yang kuat untuk mencapai tujuan bersama.</p>
-            </div>
+          <h2>Nilai-Nilai <span class="highlight">Kita.</h2>
+          <div class="value-item">
+            <p><strong>🟣 Kepedulian</strong><br>Kami percaya bahwa perubahan besar dimulai dari rasa peduli terhadap
+              sesama, terutama di lingkungan terdekat.</p>
+          </div>
+          <div class="value-item">
+            <p><strong>🟣 Transparansi</strong><br>Kami menjunjung tinggi kejujuran dan keterbukaan dalam setiap langkah
+              yang kami ambil. Informasi yang jelas dan komunikasi yang terbuka menjadi landasan kami dalam membangun
+              kepercayaan dengan sesama anggota tim dan masyarakat.</p>
+          </div>
+          <div class="value-item">
+            <p><strong>🟣 Kolaborasi</strong><br>Kami percaya bahwa kerja sama adalah kunci keberhasilan. Dengan saling
+              mendukung dan menghargai peran masing-masing, kami menciptakan sinergi yang kuat untuk mencapai tujuan
+              bersama.</p>
+          </div>
         </div>
-    </div>
+      </div>
     </section>
 
-<!-- Tim Kami Section -->
-<section class="team">
-  <div class="container">
-    <h2>Tim <span class="highlight">Kita.</span></h2>
-    <p class="team-subtitle"><b>Tim yang Kuat dan Berdedikasi.</b></p>
-    <p class="team-description">Tim kami penuh semangat dan kreativitas, dengan Raja, Rocky dan Dennis sebagai anggota yang berdedikasi dan inspiratif. Ia membawa energi positif dan kontribusi besar untuk kesuksesan tim kami.</p>
+    <!-- Tim Kami Section -->
+    <section class="team">
+      <div class="container">
+        <h2>Tim <span class="highlight">Kita.</span></h2>
+        <p class="team-subtitle"><b>Tim yang Kuat dan Berdedikasi.</b></p>
+        <p class="team-description">Tim kami penuh semangat dan kreativitas, dengan Raja, Rocky dan Dennis sebagai
+          anggota yang berdedikasi dan inspiratif. Ia membawa energi positif dan kontribusi besar untuk kesuksesan tim
+          kami.</p>
 
-    <div class="team-members">
-      <div class="member-card horizontal">
-        <img src="/frontend/img/raja about.jpg" alt="Geraldus Raja Muka">
-        <div class="member-info">
-          <h4>Geraldus Raja Muka</h4>
-          <p>535230171</p>
-          <p class="bio">Raja adalah individu yang memiliki kepedulian sosial tinggi dan pengalaman dalam kegiatan pengabdian masyarakat. Dengan latar belakang yang kuat di bidang komunikasi dan organisasi, Raja menjadi sosok yang menjembatani ide dan kebutuhan antara pengguna serta tim pengembang. Semangatnya untuk membantu sesama menjadi pondasi penting dalam pengembangan UntukKita sebagai platform donasi.</p>
-        </div>
-      </div>
-
-      <div class="member-card horizontal">
-        <img src="/frontend/img/dennis about.jpg" alt="Dennis Ananda">
-        <div class="member-info">
-          <h4>Dennis Ananda</h4>
-          <p>535230003</p>
-          <p class="bio">Dennis adalah pribadi kreatif dengan minat tinggi di bidang desain dan teknologi. Ketertarikannya dalam menciptakan solusi digital yang mudah diakses dan berorientasi pada pengguna. Dennis membawa visi tentang pentingnya tampilan dan pengalaman pengguna yang intuitif agar setiap orang dapat berdonasi dengan mudah dan nyaman.</p>
-        </div>
-      </div>
-
-      <div class="member-card horizontal">
-        <img src="/frontend/img/rocky about.jpg" alt="M. Budiman Rocky, S">
-        <div class="member-info">
-          <h4>M. Budiman Rocky. S</h4>
-          <p>535230104</p>
-          <p class="bio">Rocky dikenal sebagai sosok analitis dan tekun, dengan latar belakang di bidang pengembangan sistem dan teknologi informasi. Ia memiliki minat dalam membangun sistem digital yang efisien dan terpercaya. Rocky bertanggung jawab dalam memastikan performa teknis website berjalan optimal serta menjaga keamanan data. Dedikasinya membawa nilai lebih terhadap keberlangsungan platform donasi ini.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- ====== Footer ====== -->
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logos">
-          <div class="logo-item">
-            <img src="/Frontend/img/logo untukkita.png" alt="Logo Hati">
+        <div class="team-members">
+          <div class="member-card horizontal">
+            <img src="/frontend/img/raja about.jpg" alt="Geraldus Raja Muka">
+            <div class="member-info">
+              <h4>Geraldus Raja Muka</h4>
+              <p>535230171</p>
+              <p class="bio">Raja adalah individu yang memiliki kepedulian sosial tinggi dan pengalaman dalam kegiatan
+                pengabdian masyarakat. Dengan latar belakang yang kuat di bidang komunikasi dan organisasi, Raja menjadi
+                sosok yang menjembatani ide dan kebutuhan antara pengguna serta tim pengembang. Semangatnya untuk
+                membantu sesama menjadi pondasi penting dalam pengembangan UntukKita sebagai platform donasi.</p>
+            </div>
           </div>
-          <div class="logo-divider"></div>
-          <div class="logo-item">
-            <img src="/Frontend/img/logo mapala fti.png" alt="Logo Universitas">
+
+          <div class="member-card horizontal">
+            <img src="/frontend/img/dennis about.jpg" alt="Dennis Ananda">
+            <div class="member-info">
+              <h4>Dennis Ananda</h4>
+              <p>535230003</p>
+              <p class="bio">Dennis adalah pribadi kreatif dengan minat tinggi di bidang desain dan teknologi.
+                Ketertarikannya dalam menciptakan solusi digital yang mudah diakses dan berorientasi pada pengguna.
+                Dennis membawa visi tentang pentingnya tampilan dan pengalaman pengguna yang intuitif agar setiap orang
+                dapat berdonasi dengan mudah dan nyaman.</p>
+            </div>
+          </div>
+
+          <div class="member-card horizontal">
+            <img src="/frontend/img/rocky about.jpg" alt="M. Budiman Rocky, S">
+            <div class="member-info">
+              <h4>M. Budiman Rocky. S</h4>
+              <p>535230104</p>
+              <p class="bio">Rocky dikenal sebagai sosok analitis dan tekun, dengan latar belakang di bidang
+                pengembangan sistem dan teknologi informasi. Ia memiliki minat dalam membangun sistem digital yang
+                efisien dan terpercaya. Rocky bertanggung jawab dalam memastikan performa teknis website berjalan
+                optimal serta menjaga keamanan data. Dedikasinya membawa nilai lebih terhadap keberlangsungan platform
+                donasi ini.</p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="footer-section">
-        <h4>Quick links</h4>
-        <ul class="quick-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Gallery</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Contact us</h4>
-        <p>Untar 1, Gedung R Lt. 7</p>
-        <p><a href="mailto:mapalaftiuntar@gmail.com">mapalaftiuntar@gmail.com</a></p>
-        <p><a href="tel:+6281292602639">+62 812 9260 2639</a></p>
-      </div>
-
-      <div class="footer-section causes">
-        <h4>Urgent Causes</h4>
-        <ul>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Education</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:60%;"></div>
+    <!-- ====== Footer ====== -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logos">
+            <div class="logo-item">
+              <img src="/Frontend/img/logo untukkita.png" alt="Logo Hati">
             </div>
-            <span class="progress-text">60%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Health</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:80%;"></div>
+            <div class="logo-divider"></div>
+            <div class="logo-item">
+              <img src="/Frontend/img/logo mapala fti.png" alt="Logo Universitas">
             </div>
-            <span class="progress-text">80%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Human rights</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:53%;"></div>
-            </div>
-            <span class="progress-text">53%</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+          </div>
+        </div>
 
-    <div class="footer-bottom">
-      <div class="footer-nav">
-        <a href="#">Privacy &amp; Policy</a>
-        <span class="divider">|</span>
-        <a href="#">Terms &amp; Conditions</a>
-      </div>
-      <div class="copyright">
-        &copy; 2025 copyright all right reserved
-      </div>
-      <div class="social-icons">
-        <a href="https://facebook.com" target="_blank">
-          <img src="/Frontend/img/facebook.png" style="width: 25px; height: 25px;" alt="Facebook">
-        </a>
-        <a href="https://twitter.com" target="_blank">
-          <img src="/Frontend/img/twitter.png" alt="Twitter">
-        </a>
-        <a href="https://instagram.com" target="_blank">
-          <img src="/Frontend/img/instagram.png" alt="Instagram">
-        </a>
-      </div>
-    </div>
-  </footer>
+        <div class="footer-section">
+          <h4>Quick links</h4>
+          <ul class="quick-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Gallery</a></li>
+          </ul>
+        </div>
 
+        <div class="footer-section">
+          <h4>Contact us</h4>
+          <p>Untar 1, Gedung R Lt. 7</p>
+          <p><a href="mailto:mapalaftiuntar@gmail.com">mapalaftiuntar@gmail.com</a></p>
+          <p><a href="tel:+6281292602639">+62 812 9260 2639</a></p>
+        </div>
+
+        <div class="footer-section causes">
+          <h4>Urgent Causes</h4>
+          <ul>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Education</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width:60%;"></div>
+              </div>
+              <span class="progress-text">60%</span>
+            </li>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Health</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width:80%;"></div>
+              </div>
+              <span class="progress-text">80%</span>
+            </li>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Human rights</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width:53%;"></div>
+              </div>
+              <span class="progress-text">53%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-nav">
+          <a href="#">Privacy &amp; Policy</a>
+          <span class="divider">|</span>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 copyright all right reserved
+        </div>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img src="/Frontend/img/facebook.png" style="width: 25px; height: 25px;" alt="Facebook">
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="/Frontend/img/twitter.png" alt="Twitter">
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <img src="/Frontend/img/instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+    </footer>
+      <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+      const loginBtn = document.getElementById("login-button");
+      const logoutBtn = document.getElementById("logout-button");
+
+      if (isLoggedIn === "true") {
+        if (loginBtn) loginBtn.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "inline-block";
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function () {
+          // Hapus data login dari localStorage
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("username");
+          localStorage.removeItem("user");
+
+          // Tampilkan notifikasi
+          alert("Logout berhasil!");
+
+          // Redirect ke halaman awal
+          window.location.href = "/Frontend/HTML/home.html"; // Ubah jika berbeda
+        });
+      }
+    });
+  </script>
 </body>
+
 </html>
