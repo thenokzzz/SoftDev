@@ -236,6 +236,7 @@ nav {
   border-radius: 20px;
   border: 2px solid #9C00BC;
   background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .lihat-lainnya {
@@ -243,12 +244,18 @@ nav {
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
-  transition: color 0.3s ease;
+  transition: color 0.1s ease;
   padding: 10px;
 }
 
-.lihat-lainnya:hover {
-  color: #6b0089;
+.lihat-lainnya-container:hover {
+  background-color: #9C00BC;
+  text-decoration: none;
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.lihat-lainnya:hover{
+  color: #f4f4f4;
   text-decoration: none;
 }
 .campaign-header {

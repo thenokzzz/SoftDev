@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Halaman Utama - UntukKita</title>
   <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
-  <link rel="stylesheet" href="/Frontend/CSS/home.css"/>
+  <link rel="stylesheet" href="/Frontend/CSS/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
@@ -17,10 +17,40 @@
 <nav class="navbar">
   <div class="navbar-inner">
 
+<<<<<<< Updated upstream
     <!-- Logo -->
     <div class="logo">
       <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
       <span>Untuk<span class="highlight">Kita</span></span>
+=======
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">
+        <img src="/Frontend/img/logo untukkita.png" alt="Logo UntukKita" />
+        Untuk<span>Kita</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+        <li><a href="#">Galeri</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+      <ul class="btn-links">
+        <span id="user-greeting" style="margin-right: 10px; display: none;"></span>
+        <a href="/Frontend/HTML/login.html" id="login-button">
+          <button class="btn-login">Login</button>
+        </a>
+        <a href="/Frontend/HTML/login.html" id="logout-button" style="display: none;">
+          <button class="btn-login">Logout</button>
+        </a>
+        <a href="/Frontend/HTML/regist.html">
+          <button class="btn-donasi">Berdonasi</button>
+        </a>
+      </ul>
+
+>>>>>>> Stashed changes
     </div>
 
     <!-- Search Bar -->
@@ -123,7 +153,8 @@
           <img src="/Frontend/img/banjir.jpg" alt="Pendidikan">
           <div class="card-content">
             <h3>Bencana alam</h3>
-            <p>Bencana alam menyapa tanpa isyarat, menyisakan luka dan kehilangan mendalam bagi saudara sebangsa tercinta...</p>
+            <p>Bencana alam menyapa tanpa isyarat, menyisakan luka dan kehilangan mendalam bagi saudara sebangsa
+              tercinta...</p>
             <p class="label">Dana terkumpul</p>
             <div class="progress-bar">
               <div class="progress-fill" style="width: 43%;"></div>
@@ -139,7 +170,8 @@
           <img src="/Frontend/img/tanammangrove.JPG" alt="Pendidikan">
           <div class="card-content">
             <h3>Penanaman Mangrove</h3>
-            <p>Mangrove menjaga pantai penuh kasih, menaungi kehidupan laut yang rapuh namun sangat berarti bagi bumi...</p>
+            <p>Mangrove menjaga pantai penuh kasih, menaungi kehidupan laut yang rapuh namun sangat berarti bagi bumi...
+            </p>
             <p class="label">Dana terkumpul</p>
             <div class="progress-bar">
               <div class="progress-fill" style="width: 43%;"></div>
@@ -309,6 +341,34 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
 
+      const loginBtn = document.getElementById("login-button");
+      const logoutBtn = document.getElementById("logout-button");
+
+      if (isLoggedIn === "true") {
+        if (loginBtn) loginBtn.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "inline-block";
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function () {
+          // Hapus data login dari localStorage
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("username");
+          localStorage.removeItem("user");
+
+          // Tampilkan notifikasi
+          alert("Logout berhasil!");
+
+          // Redirect ke halaman awal
+          window.location.href = "/Frontend/HTML/home.html"; // Ubah jika berbeda
+        });
+      }
+    });
+  </script>
 </body>
+
 </html>

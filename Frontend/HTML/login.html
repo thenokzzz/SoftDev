@@ -52,8 +52,10 @@
 
         if (response.ok) {
           alert("Login berhasil!");
-          localStorage.setItem("user", JSON.stringify(data.user)); // opsional
-          window.location.href = "/Frontend/HTML/home.html"; // redirect
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("username", data.user.email); // atau nama
+          localStorage.setItem("user", JSON.stringify(data.user)); // jika ingin simpan detail
+          window.location.href = "/Frontend/HTML/home.html";
         } else {
           alert(data.error || "Login gagal. Cek email atau password.");
         }
@@ -63,10 +65,6 @@
       }
     });
   </script>
-</body>
-
-</html>
-
 </body>
 
 </html>
