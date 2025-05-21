@@ -135,14 +135,14 @@ nav {
 .btn-donasi:hover {
   background-color: #7c0099;
 }
-
-
+.home-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
 /* Hero */
 .hero {
   height: 70vh;
-  width: 160vh;
-  margin-top: 85px;
-  margin-left: 168px;
   border-radius: 10px;
   background-image: url("/Frontend/img/IMG_7127.jpg");
   background-size: cover;
