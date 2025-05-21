@@ -24,14 +24,14 @@
       </div>
 
       <!-- Search Bar -->
-      <div class="campaign-search">
+      <form id="search-form" class="campaign-search" action="campaign.html" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Cari campaign.." class="search-input" />
-      </div>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+      </form>
 
       <!-- Nav Links -->
       <ul class="nav-links">
-        <li><a href="#">Beranda</a></li>
+        <li class="active">Beranda</li>
         <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
         <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
         <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
@@ -47,7 +47,8 @@
           <button class="btn-login">Logout</button>
         </a>
         <a href="/Frontend/HTML/profile.html" id="profile-button" style="display: none;">
-          <span class="material-symbols-outlined" style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+          <span class="material-symbols-outlined"
+            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
         </a>
         <a href="/Frontend/HTML/regist.html">
           <button class="btn-donasi">Berdonasi</button>
@@ -208,11 +209,11 @@
 
       <div class="merch-cards">
         <div class="merch-card">
-          <img src="/Frontend/img/kaosorangutan.png" alt="Kaos">
+          <img src="/Frontend/img/kaosorangutan1.png" alt="Kaos">
           <h3>Bersama kita bantu sesama</h3>
           <p>Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas, setiap pembeliannya berkontribusi
             langsung pada program bantuan sosial untuk mereka yg membutuhkan.</p>
-          <a href="#">Read More</a>
+          <!-- <a href="#">Read More</a> -->
         </div>
 
         <div class="merch-card">
@@ -220,7 +221,7 @@
           <h3>Bawa tas sebarkan aksi sosial</h3>
           <p>Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari gerakan kolektif untuk bantuan sesama.
             Cocok untuk kamu yang ingin tampil sadar sosial dan penuh aksi.</p>
-          <a href="#">Read More</a>
+          <!-- <a href="#">Read More</a> -->
         </div>
 
         <div class="merch-card">
@@ -228,7 +229,7 @@
           <h3>Tumbler berisi kebaikan</h3>
           <p>Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian, aksi nyata dan harapan yang disalurkan
             lewat bantuan sosial.</p>
-          <a href="#">Read More</a>
+          <!-- <a href="#">Read More</a> -->
         </div>
       </div>
     </section>
@@ -251,9 +252,10 @@
       <div class="footer-section">
         <h4>Quick links</h4>
         <ul class="quick-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Gallery</a></li>
+          <li><a href="/Frontend/HTML/home.html">Beranda</a></li>
+          <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+          <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+          <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
         </ul>
       </div>
 
@@ -308,10 +310,10 @@
         <a href="https://facebook.com" target="_blank">
           <img src="/Frontend/img/facebook.png" style="width: 25px; height: 25px;" alt="Facebook">
         </a>
-        <a href="https://twitter.com" target="_blank">
+        <a href="https://x.com/MapalaFTI_Untar">
           <img src="/Frontend/img/twitter.png" alt="Twitter">
         </a>
-        <a href="https://instagram.com" target="_blank">
+        <a href="https://www.instagram.com/mapalaftiuntar">
           <img src="/Frontend/img/instagram.png" alt="Instagram">
         </a>
       </div>
@@ -344,6 +346,6 @@
       }
     });
   </script>
+  
 </body>
-
 </html>

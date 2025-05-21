@@ -271,6 +271,47 @@
       }
     });
   </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const searchParams = new URLSearchParams(window.location.search);
+  const keyword = searchParams.get("q");
+
+  if (keyword) {
+    const campaignCards = document.querySelectorAll(".campaign-card");
+    const lowerKeyword = keyword.toLowerCase();
+    let found = false;
+
+    campaignCards.forEach(function (card) {
+      const titleElement = card.querySelector("h3");
+      const descElement = card.querySelector("p");
+
+      const title = titleElement ? titleElement.textContent.toLowerCase() : "";
+      const description = descElement ? descElement.textContent.toLowerCase() : "";
+
+      if (title.includes(lowerKeyword) || description.includes(lowerKeyword)) {
+        card.style.display = "";
+        found = true;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (!found) {
+      const container = document.querySelector(".campaign-cards");
+      if (container) {
+        const noResults = document.createElement("p");
+        noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
+        noResults.style.textAlign = "center";
+        noResults.style.color = "grey";
+        noResults.style.marginTop = "20px";
+        container.appendChild(noResults);
+      }
+    }
+  }
+});
+
+</script>
+
 </body>
 
 </body>
