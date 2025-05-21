@@ -24,10 +24,10 @@
       </div>
 
       <!-- Search Bar -->
-      <div class="campaign-search">
+      <form id="search-form" class="campaign-search" action="campaign.html" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Cari campaign.." class="search-input" />
-      </div>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+      </form>
 
       <!-- Nav Links -->
       <ul class="nav-links">
@@ -47,7 +47,8 @@
           <button class="btn-login">Logout</button>
         </a>
         <a href="/Frontend/HTML/profile.html" id="profile-button" style="display: none;">
-          <span class="material-symbols-outlined" style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+          <span class="material-symbols-outlined"
+            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
         </a>
         <a href="/Frontend/HTML/regist.html">
           <button class="btn-donasi">Berdonasi</button>
@@ -251,10 +252,10 @@
       <div class="footer-section">
         <h4>Quick links</h4>
         <ul class="quick-links">
-        <li><a href="/Frontend/HTML/home.html">Beranda</a></li>
-        <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
-        <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
+          <li><a href="/Frontend/HTML/home.html">Beranda</a></li>
+          <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
+          <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+          <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
         </ul>
       </div>
 
@@ -345,6 +346,6 @@
       }
     });
   </script>
+  
 </body>
-
 </html>
