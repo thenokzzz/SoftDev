@@ -33,37 +33,38 @@
     </div>
   </div>
   <script>
-    document.querySelector("form").addEventListener("submit", async (e) => {
-      e.preventDefault();
+   document.querySelector("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-      const email = document.querySelector('input[type="email"]').value;
-      const password = document.querySelector('input[type="password"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelector('input[type="password"]').value;
 
-      try {
-        const response = await fetch("http://localhost:4000/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          alert("Login berhasil!");
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("username", data.user.email); // atau nama
-          localStorage.setItem("user", JSON.stringify(data.user)); // jika ingin simpan detail
-          window.location.href = "/Frontend/HTML/home.html";
-        } else {
-          alert(data.error || "Login gagal. Cek email atau password.");
-        }
-      } catch (err) {
-        alert("Terjadi kesalahan pada server.");
-        console.error(err);
-      }
+  try {
+    const response = await fetch("http://localhost:4000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
     });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Login berhasil!");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", data.name);  
+      localStorage.setItem("role", data.role);      
+      localStorage.setItem("token", data.token);    
+      window.location.href = "/Frontend/HTML/home.html";
+    } else {
+      alert(data.error || "Login gagal. Cek email atau password.");
+    }
+  } catch (err) {
+    alert("Terjadi kesalahan pada server.");
+    console.error(err);
+  }
+});
   </script>
 </body>
 
