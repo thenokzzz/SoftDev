@@ -1,5 +1,6 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -25,22 +26,21 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: "Password salah" });
     }
 
-    res.status(200).json({
-      message: "Login berhasil",
-      user: {
-        email: user.email,
-        // Jangan kirim password hash ke client, demi keamanan
-      },
-    });
+    const token = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.json({ token, role: user.role, name: user.name });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Gagal login" });
+    res.status(500).json({ error: "Gagal login", detail: err.message });
   }
 };
 
-
 exports.register = async (req, res) => {
   const { name, email, password, confirm_password, number_phone } = req.body;
+  const role = "user"; // default role user
   console.log(req.body);
   if (!name || !email || !password || !confirm_password || !number_phone) {
     return res.status(400).json({ error: "Semua field wajib diisi" });
@@ -68,11 +68,9 @@ exports.register = async (req, res) => {
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Simpan ke database
     const newUser = await db.query(
-      "INSERT INTO accounts (name, email, password, number_phone) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, email, hashedPassword, number_phone]
+      "INSERT INTO accounts(name, email, password, role, number_phone) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      [name, email, hashedPassword, role, number_phone]
     );
 
     res.status(201).json({
@@ -81,6 +79,7 @@ exports.register = async (req, res) => {
         id: newUser.rows[0].id,
         name: newUser.rows[0].name,
         email: newUser.rows[0].email,
+        role: newUser.rows[0].role,
         number_phone: newUser.rows[0].number_phone,
       },
     });
