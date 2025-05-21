@@ -130,20 +130,24 @@ nav {
 
 .btn-login:hover {
   background-color: #eee;
+  transition: background-color 0.3s ease;
 }
 
 .btn-donasi:hover {
   background-color: #7c0099;
+  transition: background-color 0.3s ease;
 }
 
+.home-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
 /* Hero Section */
 .hero {
   height: 70vh;
-  width: 160vh;
-  margin-top: 85px;
-  margin-left: 168px;
   border-radius: 10px;
-  background-image: url("/Frontend/img/IMG_7127.jpg");
+  background-image: url("/Frontend/img/about.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -376,7 +380,7 @@ nav {
 
 .member-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 18px #9233ea33;
+  box-shadow: 0 14px 18px #12121233
 }
 
 .member-card img {
@@ -409,6 +413,8 @@ nav {
     line-height: 1.6;
     text-align: justify;
 }
+
+
 
 /* ====== Footer ====== */
 .site-footer {

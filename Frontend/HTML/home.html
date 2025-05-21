@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Halaman Utama - UntukKita</title>
+  <title>Beranda - UntukKita</title>
   <link rel="icon" type="image/png" href="/Frontend/img/logo untukkita.png">
   <link rel="stylesheet" href="/Frontend/CSS/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -31,10 +31,10 @@
 
       <!-- Nav Links -->
       <ul class="nav-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="#">Beranda</a></li>
         <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
         <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
-        <li><a href="#">Galeri</a></li>
+        <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
         <!-- <li><a href="#">Blog</a></li> -->
       </ul>
 
@@ -130,9 +130,9 @@
               tercinta...</p>
             <p class="label">Dana terkumpul</p>
             <div class="progress-bar">
-              <div class="progress-fill" style="width: 43%;"></div>
+              <div class="progress-fill" style="width: 47%;"></div>
             </div>
-            <p class="amount">43%</p>
+            <p class="amount">47%</p>
             <div class="buttons">
               <button class="btn-primary">Donate</button>
             </div>
@@ -147,9 +147,9 @@
             </p>
             <p class="label">Dana terkumpul</p>
             <div class="progress-bar">
-              <div class="progress-fill" style="width: 43%;"></div>
+              <div class="progress-fill" style="width: 38%;"></div>
             </div>
-            <p class="amount">43%</p>
+            <p class="amount">38%</p>
             <div class="buttons">
               <button class="btn-primary">Donate</button>
             </div>
@@ -172,7 +172,7 @@
             Dengan adanya ini kami harap banyak manusia yang peduli akan sekitar.</p>
           <p><strong>Mengapa memilih kami?</strong><br>
             Kami hadir dengan komitmen nyata untuk membantu secara transparan, tepat sasaran, dan berkelanjutan.</p>
-          <button class="btn">Learn More</button>
+          <!-- <button class="btn">Learn More</button> -->
         </div>
       </div>
     </section>
@@ -205,7 +205,7 @@
 
       <div class="merch-cards">
         <div class="merch-card">
-          <img src="/Frontend/img/kaos.jpg" alt="Kaos">
+          <img src="/Frontend/img/kaosorangutan.png" alt="Kaos">
           <h3>Bersama kita bantu sesama</h3>
           <p>Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas, setiap pembeliannya berkontribusi
             langsung pada program bantuan sosial untuk mereka yg membutuhkan.</p>
@@ -213,7 +213,7 @@
         </div>
 
         <div class="merch-card">
-          <img src="/Frontend/img/tas.jpg" alt="Tote Bag">
+          <img src="/Frontend/img/totebag.jpg" alt="Tote Bag">
           <h3>Bawa tas sebarkan aksi sosial</h3>
           <p>Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari gerakan kolektif untuk bantuan sesama.
             Cocok untuk kamu yang ingin tampil sadar sosial dan penuh aksi.</p>
@@ -221,7 +221,7 @@
         </div>
 
         <div class="merch-card">
-          <img src="/Frontend/img/tumbler.jpg" alt="Tumbler">
+          <img src="/Frontend/img/tumbler.png" alt="Tumbler">
           <h3>Tumbler berisi kebaikan</h3>
           <p>Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian, aksi nyata dan harapan yang disalurkan
             lewat bantuan sosial.</p>
@@ -314,34 +314,35 @@
       </div>
     </div>
   </footer>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const isLoggedIn = localStorage.getItem("isLoggedIn");
+<script>
+  // Simulasi status login
+  const isLoggedIn = true; // Ubah ke false jika user belum login
 
-      const loginBtn = document.getElementById("login-button");
-      const logoutBtn = document.getElementById("logout-button");
+  const loginBtn = document.getElementById('loginBtn');
+  const donateBtn = document.getElementById('donateBtn');
 
-      if (isLoggedIn === "true") {
-        if (loginBtn) loginBtn.style.display = "none";
-        if (logoutBtn) logoutBtn.style.display = "inline-block";
-      }
+  if (isLoggedIn) {
+    // Ganti tombol Login jadi Logout (icon)
+    loginBtn.innerHTML = `<span class="material-symbols-outlined">logout</span>`;
+    loginBtn.title = "Logout"; // Tooltip jika hover
 
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-          // Hapus data login dari localStorage
-          localStorage.removeItem("isLoggedIn");
-          localStorage.removeItem("username");
-          localStorage.removeItem("user");
+    // Ganti tombol Berdonasi jadi Profile (icon)
+    donateBtn.innerHTML = `<span class="material-symbols-outlined">account_circle</span>`;
+    donateBtn.title = "Profil Saya"; // Tooltip jika hover
 
-          // Tampilkan notifikasi
-          alert("Logout berhasil!");
-
-          // Redirect ke halaman awal
-          window.location.href = "/Frontend/HTML/home.html"; // Ubah jika berbeda
-        });
-      }
+    // Tambahkan event listener jika ingin logout saat klik
+    loginBtn.addEventListener('click', function () {
+      // Contoh logout action
+      alert("Logout berhasil!");
+      // location.reload(); // atau redirect ke halaman login
     });
-  </script>
+
+    donateBtn.addEventListener('click', function () {
+      // Contoh redirect ke profil
+      window.location.href = '/Frontend/HTML/profil.html';
+    });
+  }
+</script>
 </body>
 
 </html>
