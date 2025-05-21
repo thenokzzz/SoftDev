@@ -1,28 +1,38 @@
-const db = require('../config/db');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-const Account = {
+const Accounts = {
   async findAll() {
-    const result = await db.query('SELECT * FROM accounts');
-    return result.rows;
+    const result = await prisma.accounts.findMany();
+    return result;
   },
 
   async findById(id) {
-    const result = await db.query('SELECT * FROM accounts WHERE id = $1', [id]);
-    return result.rows[0];
+    const result = await prisma.accounts.findUnique({
+      where: { id: parseInt(id) },
+    });
+    return result;
   },
 
-  async create({ name, email, password }) {
-    const result = await db.query(
-      'INSERT INTO accounts(name, email, password) VALUES($1, $2, $3) RETURNING *',
-      [name, email, password]
-    );
-    return result.rows[0];
+  async create({ name, email, password, number_phone, role = 'user' }) {
+    const result = await prisma.accounts.create({
+      data: {
+        name,
+        email,
+        password,
+        number_phone,
+        role,
+      },
+    });
+    return result;
   },
 
   async delete(id) {
-    const result = await db.query('DELETE FROM accounts WHERE id = $1 RETURNING *', [id]);
-    return result.rows[0];
+    const result = await prisma.accounts.delete({
+      where: { id: parseInt(id) },
+    });
+    return result;
   }
 };
 
-module.exports = Account;
+module.exports = Accounts;

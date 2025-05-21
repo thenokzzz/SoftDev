@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Donasi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      background: #9c00bc;
+      transition: left 0.3s;
+      z-index: 1040;
+      padding-top: 60px;
+    }
+
+    #sidebar.show {
+      left: 0;
+    }
+
+    #sidebar a {
+      color: white;
+      padding: 10px 20px;
+      display: block;
+      text-decoration: none;
+    }
+
+    #sidebar a:hover {
+      background-color: #4b015a;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1030;
+    }
+
+    #overlay.show {
+      display: block;
+    }
+
+    #mainContent {
+      margin-left: 0;
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    @media (min-width: 768px) {
+      #sidebar {
+        left: 0;
+      }
+
+      #overlay {
+        display: none !important;
+      }
+
+      #mainContent {
+        margin-left: 250px;
+      }
+
+      #menuToggle {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <a href="#" data-menu="stats">Dashboard</a>
+    <a href="#" data-menu="users">Kelola Akun</a>
+    <a href="#" data-menu="campaign">Campaign</a>
+    <a href="#">Donasi</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark fixed-top" style="background-color: #9c00bc;">
+    <div class="container-fluid">
+      <button class="btn btn-outline-light" id="menuToggle">☰</button>
+      <span class="navbar-brand mx-auto">Admin Ganteng</span>
+      <a href="/admin/logout" class="btn btn-outline-light">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div id="mainContent" class="container-fluid mt-5">
+    <h3>Statistik Donasi</h3>
+    <div class="row g-3 mt-2">
+      <div class="col-md-4">
+        <div class="card bg-primary text-white">
+          <div class="card-body">
+            <h5>Total Donasi</h5>
+            <p>Rp 12.500.000</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <h5>Campaign Aktif</h5>
+            <p>5</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-info text-white">
+          <div class="card-body">
+            <h5>Jumlah Donatur</h5>
+            <p>350</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const toggleBtn = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    const mainContent = document.getElementById("mainContent");
+    const overlay = document.getElementById("overlay");
+
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle("show");
+      overlay.classList.toggle("show");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        sidebar.classList.contains("show") &&
+        !sidebar.contains(e.target) &&
+        e.target !== toggleBtn
+      ) {
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+      }
+    });
+
+    document.querySelectorAll("#sidebar a").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const menu = link.dataset.menu;
+
+        switch (menu) {
+          case "users":
+            fetchUsers();
+            break;
+          case "stats":
+            renderStats();
+            break;
+          case "campaign":
+            fetchCampaigns();
+            break;
+          default:
+            mainContent.innerHTML = `<h3>${link.textContent}</h3><p>Fitur belum tersedia.</p>`;
+        }
+
+        if (window.innerWidth < 768) {
+          sidebar.classList.remove("show");
+          overlay.classList.remove("show");
+        }
+      });
+    });
+
+    function renderStats() {
+      mainContent.innerHTML = `
+        <h3>Statistik Donasi</h3>
+        <div class="row g-3 mt-2">
+          <div class="col-md-4">
+            <div class="card bg-primary text-white">
+              <div class="card-body">
+                <h5>Total Donasi</h5>
+                <p>Rp 12.500.000</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-success text-white">
+              <div class="card-body">
+                <h5>Campaign Aktif</h5>
+                <p>5</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-info text-white">
+              <div class="card-body">
+                <h5>Jumlah Donatur</h5>
+                <p>350</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function fetchUsers() {
+      fetch("/api/accounts")
+        .then(res => res.json())
+        .then(data => {
+          let html = `
+            <h3>Kelola Akun User</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr><th>ID</th><th>Nama</th><th>Email</th><th>Nomor</th><th>Role</th><th>Aksi</th></tr>
+              </thead>
+              <tbody>`;
+          data.forEach(user => {
+            html += `
+              <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.number_phone}</td>
+                <td>${user.role}</td>
+                <td>
+                  <button class="btn btn-sm btn-warning me-1" onclick="editUser(${user.id}, '${user.name}', '${user.email}', '${user.number_phone}', '${user.role}')">Edit</button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">Hapus</button>
+                </td>
+              </tr>`;
+          });
+          html += `</tbody></table>`;
+          mainContent.innerHTML = html;
+        })
+        .catch(err => {
+          mainContent.innerHTML = `<p class="text-danger">Gagal mengambil data user.</p>`;
+          console.error(err);
+        });
+    }
+
+    function editUser(id, name, email, number_phone, role) {
+      const form = `
+        <h3>Edit Akun</h3>
+        <form id="editUserForm">
+          <input type="hidden" name="id" value="${id}" />
+          <div class="mb-2"><label>Nama</label><input type="text" name="name" class="form-control" value="${name}" required></div>
+          <div class="mb-2"><label>Email</label><input type="email" name="email" class="form-control" value="${email}" required></div>
+          <div class="mb-2"><label>Nomor Telepon</label><input type="text" name="number_phone" class="form-control" value="${number_phone}" required></div>
+          <div class="mb-2"><label>Role</label>
+            <select name="role" class="form-control">
+              <option value="user" ${role === 'user' ? 'selected' : ''}>User</option>
+              <option value="admin" ${role === 'admin' ? 'selected' : ''}>Admin</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Simpan</button>
+          <button type="button" class="btn btn-secondary" onclick="fetchUsers()">Batal</button>
+        </form>`;
+      mainContent.innerHTML = form;
+
+      document.getElementById("editUserForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const updatedUser = Object.fromEntries(formData.entries());
+
+        const res = await fetch(`/api/accounts/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedUser)
+        });
+
+        if (res.ok) {
+          alert("User berhasil diperbarui!");
+          fetchUsers();
+        } else {
+          alert("Gagal mengedit user.");
+        }
+      });
+    }
+
+    function deleteUser(id) {
+      if (confirm("Yakin ingin menghapus user ini?")) {
+        fetch(`/api/accounts/${id}`, {
+          method: "DELETE"
+        })
+          .then(res => {
+            if (res.ok) {
+              alert("User dihapus.");
+              fetchUsers();
+            } else {
+              alert("Gagal hapus user.");
+            }
+          })
+          .catch(err => console.error(err));
+      }
+    }
+
+    function fetchCampaigns() {
+      fetch("/api/campaign")
+        .then(res => res.json())
+        .then(data => {
+          let html = `
+            <h3>Kelola Campaign</h3>
+            <button class="btn btn-primary mb-3" onclick="showCreateCampaignForm()">+ Tambah Campaign</button>
+            <table class="table table-bordered">
+              <thead>
+                <tr><th>ID</th><th>Judul</th><th>Deskripsi</th><th>Target</th><th>Status</th><th>Aksi</th></tr>
+              </thead>
+              <tbody>`;
+          data.forEach(c => {
+            html += `
+              <tr>
+                <td>${c.id}</td>
+                <td>${c.title}</td>
+                <td>${c.description}</td>
+                <td>Rp ${c.target_amount}</td>
+                <td>${c.status}</td>
+                <td>${c.image ? `<img src="/uploads/${c.image}" class="img-fluid mb-2" style="max-height:150px;">` : ""}</td>
+                <td>
+                  <button class="btn btn-sm btn-warning me-1" onclick='editCampaign(${JSON.stringify(c)})'>Edit</button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteCampaign(${c.id})">Hapus</button>
+                </td>
+              </tr>`;
+          });
+          html += `</tbody></table>`;
+          mainContent.innerHTML = html;
+        })
+        .catch(err => {
+          mainContent.innerHTML = `<p class="text-danger">Gagal mengambil data campaign.</p>`;
+          console.error(err);
+        });
+    }
+
+    function showCreateCampaignForm() {
+      mainContent.innerHTML = `
+        <h3>Tambah Campaign</h3>
+        <form id="createCampaignForm">
+          <div class="mb-2"><label>Judul</label><input type="text" name="title" class="form-control" required></div>
+          <div class="mb-2"><label>Deskripsi</label><textarea name="description" class="form-control" required></textarea></div>
+          <div class="mb-2"><label>Target Donasi</label><input type="text" name="target_amount" class="form-control" required></div>
+          <div class="mb-2"><label>Gambar (opsional)</label><input type="file" name="image" accept="image/*" class="form-control"></div>
+          <input type="hidden" name="target_amount_raw" />
+          <button type="submit" class="btn btn-success">Simpan</button>
+          <button type="button" class="btn btn-secondary" onclick="fetchCampaigns()">Batal</button>
+        </form>`;
+
+      document.getElementById("createCampaignForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        // Ambil nilai yang diformat Rupiah
+        const targetAmountFormatted = form.querySelector("input[name='target_amount']").value;
+
+        // Bersihkan jadi angka, contoh "Rp 1.000.000" => "1000000"
+        const targetAmountNumber = targetAmountFormatted.replace(/[^0-9]/g, '');
+
+        // Masukkan ke hidden input agar dikirim ke server
+        let hiddenInput = form.querySelector("input[name='target_amount_raw']");
+        if (!hiddenInput) {
+          hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = 'target_amount_raw';
+          form.appendChild(hiddenInput);
+        }
+        hiddenInput.value = targetAmountNumber;
+
+        // Buang field target_amount asli supaya tidak terkirim (atau biarkan saja kalau backend ignore)
+        // form.querySelector("input[name='target_amount']").disabled = true;
+
+        const formData = new FormData(form);
+
+        // Jika disable target_amount asli, enable kembali supaya user tetap bisa edit nanti
+        // form.querySelector("input[name='target_amount']").disabled = false;
+
+        const res = await fetch("/api/campaign", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.ok) {
+          alert("Campaign berhasil ditambahkan!");
+          form.reset();
+          fetchCampaigns();
+        } else {
+          const err = await res.text();
+          console.error("Gagal menambahkan campaign:", res.status, err);
+          alert("Gagal menambahkan campaign");
+        }
+      });
+
+
+
+      const targetInput = document.querySelector("input[name='target_amount']");
+
+      // Format angka menjadi format Rupiah
+      function formatRupiah(angka) {
+        const numberString = angka.replace(/[^,\d]/g, "").toString();
+        const split = numberString.split(",");
+        let sisa = split[0].length % 3;
+        let rupiah = split[0].substr(0, sisa);
+        const ribuan = split[0].substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+          rupiah += (sisa ? "." : "") + ribuan.join(".");
+        }
+
+        return split[1] !== undefined ? "Rp " + rupiah + "," + split[1] : "Rp " + rupiah;
+      }
+
+      targetInput.addEventListener("input", function (e) {
+        const cursorPosition = this.selectionStart;
+        const formatted = formatRupiah(this.value);
+        this.value = formatted;
+        this.setSelectionRange(formatted.length, formatted.length);
+      });
+    }
+    function deleteCampaign(id) {
+      if (confirm("Yakin ingin menghapus campaign ini?")) {
+        fetch(`/api/campaign/${id}`, {
+          method: "DELETE"
+        })
+          .then(res => {
+            if (res.ok) {
+              alert("Campaign berhasil dihapus.");
+              fetchCampaigns();
+            } else {
+              alert("Gagal menghapus campaign.");
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert("Terjadi kesalahan.");
+          });
+      }
+    }
+    function editCampaign(campaign) {
+      mainContent.innerHTML = `
+    <h3>Edit Campaign</h3>
+    <form id="editCampaignForm">
+      <input type="hidden" name="id" value="${campaign.id}">
+      <div class="mb-2">
+        <label>Judul</label>
+        <input type="text" name="title" class="form-control" value="${campaign.title}" required>
+      </div>
+      <div class="mb-2">
+        <label>Deskripsi</label>
+        <textarea name="description" class="form-control" required>${campaign.description}</textarea>
+      </div>
+      <div class="mb-2">
+        <label>Target Donasi</label>
+        <input type="text" name="target_amount" class="form-control" value="${campaign.target_amount}" required>
+      </div>
+      <div class="mb-2">
+        <label>Gambar (opsional, upload ulang jika ingin ganti)</label>
+        <input type="file" name="image" accept="image/*" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success">Simpan</button>
+      <button type="button" class="btn btn-secondary" onclick="fetchCampaigns()">Batal</button>
+    </form>
+  `;
+
+      document.getElementById("editCampaignForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        // Pastikan target_amount dikonversi ke angka tanpa karakter non-digit
+        const targetRaw = formData.get("target_amount");
+        const targetAmountClean = parseInt(targetRaw.replace(/[^0-9]/g, ""), 10);
+        formData.set("target_amount", targetAmountClean);
+
+        const campaignId = formData.get("id");
+
+        try {
+          const res = await fetch(`/api/campaign/${campaignId}`, {
+            method: "PUT",
+            body: formData, // FormData sudah termasuk file jika ada
+          });
+
+          if (res.ok) {
+            alert("Campaign berhasil diperbarui!");
+            fetchCampaigns(); // Refresh list campaign
+          } else {
+            const errorData = await res.json();
+            console.error("Gagal mengedit campaign:", errorData.error || "Unknown error");
+          }
+        } catch (error) {
+          alert("Terjadi kesalahan saat mengedit campaign.");
+          console.error(error);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
