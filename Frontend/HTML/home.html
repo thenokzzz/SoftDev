@@ -46,6 +46,9 @@
         <a href="/Frontend/HTML/login.html" id="logout-button" style="display: none;">
           <button class="btn-login">Logout</button>
         </a>
+        <a href="/Frontend/HTML/profile.html" id="profile-button" style="display: none;">
+          <span class="material-symbols-outlined" style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+        </a>
         <a href="/Frontend/HTML/regist.html">
           <button class="btn-donasi">Berdonasi</button>
         </a>
@@ -314,35 +317,33 @@
       </div>
     </div>
   </footer>
-<script>
-  // Simulasi status login
-  const isLoggedIn = true; // Ubah ke false jika user belum login
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      const loginBtn = document.getElementById("login-button");
+      const logoutBtn = document.getElementById("logout-button");
+      const profileBtn = document.getElementById("profile-button");
+      const donasiBtn = document.querySelector(".btn-donasi");
 
-  const loginBtn = document.getElementById('loginBtn');
-  const donateBtn = document.getElementById('donateBtn');
+      if (isLoggedIn === "true") {
+        if (loginBtn) loginBtn.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "inline-block";
+        if (profileBtn) profileBtn.style.display = "inline-block";
+        if (donasiBtn) donasiBtn.style.display = "none";
+      }
 
-  if (isLoggedIn) {
-    // Ganti tombol Login jadi Logout (icon)
-    loginBtn.innerHTML = `<span class="material-symbols-outlined">logout</span>`;
-    loginBtn.title = "Logout"; // Tooltip jika hover
-
-    // Ganti tombol Berdonasi jadi Profile (icon)
-    donateBtn.innerHTML = `<span class="material-symbols-outlined">account_circle</span>`;
-    donateBtn.title = "Profil Saya"; // Tooltip jika hover
-
-    // Tambahkan event listener jika ingin logout saat klik
-    loginBtn.addEventListener('click', function () {
-      // Contoh logout action
-      alert("Logout berhasil!");
-      // location.reload(); // atau redirect ke halaman login
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("username");
+          localStorage.removeItem("user");
+          alert("Logout berhasil!");
+          window.location.href = "/Frontend/HTML/home.html";
+        });
+      }
     });
-
-    donateBtn.addEventListener('click', function () {
-      // Contoh redirect ke profil
-      window.location.href = '/Frontend/HTML/profil.html';
-    });
-  }
-</script>
+  </script>
 </body>
 
 </html>
