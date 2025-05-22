@@ -13,7 +13,13 @@ exports.login = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  req.session.destroy(() => {
+  if (req.session) {
+    req.session.destroy(() => {
+      res.sendFile(path.join(__dirname, "../../Frontend/HTML/admin_login.html"));
+    });
+  } else {
+    // fallback jika session tidak ada
     res.sendFile(path.join(__dirname, "../../Frontend/HTML/admin_login.html"));
-  });
+  }
 };
+

@@ -13,6 +13,7 @@ const upload = multer({ dest: "uploads/" });
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const session = require('express-session');
 
 app.use(express.json()); // ⬅️ Middleware untuk parsing JSON (penting!)
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +24,12 @@ app.use("/api/auth", authRoutes); // Route untuk login (auth)
 app.use("/admin", adminRoutes);
 app.use("/api", campaignRoute);
 app.use("/uploads", express.static("uploads"));
+app.use(session({
+  secret: 'yourSecretKey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // set secure: true jika pakai HTTPS
+}));
 
 // Route test
 app.get("/", (req, res) => {
