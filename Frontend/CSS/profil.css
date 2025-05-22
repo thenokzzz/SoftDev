@@ -1,12 +1,12 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #c62121;
+  background-color: #ffffff;
 }
 
 .container {
   display: flex;
-  background-color: #d30000;
+  background-color: #ffffff;
 }
 
 /* Logo */
@@ -49,6 +49,7 @@ body {
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin-bottom: 410px;
 }
 
 .sidebar li {
@@ -74,7 +75,7 @@ body {
 }
 
 .sidebar li.logout-button {
-    margin-top: 310px;
+    margin-top: auto;
 }
 
 .main-content {

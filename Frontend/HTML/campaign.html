@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campaign - UntukKita</title>
   <link rel="stylesheet" href="/Frontend/CSS/campaign.css">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+
 
 </head>
 
@@ -34,7 +35,7 @@
       <ul class="nav-links">
         <li><a href="/Frontend/HTML/home.html">Beranda</a></li>
         <li><a href="/Frontend/HTML/about.html">Tentang</a></li>
-        <li><a href="/Frontend/HTML/campaign.html">Campaign</a></li>
+        <li class="active">Campaign</a></li>
         <li><a href="/Frontend/HTML/galeri.html">Galeri</a></li>
         <!-- <li><a href="#">Blog</a></li> -->
       </ul>
@@ -46,6 +47,10 @@
         </a>
         <a href="/Frontend/HTML/login.html" id="logout-button" style="display: none;">
           <button class="btn-login">Logout</button>
+        </a>
+        <a href="/Frontend/HTML/profile.html" id="profile-button" style="display: none;">
+          <span class="material-symbols-outlined"
+            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
         </a>
         <a href="/Frontend/HTML/regist.html">
           <button class="btn-donasi">Berdonasi</button>
@@ -64,8 +69,7 @@
     <div class="campaign-card">
       <img src="/Frontend/img/pendidikan.jpeg" alt="Kampanye Pendidikan">
       <h3><a href="/Frontend/HTML/pendidikan.html">Pendidikan</a></h3>
-      <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak Kurang
-        Mampu...</p>
+      <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program bantuan pendidikan untuk anak kurang mampu...</p>
       <div class="progress-bar">
         <div class="progress-fill" style="width: 43%;"></div>
       </div>
@@ -243,34 +247,43 @@
       </div>
     </div>
   </footer>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const isLoggedIn = localStorage.getItem("isLoggedIn");
-
       const loginBtn = document.getElementById("login-button");
       const logoutBtn = document.getElementById("logout-button");
+      const profileBtn = document.getElementById("profile-button");
+      const donasiBtn = document.querySelector(".btn-donasi");
 
       if (isLoggedIn === "true") {
         if (loginBtn) loginBtn.style.display = "none";
         if (logoutBtn) logoutBtn.style.display = "inline-block";
+        if (profileBtn) profileBtn.style.display = "inline-block";
+        if (donasiBtn) donasiBtn.style.display = "none";
       }
 
       if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-          // Hapus data login dari localStorage
+        logoutBtn.addEventListener("click", function (e) {
+          e.preventDefault();
           localStorage.removeItem("isLoggedIn");
           localStorage.removeItem("username");
           localStorage.removeItem("user");
-
-          // Tampilkan notifikasi
           alert("Logout berhasil!");
-
-          // Redirect ke halaman awal
-          window.location.href = "/Frontend/HTML/home.html"; // Ubah jika berbeda
+          window.location.href = "/Frontend/HTML/login.html";
         });
       }
+
+      if (profileBtn) {
+      profileBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = "/Frontend/HTML/profil.html";
+      });
+    }
     });
   </script>
+
+
   <script>
   document.addEventListener("DOMContentLoaded", function () {
   const searchParams = new URLSearchParams(window.location.search);
