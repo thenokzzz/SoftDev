@@ -45,6 +45,7 @@
         </a>
         <a href="/Frontend/HTML/login.html" id="logout-button" style="display: none;">
           <button class="btn-login">Logout</button>
+          
         </a>
         <a href="/Frontend/HTML/profile.html" id="profile-button" style="display: none;">
           <span class="material-symbols-outlined"
@@ -341,7 +342,7 @@
           localStorage.removeItem("username");
           localStorage.removeItem("user");
           alert("Logout berhasil!");
-          window.location.href = "/Frontend/HTML/home.html";
+          window.location.href = "/Frontend/HTML/login.html";
         });
       }
     });
