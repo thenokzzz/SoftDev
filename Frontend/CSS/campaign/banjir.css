@@ -100,6 +100,12 @@ nav {
   color: #9c00bc;
 }
 
+.nav-links li.active,
+.nav-links li:hover {
+  color:#9c00bc;
+  font-weight: bold;
+}
+
 /* Button styles */
 .btn-links {
   display: flex;
@@ -139,11 +145,223 @@ nav {
 
 
 
+/* ISI CAMPAIGN */
+.campaign-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* gap: 20px;
+  padding: 40px 60px; */
+  flex-wrap: wrap;
+}
+/* Bagian Kiri (Gambar) */
+.left-section {
+  flex: 2;
+  min-width: 60%;
+  margin-left: 120px;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  width: 80%;
+  height: 340px;
+  border-radius: 10px;
+}
+
+.slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+  width: 100%; /* untuk 3 gambar */
+  height: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav.prev {
+  left: 10px;
+}
+
+.nav.next {
+  right: 10px;
+}
+
+.campaign-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  /* background-color: #5dd59d; */
+  margin-top: 0px;
+  display: inline-block;
+}
+
+.campaign-image {
+  width: 80%;
+  border-radius: 10px;
+}
+
+/* Bagian Kanan (Donasi) */
+.right-section {
+  position: sticky;
+  top: 100px;            
+  height: fit-content;
+  margin-right: 120px;     
+  min-width: 300px;
+  flex: 1;
+  align-self: flex-start;  /* memastikan sticky berjalan saat parent pakai flex */
+  z-index: 1;              /* jaga agar tidak meniban elemen di atas */
+}
 
 
+.donation-box {
+  background-color: white;
+  margin-top: 46px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donation-collected {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.amount {
+  color: #9c00bc;
+  font-size: 28px;
+  margin: 0;
+}
+
+.target {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-donasi, .btn-bagikan {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-donasi {
+  background-color: #9c00bc;
+  color: white;
+}
+
+.btn-bagikan {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.organisasi {
+  display: flex;
+  align-items: center;
+  gap: 6px;            
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+.icon-verified {
+  color: rgb(19, 19, 209);
+  font-size: 18px; 
+}
 
 
+.donasi-terakhir {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+}
 
+.donasi-terakhir em {
+  color: #777;
+}
+
+
+/* ==deskripsi== */
+.campaign-description {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.7;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
+  box-sizing: border-box;
+}
+
+
+.campaign-description h2 {
+  font-size: 24px;
+  color: #4a148c;
+  margin-bottom: 15px;
+}
+
+.campaign-description p {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.campaign-description ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.campaign-description ul li {
+  list-style-type: disc;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.campaign-description strong {
+  color: #2e2e2e;
+}
+
+.campaign-description p:last-child {
+  font-weight: bold;
+  font-size: 16px;
+}
 
 
 /* ====== Footer ====== */
@@ -263,6 +481,7 @@ nav {
 .progress-bar-fill {
   height: 100%;
   border-radius: 5px;
+  background-color: #9c00bc;
 }
 
 .progress-bar-container.purple .progress-bar-fill {
