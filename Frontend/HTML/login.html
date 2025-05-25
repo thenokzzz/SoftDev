@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Masuk - UntukKita</title>
-  <link rel="stylesheet" href="/Frontend/CSS/login.css">
+  <link rel="stylesheet" href="/CSS/login.css">
 </head>
 
 <body>
   <div class="container">
     <div class="left-section">
-      <img src="/frontend/img/IMG_7127.jpg" alt="Bakti Sosial">
+      <img src="/img/IMG_7127.jpg" alt="Bakti Sosial">
     </div>
     <div class="right-section">
       <h2>Selamat Datang Di UntukKita.</h2>
@@ -21,13 +21,13 @@
         <input type="password" name="password" placeholder="Kata Sandi" required />
         <button type="submit">Masuk</button>
       </form>
-      <a href="/frontend/html/regist.html">Belum Memiliki Akun? Daftar Disini Ya!</a>
+      <a href="/register">Belum Memiliki Akun? Daftar Disini Ya!</a>
       <div class="partner-logos">
         <p>Official Partner</p>
         <div class="partner-logos-row">
-          <img src="/frontend/img/logo untukkita.png" alt="UntukKita Logo">
+          <img src="/img/logo untukkita.png" alt="UntukKita Logo">
           <div class="logo-divider"></div>
-          <img src="/frontend/img/logo mapala fti.png" alt="Mapala FTI Logo">
+          <img src="/img/logo mapala fti.png" alt="Mapala FTI Logo">
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       localStorage.setItem("username", data.name);  
       localStorage.setItem("role", data.role);      
       localStorage.setItem("token", data.token);    
-      window.location.href = "/Frontend/HTML/home.html";
+      window.location.href = "/home";
     } else {
       alert(data.error || "Login gagal. Cek email atau password.");
     }

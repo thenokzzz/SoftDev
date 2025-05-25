@@ -150,7 +150,7 @@ nav {
 .hero {
   height: 70vh;
   border-radius: 10px;
-  background-image: url("/Frontend/img/IMG_7127.jpg");
+  background-image: url("/img/IMG_7127.jpg");
   background-size: cover;
   background-position: center;
   display: flex;

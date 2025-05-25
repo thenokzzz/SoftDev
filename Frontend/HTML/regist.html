@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Frontend/CSS/regist.css">
+    <link rel="stylesheet" href="/CSS/regist.css">
     <title>Registrasi - UntukKita</title>
 </head>
 
@@ -23,9 +23,9 @@
             <div class="partner-logos">
                 <p>Official Partner</p>
                 <div class="partner-logos-row">
-                    <img src="/frontend/img/logo untukkita.png" alt="Logo UntukKita">
+                    <img src="/img/logo untukkita.png" alt="Logo UntukKita">
                     <div class="logo-divider"></div>
-                    <img src="/frontend/img/logo mapala fti.png" alt="Logo Mapala FTI">
+                    <img src="/img/logo mapala fti.png" alt="Logo Mapala FTI">
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 if (response.ok) {
                     alert("Registrasi berhasil!");
                     localStorage.setItem("user", JSON.stringify(data.user)); // opsional
-                    window.location.href = "/Frontend/HTML/login.html"; // redirect
+                    window.location.href = "/login"; // redirect
                 } else {
                     alert(data.error || "Registrasi gagal.");
                 }

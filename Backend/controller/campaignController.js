@@ -57,20 +57,16 @@ async function getCampaignById(req, res) {
 async function updateCampaign(req, res) {
   try {
     const { id } = req.params;
+    const { title, description, target_amount } = req.body;
 
-    // Ambil data dari form
-    const { title, description } = req.body;
-    const targetAmount = Number(
-      req.body.target_amount_raw || req.body.target_amount
-    );
-
+    const targetAmount = Number(target_amount);
     if (!title || isNaN(targetAmount)) {
       return res
         .status(400)
         .json({ error: "Title and valid target_amount required" });
     }
 
-    const imageFile = req.file; // cek jika ada file baru diupload
+    const imageFile = req.file;
 
     const updatedData = {
       title,
@@ -83,6 +79,10 @@ async function updateCampaign(req, res) {
     }
 
     const updatedCampaign = await campaignModel.updateCampaign(id, updatedData);
+
+    if (!updatedCampaign) {
+      return res.status(404).json({ error: "Campaign not found" });
+    }
 
     res.json(updatedCampaign);
   } catch (err) {
