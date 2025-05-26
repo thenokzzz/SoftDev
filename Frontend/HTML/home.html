@@ -27,6 +27,7 @@
       <form id="search-form" class="campaign-search" action="/campaign" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
         <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+        <button type="submit" hidden></button>
       </form>
 
       <!-- Nav Links -->
@@ -108,58 +109,8 @@
         <p>Kami membantu mereka yang tidak memiliki harapan</p>
       </div>
 
-      <div class="cards">
-        <!-- Card 1-->
-        <div class="card-campaign">
-          <img src="/img/pendidikan.jpeg" alt="Pendidikan">
-          <div class="card-content">
-            <h3>Pendidikan</h3>
-            <p>Kami mengajak Anda untuk berkontribusi pada perubahan melalui program Bantuan Pendidikan untuk Anak
-              Kurang Mampu...</p>
-            <p class="label">Dana terkumpul</p>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 43%;"></div>
-            </div>
-            <p class="amount">43%</p>
-            <div class="buttons">
-              <button class="btn-primary">Donate</button>
-            </div>
-          </div>
-        </div>
-        <!-- Card 2-->
-        <div class="card-campaign">
-          <img src="/img/banjir.jpg" alt="Pendidikan">
-          <div class="card-content">
-            <h3>Bencana alam</h3>
-            <p>Bencana alam menyapa tanpa isyarat, menyisakan luka dan kehilangan mendalam bagi saudara sebangsa
-              tercinta...</p>
-            <p class="label">Dana terkumpul</p>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 47%;"></div>
-            </div>
-            <p class="amount">47%</p>
-            <div class="buttons">
-              <button class="btn-primary">Donate</button>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3-->
-        <div class="card-campaign">
-          <img src="/img/tanammangrove.JPG" alt="Pendidikan">
-          <div class="card-content">
-            <h3>Penanaman Mangrove</h3>
-            <p>Mangrove menjaga pantai penuh kasih, menaungi kehidupan laut yang rapuh namun sangat berarti bagi bumi...
-            </p>
-            <p class="label">Dana terkumpul</p>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 38%;"></div>
-            </div>
-            <p class="amount">38%</p>
-            <div class="buttons">
-              <button class="btn-primary">Donate</button>
-            </div>
-          </div>
-        </div>
+      <div class="cards" id="campaignContainerHome">
+        <!-- Campaign muncul di sini -->
       </div>
     </section>
 
@@ -322,6 +273,69 @@
     </div>
   </footer>
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("campaignContainerHome");
+      const form = document.getElementById("search-form");
+
+      // Fungsi untuk render campaign
+      function renderCampaigns(campaigns) {
+        container.innerHTML = ""; // clear existing
+        if (campaigns.length === 0) {
+          container.innerHTML = "<p>Tidak ada campaign ditemukan.</p>";
+          return;
+        }
+
+        const top3 = campaigns.slice(0, 3);
+        top3.forEach(c => {
+          const percentage = Math.floor((c.currentAmount / c.goalAmount) * 100);
+          const card = document.createElement("div");
+          card.className = "card-campaign";
+          card.innerHTML = `
+          <img src="/uploads/${c.image}" alt="${c.title}">
+          <div class="card-content">
+            <h3>${c.title}</h3>
+            <p>${c.description}</p>
+            <p class="label">Dana terkumpul</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${percentage}%"></div>
+            </div>
+            <p class="amount">${percentage}%</p>
+            <div class="buttons">
+              <button class="btn-primary" onclick="window.location.href='/campaign'">Donate</button>
+            </div>
+          </div>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      // Load semua campaign (default)
+      async function loadAllCampaigns() {
+        try {
+          const res = await fetch("http://localhost:4000/api/campaign");
+          const campaigns = await res.json();
+          renderCampaigns(campaigns);
+        } catch (err) {
+          console.error("Gagal memuat campaign:", err);
+          container.innerHTML = "<p style='color: red;'>Gagal memuat data campaign.</p>";
+        }
+      }
+
+      // Handle search
+      // Handle search: redirect ke campaign.html
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const q = form.q.value.trim();
+
+        if (q) {
+          window.location.href = `/campaign?q=${encodeURIComponent(q)}`;
+        } else {
+          window.location.href = `/campaign`;
+        }
+      });
+      // Muat awal
+      loadAllCampaigns();
+    });
     document.addEventListener("DOMContentLoaded", function () {
       const isLoggedIn = localStorage.getItem("isLoggedIn");
       const loginBtn = document.getElementById("login-button");
@@ -347,41 +361,6 @@
         });
       }
     });
-
-    
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchParams = new URLSearchParams(window.location.search);
-    const keyword = searchParams.get("q");
-
-    if (keyword) {
-      const campaignCards = document.querySelectorAll(".campaign-card");
-      const lowerKeyword = keyword.toLowerCase();
-      let found = false;
-
-      campaignCards.forEach(function (card) {
-        const title = card.querySelector("h3").textContent.toLowerCase();
-        const description = card.querySelector("p").textContent.toLowerCase();
-
-        if (title.includes(lowerKeyword) || description.includes(lowerKeyword)) {
-          card.style.display = "block";
-          found = true;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      if (!found) {
-        const noResults = document.createElement("p");
-        noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
-        noResults.style.textAlign = "center";
-        noResults.style.color = "grey";
-        noResults.style.marginTop = "20px";
-        document.querySelector(".campaign-cards").appendChild(noResults);
-      }
-    }
-  });
-
   </script>
 </body>
-
 </html>

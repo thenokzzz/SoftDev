@@ -100,10 +100,27 @@ async function deleteCampaign(req, res) {
   }
 }
 
+async function searchCampaigns(req, res) {
+  try {
+    const { q } = req.query;
+
+    if (!q || q.trim() === "") {
+      return res.status(400).json({ error: "q is required for search" });
+    }
+
+    const results = await campaignModel.searchCampaigns(q);
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+
 module.exports = {
   createCampaign,
   getAllCampaigns,
   getCampaignById,
   updateCampaign,
   deleteCampaign,
+  searchCampaigns,
 };

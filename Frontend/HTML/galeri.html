@@ -26,10 +26,11 @@
       </div>
 
       <!-- Search Bar -->
-      <div class="campaign-search">
+      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Cari campaign.." class="search-input" />
-      </div>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+        <button type="submit" hidden></button>
+      </form>
 
       <!-- Nav Links -->
       <ul class="nav-links">
@@ -48,7 +49,7 @@
         <a href="/login" id="logout-button" style="display: none;">
           <button class="btn-login">Logout</button>
         </a>
-          <a href="/profile" id="profile-button" style="display: none;">
+        <a href="/profile" id="profile-button" style="display: none;">
           <span class="material-symbols-outlined"
             style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
         </a>
@@ -59,68 +60,68 @@
     </div>
   </nav>
 
-     <!-- Galeri Section -->
-<section class="galeri-section">
-  <h2>Dokumentasi <span class="highlight">Kegiatan</span></h2>
-  <div class="galeri-grid">
+  <!-- Galeri Section -->
+  <section class="galeri-section">
+    <h2>Dokumentasi <span class="highlight">Kegiatan</span></h2>
+    <div class="galeri-grid">
 
-    <!-- Galeri 1 -->
-    <div class="galeri-card">
-      <div class="galeri-image">
-        <img src="/img/galeribanjir.jpg" alt="Donasi Bencana Alam">
-        <span class="badge">DAMPAK KEBAIKAN
+      <!-- Galeri 1 -->
+      <div class="galeri-card">
+        <div class="galeri-image">
+          <img src="/img/galeribanjir.jpg" alt="Donasi Bencana Alam">
+          <span class="badge">DAMPAK KEBAIKAN
+        </div>
+        <div class="galeri-content">
+          <h3>Donasi Bencana Alam</h3>
+          <p class="deskripsi">Distribusi bantuan kepada korban banjir di Jakarta Timur.</p>
+          <p class="tanggal">1 Juni 2025</p>
+        </div>
       </div>
-      <div class="galeri-content">
-        <h3>Donasi Bencana Alam</h3>
-        <p class="deskripsi">Distribusi bantuan kepada korban banjir di Jakarta Timur.</p>
-        <p class="tanggal">1 Juni 2025</p>
+
+      <!-- Galeri 2 -->
+      <div class="galeri-card">
+        <div class="galeri-image">
+          <img src="/img/galeritanampohon.jpg" alt="Aksi Tanam Pohon">
+          <span class="badge">DAMPAK KEBAIKAN
+        </div>
+        <div class="galeri-content">
+          <h3>Aksi Tanam Pohon</h3>
+          <p class="deskripsi">Kegiatan pelestarian lingkungan bersama MAPALA FTI.</p>
+          <p class="tanggal">17 Agustus 2024</p>
+        </div>
       </div>
+
+      <!-- Galeri 3 -->
+      <div class="galeri-card">
+        <div class="galeri-image">
+          <img src="/img/galeripendidikan.jpg" alt="Penggalangan Dana Pendidikan">
+          <span class="badge">DAMPAK KEBAIKAN
+        </div>
+        <div class="galeri-content">
+          <h3>Penggalangan Dana Pendidikan</h3>
+          <p class="deskripsi"> Membantu anak-anak untuk mendapatkan pendidikan yang lebih baik.</p>
+          <p class="tanggal">7 Juni 2024</p>
+        </div>
+      </div>
+
+      <!-- Galeri 4 -->
+      <div class="galeri-card">
+        <div class="galeri-image">
+          <img src="/img/galeribahasaisyarat.jpg" alt="Belajar Bahasa Isyarat">
+          <span class="badge">DAMPAK KEBAIKAN
+        </div>
+        <div class="galeri-content">
+          <h3>Belajar Bahasa Isyarat</h3>
+          <p class="deskripsi">Membantu penderita penyakit tuli dengan bahasa isyarat dasar untuk berkomunikasi.</p>
+          <p class="tanggal">19 Februari 2024</p>
+        </div>
+      </div>
+
     </div>
-
-    <!-- Galeri 2 -->
-    <div class="galeri-card">
-      <div class="galeri-image">
-        <img src="/img/galeritanampohon.jpg" alt="Aksi Tanam Pohon">
-        <span class="badge">DAMPAK KEBAIKAN
-      </div>
-      <div class="galeri-content">
-        <h3>Aksi Tanam Pohon</h3>
-        <p class="deskripsi">Kegiatan pelestarian lingkungan bersama MAPALA FTI.</p>
-        <p class="tanggal">17 Agustus 2024</p>
-      </div>
-    </div>
-
-    <!-- Galeri 3 -->
-    <div class="galeri-card">
-      <div class="galeri-image">
-        <img src="/img/galeripendidikan.jpg" alt="Penggalangan Dana Pendidikan">
-        <span class="badge">DAMPAK KEBAIKAN
-      </div>
-      <div class="galeri-content">
-        <h3>Penggalangan Dana Pendidikan</h3>
-        <p class="deskripsi"> Membantu anak-anak untuk mendapatkan pendidikan yang lebih baik.</p>
-        <p class="tanggal">7 Juni 2024</p>
-      </div>
-    </div>
-
-    <!-- Galeri 4 -->
-    <div class="galeri-card">
-      <div class="galeri-image">
-        <img src="/img/galeribahasaisyarat.jpg" alt="Belajar Bahasa Isyarat">
-        <span class="badge">DAMPAK KEBAIKAN
-      </div>
-      <div class="galeri-content">
-        <h3>Belajar Bahasa Isyarat</h3>
-        <p class="deskripsi">Membantu penderita penyakit tuli dengan bahasa isyarat dasar untuk berkomunikasi.</p>
-        <p class="tanggal">19 Februari 2024</p>
-      </div>
-    </div>
-
-  </div>
-</section>
+  </section>
 
 
-    <!-- ====== Footer ====== -->
+  <!-- ====== Footer ====== -->
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand">
@@ -138,10 +139,10 @@
       <div class="footer-section">
         <h4>Quick links</h4>
         <ul class="quick-links">
-        <li><a href="/home">Beranda</a></li>
-        <li><a href="/about">Tentang</a></li>
-        <li><a href="/campaign">Campaign</a></li>
-        <li><a href="/galeri">Galeri</a></li>
+          <li><a href="/home">Beranda</a></li>
+          <li><a href="/about">Tentang</a></li>
+          <li><a href="/campaign">Campaign</a></li>
+          <li><a href="/galeri">Galeri</a></li>
         </ul>
       </div>
 
@@ -232,11 +233,11 @@
       }
 
       if (profileBtn) {
-      profileBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "/profile";
-      });
-    }
+        profileBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "/profile";
+        });
+      }
     });
   </script>
 </body>

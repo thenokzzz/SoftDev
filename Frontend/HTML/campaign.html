@@ -6,11 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campaign - UntukKita</title>
   <link rel="stylesheet" href="/CSS/campaign.css">
+  <link rel="icon" type="image/png" href="/img/logo untukkita.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-
-
 </head>
 
 <body>
@@ -26,10 +24,11 @@
       </div>
 
       <!-- Search Bar -->
-      <div class="campaign-search">
+      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Cari campaign.." class="search-input" />
-      </div>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+        <button type="submit" hidden></button>
+      </form>
 
       <!-- Nav Links -->
       <ul class="nav-links">
@@ -67,7 +66,6 @@
   <div class="campaign-cards" id="campaignContainer">
     <!-- Campaign cards akan dimuat di sini -->
   </div>
-  
 
   <!-- ====== Footer ====== -->
   <footer class="site-footer">
@@ -187,84 +185,29 @@
         });
       }
     });
-    
-   document.addEventListener("DOMContentLoaded", async () => {
-    const container = document.getElementById("campaignContainer");
-    
-
-    try {
-      const response = await fetch("http://localhost:4000/api/campaign");
-      const campaigns = await response.json();
-
-      if (!Array.isArray(campaigns)) throw new Error("Format data tidak valid.");
-
-      campaigns.forEach(c => {
-        const card = document.createElement("div");
-        card.className = "campaign-card";
-        card.innerHTML = `
-          <img src="/uploads/${c.image}" alt="${c.title}" />
-          <h3><a href="#">${c.title}</a></h3>
-          <p>${c.description}</p>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%;"></div>
-          </div>
-          <p class="progress-text">0%</p>
-          <button class="donate-btn">Donasi</button>
-        `;
-        container.appendChild(card);
-      });
-
-      const searchParams = new URLSearchParams(window.location.search);
-      const keyword = searchParams.get("q");
-      if (keyword) {
-        const campaignCards = document.querySelectorAll(".campaign-card");
-        const lowerKeyword = keyword.toLowerCase();
-        let found = false;
-
-        const oldMessage = document.querySelector(".no-results-message");
-        if (oldMessage) oldMessage.remove();
-
-        campaignCards.forEach(function (card) {
-          const titleElement = card.querySelector("h3");
-          const descElement = card.querySelector("p");
-
-          const title = titleElement ? titleElement.textContent.toLowerCase() : "";
-          const description = descElement ? descElement.textContent.toLowerCase() : "";
-
-          if (title.includes(lowerKeyword) || description.includes(lowerKeyword)) {
-            card.style.display = "";
-            found = true;
-          } else {
-            card.style.display = "none";
-          }
-        });
-
-        if (!found) {
-          const noResults = document.createElement("p");
-          noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
-          noResults.className = "no-results-message";
-          document.body.appendChild(noResults);
-        }
-      }
-
-    } catch (err) {
-      console.error("Gagal memuat campaign:", err);
-      container.innerHTML = "<p style='color: red;'>Gagal memuat data campaign.</p>";
-    }
-  });
-
     document.addEventListener("DOMContentLoaded", async () => {
       const container = document.getElementById("campaignContainer");
 
+      const searchParams = new URLSearchParams(window.location.search);
+      const keyword = searchParams.get("q");
+
       try {
-        const response = await fetch("http://localhost:4000/api/campaign");
+        const apiUrl = keyword
+          ? `http://localhost:4000/api/search?q=${encodeURIComponent(keyword)}`
+          : "http://localhost:4000/api/campaign";
+
+        const response = await fetch(apiUrl);
         const campaigns = await response.json();
 
-        if (!Array.isArray(campaigns)) {
-          throw new Error("Format data tidak valid.");
+        container.innerHTML = "";
+
+        if (!Array.isArray(campaigns) || campaigns.length === 0) {
+          container.innerHTML = `<p style="text-align:center; color:gray;">Tidak ada campaign ditemukan.</p>`;
+          return;
         }
 
         campaigns.forEach(c => {
+          const percentage = Math.floor((c.currentAmount / c.goalAmount) * 100);
           const card = document.createElement("div");
           card.className = "campaign-card";
           card.innerHTML = `
@@ -272,9 +215,9 @@
         <h3><a href="#">${c.title}</a></h3>
         <p>${c.description}</p>
         <div class="progress-bar">
-          <div class="progress-fill" style="width: 0%;"></div>
+          <div class="progress-fill" style="width: ${percentage}%"></div>
         </div>
-        <p class="progress-text">0%</p>
+        <p class="progress-text">${percentage}%</p>
         <button class="donate-btn">Donasi</button>
       `;
           container.appendChild(card);
@@ -286,7 +229,6 @@
       }
     });
   </script>
-
 </body>
 
 </body>

@@ -28,6 +28,7 @@ router.put(
   campaignController.updateCampaign
 );
 
+router.get("/search", campaignController.searchCampaigns);
 router.get("/campaign", campaignController.getAllCampaigns);
 router.get("/campaign/:id", campaignController.getCampaignById);
 router.delete("/campaign/:id", campaignController.deleteCampaign);

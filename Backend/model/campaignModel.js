@@ -54,10 +54,23 @@ async function deleteCampaign(id) {
   });
 }
 
+async function searchCampaigns(q) {
+  return await prisma.campaign.findMany({
+    where: {
+      OR: [
+        { title: { contains: q, mode: 'insensitive' } },
+        { description: { contains: q, mode: 'insensitive' } },
+      ],
+    },
+  });
+}
+
+
 module.exports = {
   createCampaign,
   getAllCampaigns,
   getCampaignById,
   updateCampaign,
   deleteCampaign,
+  searchCampaigns,
 };
