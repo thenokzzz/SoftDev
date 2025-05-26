@@ -24,7 +24,7 @@
       </div>
 
       <!-- Search Bar -->
-      <form id="search-form" class="campaign-search" action="campaign.html" method="GET">
+      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
         <span class="material-symbols-outlined search-icon">search</span>
         <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
       </form>
@@ -347,6 +347,40 @@
         });
       }
     });
+
+    
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchParams = new URLSearchParams(window.location.search);
+    const keyword = searchParams.get("q");
+
+    if (keyword) {
+      const campaignCards = document.querySelectorAll(".campaign-card");
+      const lowerKeyword = keyword.toLowerCase();
+      let found = false;
+
+      campaignCards.forEach(function (card) {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const description = card.querySelector("p").textContent.toLowerCase();
+
+        if (title.includes(lowerKeyword) || description.includes(lowerKeyword)) {
+          card.style.display = "block";
+          found = true;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      if (!found) {
+        const noResults = document.createElement("p");
+        noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
+        noResults.style.textAlign = "center";
+        noResults.style.color = "grey";
+        noResults.style.marginTop = "20px";
+        document.querySelector(".campaign-cards").appendChild(noResults);
+      }
+    }
+  });
+
   </script>
 </body>
 

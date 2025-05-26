@@ -3,6 +3,27 @@ const jwt = require("jsonwebtoken");
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+exports.profileData = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ error: 'Token dibutuhkan' });
+
+    const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await prisma.accounts.findUnique({
+      where: { id: decoded.id },
+      select: { name: true, email: true }
+    });
+
+    if (!user) return res.status(404).json({ error: 'User tidak ditemukan' });
+
+    res.json(user);
+  } catch (error) {
+    res.status(401).json({ error: 'Token tidak valid atau expired' });
+  }
+};
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -29,6 +50,13 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
+     req.session.user = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    };
 
     res.json({ token, role: user.role, name: user.name });
   } catch (err) {

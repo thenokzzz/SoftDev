@@ -67,7 +67,7 @@
   <div class="campaign-cards" id="campaignContainer">
     <!-- Campaign cards akan dimuat di sini -->
   </div>
-  </section>
+  
 
   <!-- ====== Footer ====== -->
   <footer class="site-footer">
@@ -187,14 +187,42 @@
         });
       }
     });
-    document.addEventListener("DOMContentLoaded", function () {
+    
+   document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.getElementById("campaignContainer");
+    
+
+    try {
+      const response = await fetch("http://localhost:4000/api/campaign");
+      const campaigns = await response.json();
+
+      if (!Array.isArray(campaigns)) throw new Error("Format data tidak valid.");
+
+      campaigns.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "campaign-card";
+        card.innerHTML = `
+          <img src="/uploads/${c.image}" alt="${c.title}" />
+          <h3><a href="#">${c.title}</a></h3>
+          <p>${c.description}</p>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+          <p class="progress-text">0%</p>
+          <button class="donate-btn">Donasi</button>
+        `;
+        container.appendChild(card);
+      });
+
       const searchParams = new URLSearchParams(window.location.search);
       const keyword = searchParams.get("q");
-
       if (keyword) {
         const campaignCards = document.querySelectorAll(".campaign-card");
         const lowerKeyword = keyword.toLowerCase();
         let found = false;
+
+        const oldMessage = document.querySelector(".no-results-message");
+        if (oldMessage) oldMessage.remove();
 
         campaignCards.forEach(function (card) {
           const titleElement = card.querySelector("h3");
@@ -212,18 +240,19 @@
         });
 
         if (!found) {
-          const container = document.querySelector(".campaign-cards");
-          if (container) {
-            const noResults = document.createElement("p");
-            noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
-            noResults.style.textAlign = "center";
-            noResults.style.color = "grey";
-            noResults.style.marginTop = "20px";
-            container.appendChild(noResults);
-          }
+          const noResults = document.createElement("p");
+          noResults.textContent = `Tidak ada campaign yang cocok dengan: "${keyword}"`;
+          noResults.className = "no-results-message";
+          document.body.appendChild(noResults);
         }
       }
-    });
+
+    } catch (err) {
+      console.error("Gagal memuat campaign:", err);
+      container.innerHTML = "<p style='color: red;'>Gagal memuat data campaign.</p>";
+    }
+  });
+
     document.addEventListener("DOMContentLoaded", async () => {
       const container = document.getElementById("campaignContainer");
 
