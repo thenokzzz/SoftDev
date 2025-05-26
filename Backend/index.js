@@ -58,6 +58,9 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/regist.html"));
 });
+app.get("/profile", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/profil.html"));
+});
 
 app.get("/", (req, res) => {
   res.send("Server aktif.");
