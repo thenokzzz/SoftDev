@@ -11,6 +11,54 @@ body {
   margin: 0;
 }
 
+.hamburger {
+  display: none; /* sembunyikan secara default */
+}
+/* Sembunyikan mobile-menu secara default */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  padding: 16px;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  z-index: 9999;
+  width: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.show {
+  display: flex;
+}
+
+
+/* Desktop only */
+.desktop-only {
+  display: flex;
+}
+@media screen and (max-width: 480px) {
+  /* Tampilkan hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Sembunyikan menu desktop */
+  .desktop-only {
+    display: none;
+  }
+
+  /* Tampilkan mobile menu saat toggle */
+  .mobile-menu.show {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    padding: 16px;
+    width: 100%;
+  }
+}
+
 /* Navbar */
 nav {
   background-color: #c3c3c3;
@@ -21,6 +69,8 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   padding-bottom: 5px;
 }
+
+
 
 .navbar-inner {
   max-width: 1200px;
@@ -104,6 +154,9 @@ nav {
   color:#9c00bc;
   font-weight: bold;
 }
+
+
+
 
 /* Button styles */
 .btn-links {

@@ -16,46 +16,47 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
-
+      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">&#9776;</button>
       <!-- Logo -->
       <div class="logo">
         <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
         <span>Untuk<span class="highlight">Kita</span></span>
       </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <!-- Search Bar -->
+        <form id="search-form" class="campaign-search" action="/campaign" method="GET">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+          <button type="submit" hidden></button>
+        </form>
 
-      <!-- Search Bar -->
-      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
-        <button type="submit" hidden></button>
-      </form>
 
-      <!-- Nav Links -->
-      <ul class="nav-links">
-        <li class="active">Beranda</li>
-        <li><a href="/about">Tentang</a></li>
-        <li><a href="/campaign">Campaign</a></li>
-        <li><a href="/galeri">Galeri</a></li>
-        <!-- <li><a href="#">Blog</a></li> -->
-      </ul>
+        <!-- Nav Links -->
+          <ul class="nav-links">
+            <li class="active">Beranda</li>
+            <li><a href="/about">Tentang</a></li>
+            <li><a href="/campaign">Campaign</a></li>
+            <li><a href="/galeri">Galeri</a></li>
+            <!-- <li><a href="#">Blog</a></li> -->
+          </ul>
 
-      <!-- Buttons -->
-      <ul class="btn-links">
-        <a href="/login" id="login-button">
-          <button class="btn-login">Login</button>
-        </a>
-        <a href="/login" id="logout-button" style="display: none;">
-          <button class="btn-login">Logout</button>
-
-        </a>
-        <a href="/profile/" id="profile-button" style="display: none;">
-          <span class="material-symbols-outlined"
-            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
-        </a>
-        <a href="/register">
-          <button class="btn-donasi">Berdonasi</button>
-        </a>
-      </ul>
+        <!-- Buttons -->
+        <div class="btn-links">
+          <a href="/login" id="login-button">
+            <button class="btn-login">Login</button>
+          </a>
+          <a href="/login" id="logout-button" style="display: none;">
+            <button class="btn-login">Logout</button>
+          </a>
+          <a href="/profile/" id="profile-button" style="display: none;">
+            <span class="material-symbols-outlined"
+              style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+          </a>
+          <a href="/register">
+            <button class="btn-donasi">Berdonasi</button>
+          </a>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -361,6 +362,16 @@
         });
       }
     });
+
+     function toggleMenu() {
+    const menu = document.getElementById("mobileMenu");
+    if (menu) {
+      menu.classList.toggle("show");
+    }
+  }
+
+
   </script>
 </body>
+
 </html>
