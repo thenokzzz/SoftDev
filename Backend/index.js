@@ -17,6 +17,10 @@ const upload = multer({ dest: "uploads/" });
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const { midtrans } = require("./controller/midtransController");
+
+
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "default_secret",
@@ -33,6 +37,19 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.render("form");
+});
+
+app.post("/pay", midtrans);
+
+app.listen(PORT, () => console.log("Running on port", PORT));
+
+
 app.use(express.static(path.join(__dirname, "../Frontend")));
 app.use("/uploads", express.static("uploads"));
 app.use("/api/accounts", userRoutes);
