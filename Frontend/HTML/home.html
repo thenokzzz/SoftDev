@@ -1,297 +1,369 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beranda - UntukKita</title>
+    <link rel="icon" type="image/png" href="/img/logo untukkita.png" />
+    <link rel="stylesheet" href="/CSS/home.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Beranda - UntukKita</title>
-  <link rel="icon" type="image/png" href="/img/logo untukkita.png">
-  <link rel="stylesheet" href="/CSS/home.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="left-section">
+          <button
+            class="hamburger"
+            aria-label="Toggle menu"
+            onclick="toggleMenu()"
+          >
+            &#9776;
+          </button>
+          <div class="logo">
+            <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
+            <span>Untuk<span class="highlight">Kita</span></span>
+          </div>
+        </div>
 
-</head>
+        <div class="middle-section">
+          <form
+            id="search-form"
+            class="campaign-search"
+            action="/campaign"
+            method="GET"
+          >
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input
+              type="text"
+              placeholder="Cari campaign.."
+              class="search-input"
+              name="q"
+            />
+            <button type="submit" hidden></button>
+          </form>
+        </div>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">&#9776;</button>
-      <!-- Logo -->
-      <div class="logo">
-        <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
-        <span>Untuk<span class="highlight">Kita</span></span>
-      </div>
-      <div class="mobile-menu" id="mobileMenu">
-        <!-- Search Bar -->
-        <form id="search-form" class="campaign-search" action="/campaign" method="GET">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
-          <button type="submit" hidden></button>
-        </form>
-
-
-        <!-- Nav Links -->
+        <div class="right-section desktop-menu">
           <ul class="nav-links">
-            <li class="active">Beranda</li>
+            <li class="active"><a href="/">Beranda</a></li>
             <li><a href="/about">Tentang</a></li>
             <li><a href="/campaign">Campaign</a></li>
             <li><a href="/galeri">Galeri</a></li>
-            <!-- <li><a href="#">Blog</a></li> -->
           </ul>
 
-        <!-- Buttons -->
-        <div class="btn-links">
-          <a href="/login" id="login-button">
-            <button class="btn-login">Login</button>
-          </a>
-          <a href="/login" id="logout-button" style="display: none;">
-            <button class="btn-login">Logout</button>
-          </a>
-          <a href="/profile/" id="profile-button" style="display: none;">
-            <span class="material-symbols-outlined"
-              style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
-          </a>
-          <a href="/register">
-            <button class="btn-donasi">Berdonasi</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-
-  <div class="home-content">
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="overlay">
-        <h1>
-          DIMULAI DARI <span class="highlight">UNTAR</span><br />
-          <div style="margin-top: 5px;">MENUJU PERUBAHAN <span class="highlight">BESAR.</span></div>
-        </h1>
-      </div>
-    </section>
-
-    <!-- Kategori Section -->
-    <div class="kategori">
-      <div class="kategori-item">
-        <div class="kategori-icon">
-          <img src="/img/heart (3).png" alt="">
-        </div>
-        <p>Sosial</p>
-      </div>
-      <div class="kategori-item">
-        <div class="kategori-icon">
-          <img src="/img/plant.png" alt="">
-        </div>
-        <p>Lingkungan</p>
-      </div>
-      <div class="kategori-item">
-        <div class="kategori-icon">
-          <img src="/img/earthquake.png" alt="">
-        </div>
-        <p>Bencana Alam</p>
-      </div>
-      <div class="kategori-item">
-        <div class="kategori-icon">
-          <img src="/img/merchandise.png" alt="">
-        </div>
-        <p>Merchandise</p>
-      </div>
-    </div>
-
-    <!-- Campaign Pilihan Section -->
-    <section class="campaign">
-      <button class="lihat-lainnya-container">
-        <a href="/campaign" class="lihat-lainnya">Lihat lainnya</a>
-      </button>
-      <div class="campaign-header">
-        <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
-        <p>Kami membantu mereka yang tidak memiliki harapan</p>
-      </div>
-
-      <div class="cards" id="campaignContainerHome">
-        <!-- Campaign muncul di sini -->
-      </div>
-    </section>
-
-    <!-- Section Kisah Kita -->
-    <section class="kisah-kita">
-      <div class="container">
-        <div class="image">
-          <img src="/img/home pelestarianalam.jpeg" alt="Kisah Kita">
-        </div>
-        <div class="content">
-          <h2>Kisah Kita</h2>
-          <p><strong>Siapakah kami?</strong><br>
-            Kami adalah sekumpulan mahasiswa yang ingin berbagi dan membangun kepedulian bersama terhadap sesama
-            manusia.
-            Dengan adanya ini kami harap banyak manusia yang peduli akan sekitar.</p>
-          <p><strong>Mengapa memilih kami?</strong><br>
-            Kami hadir dengan komitmen nyata untuk membantu secara transparan, tepat sasaran, dan berkelanjutan.</p>
-          <!-- <button class="btn">Learn More</button> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Bagaimana Kita Bekerja -->
-    <section class="bagaimana-kerja">
-      <div class="container">
-        <div class="content">
-          <h2>Bagaimana kita bekerja</h2>
-          <ul>
-            <li><span class="dot"></span><strong>Menyalurkan Bantuan</strong><br>
-              Bantuan dikirim langsung ke pihak yang membutuhkan secara aman, cepat dan transparan.
-            </li>
-            <li><span class="dot"></span><strong>Menggalang Dukungan</strong><br>
-              Kami membuka donasi atau menjual merchandise untuk mengumpulkan dana dan dukungan dari masyarakat.
-            </li>
-            <li><span class="dot"></span><strong>Memberikan Laporan</strong><br>
-              Semua proses disertai laporan dan dokumentasi, agar semua pihak tahu kemana bantuannya disalurkan.
-            </li>
-          </ul>
-        </div>
-        <div class="image">
-          <img src="/img/home baksos2.jpg" alt="Bakti Sosial">
-        </div>
-      </div>
-    </section>
-    <section class="merchandise">
-      <h2 class="judul-merch">Merchandise</h2>
-      <p>penjualan merchandise ini hasil penjualannya digunakan untuk mendukung kegiatan sosial dan kemanusiaan.</p>
-
-      <div class="merch-cards">
-        <div class="merch-card">
-          <img src="/img/kaosorangutan1.png" alt="Kaos">
-          <h3>Bersama kita bantu sesama</h3>
-          <p>Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas, setiap pembeliannya berkontribusi
-            langsung pada program bantuan sosial untuk mereka yg membutuhkan.</p>
-          <!-- <a href="#">Read More</a> -->
-        </div>
-
-        <div class="merch-card">
-          <img src="/img/totebag1.png" alt="Tote Bag">
-          <h3>Bawa tas sebarkan aksi sosial</h3>
-          <p>Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari gerakan kolektif untuk bantuan sesama.
-            Cocok untuk kamu yang ingin tampil sadar sosial dan penuh aksi.</p>
-          <!-- <a href="#">Read More</a> -->
-        </div>
-
-        <div class="merch-card">
-          <img src="/img/tumbler1.png" alt="Tumbler">
-          <h3>Tumbler berisi kebaikan</h3>
-          <p>Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian, aksi nyata dan harapan yang disalurkan
-            lewat bantuan sosial.</p>
-          <!-- <a href="#">Read More</a> -->
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ====== Footer ====== -->
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logos">
-          <div class="logo-item">
-            <img src="/img/logo untukkita.png" alt="Logo Hati">
-          </div>
-          <div class="logo-divider"></div>
-          <div class="logo-item">
-            <img src="/img/logo mapala fti.png" alt="Logo Universitas">
+          <div class="btn-links">
+            <a href="/login" id="login-button"
+              ><button class="btn-login">Login</button></a
+            >
+            <a href="/login" id="logout-button" style="display: none"
+              ><button class="btn-login">Logout</button></a
+            >
+            <a href="/profile/" id="profile-button" style="display: none">
+              <span
+                class="material-symbols-outlined"
+                style="font-size: 36px; color: #9c00bc"
+                >account_circle</span
+              >
+            </a>
+            <a href="/register"
+              ><button class="btn-donasi">Berdonasi</button></a
+            >
           </div>
         </div>
       </div>
 
-      <div class="footer-section">
-        <h4>Quick links</h4>
-        <ul class="quick-links">
-          <li><a href="/home">Beranda</a></li>
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="nav-links">
+          <li class="active"><a href="/">Beranda</a></li>
           <li><a href="/about">Tentang</a></li>
           <li><a href="/campaign">Campaign</a></li>
           <li><a href="/galeri">Galeri</a></li>
         </ul>
+
+        <div class="btn-links">
+          <a href="/login"><button class="btn-login">Login</button></a>
+          <a href="/register"><button class="btn-donasi">Berdonasi</button></a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="overlay">
+          <h1>
+            DIMULAI DARI <span class="highlight">UNTAR</span><br />
+            <div style="margin-top: 5px">
+              MENUJU PERUBAHAN <span class="highlight">BESAR.</span>
+            </div>
+          </h1>
+        </div>
+      </section>
+
+      <!-- Kategori Section -->
+      <div class="kategori">
+        <div class="kategori-item">
+          <div class="kategori-icon">
+            <img src="/img/heart (3).png" alt="" />
+          </div>
+          <p>Sosial</p>
+        </div>
+        <div class="kategori-item">
+          <div class="kategori-icon">
+            <img src="/img/plant.png" alt="" />
+          </div>
+          <p>Lingkungan</p>
+        </div>
+        <div class="kategori-item">
+          <div class="kategori-icon">
+            <img src="/img/earthquake.png" alt="" />
+          </div>
+          <p>Bencana Alam</p>
+        </div>
+        <div class="kategori-item">
+          <div class="kategori-icon">
+            <img src="/img/merchandise.png" alt="" />
+          </div>
+          <p>Merchandise</p>
+        </div>
       </div>
 
-      <div class="footer-section">
-        <h4>Contact us</h4>
-        <p>Untar 1, Gedung R Lt. 7</p>
-        <p><a href="mailto:mapalaftiuntar@gmail.com">mapalaftiuntar@gmail.com</a></p>
-        <p><a href="tel:+6281292602639">+62 812 9260 2639</a></p>
-      </div>
+      <!-- Campaign Pilihan Section -->
+      <section class="campaign">
+        <button class="lihat-lainnya-container">
+          <a href="/campaign" class="lihat-lainnya">Lihat lainnya</a>
+        </button>
+        <div class="campaign-header">
+          <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
+          <p>Kami membantu mereka yang tidak memiliki harapan</p>
+        </div>
 
-      <div class="footer-section causes">
-        <h4>Urgent Causes</h4>
-        <ul>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Education</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:60%;"></div>
-            </div>
-            <span class="progress-text">60%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Health</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:80%;"></div>
-            </div>
-            <span class="progress-text">80%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Human rights</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:53%;"></div>
-            </div>
-            <span class="progress-text">53%</span>
-          </li>
-        </ul>
-      </div>
+        <div class="cards" id="campaignContainerHome">
+          <!-- Campaign muncul di sini -->
+        </div>
+      </section>
+
+      <!-- Section Kisah Kita -->
+      <section class="kisah-kita">
+        <div class="container">
+          <div class="image">
+            <img src="/img/home pelestarianalam.jpeg" alt="Kisah Kita" />
+          </div>
+          <div class="content">
+            <h2>Kisah Kita</h2>
+            <p>
+              <strong>Siapakah kami?</strong><br />
+              Kami adalah sekumpulan mahasiswa yang ingin berbagi dan membangun
+              kepedulian bersama terhadap sesama manusia. Dengan adanya ini kami
+              harap banyak manusia yang peduli akan sekitar.
+            </p>
+            <p>
+              <strong>Mengapa memilih kami?</strong><br />
+              Kami hadir dengan komitmen nyata untuk membantu secara transparan,
+              tepat sasaran, dan berkelanjutan.
+            </p>
+            <!-- <button class="btn">Learn More</button> -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Bagaimana Kita Bekerja -->
+      <section class="bagaimana-kerja">
+        <div class="container">
+          <div class="content">
+            <h2>Bagaimana kita bekerja</h2>
+            <ul>
+              <li>
+                <span class="dot"></span><strong>Menyalurkan Bantuan</strong
+                ><br />
+                Bantuan dikirim langsung ke pihak yang membutuhkan secara aman,
+                cepat dan transparan.
+              </li>
+              <li>
+                <span class="dot"></span><strong>Menggalang Dukungan</strong
+                ><br />
+                Kami membuka donasi atau menjual merchandise untuk mengumpulkan
+                dana dan dukungan dari masyarakat.
+              </li>
+              <li>
+                <span class="dot"></span><strong>Memberikan Laporan</strong
+                ><br />
+                Semua proses disertai laporan dan dokumentasi, agar semua pihak
+                tahu kemana bantuannya disalurkan.
+              </li>
+            </ul>
+          </div>
+          <div class="image">
+            <img src="/img/home baksos2.jpg" alt="Bakti Sosial" />
+          </div>
+        </div>
+      </section>
+      <section class="merchandise">
+        <h2 class="judul-merch">Merchandise</h2>
+        <p>
+          penjualan merchandise ini hasil penjualannya digunakan untuk mendukung
+          kegiatan sosial dan kemanusiaan.
+        </p>
+
+        <div class="merch-cards">
+          <div class="merch-card">
+            <img src="/img/kaosorangutan1.png" alt="Kaos" />
+            <h3>Bersama kita bantu sesama</h3>
+            <p>
+              Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah
+              solidaritas, setiap pembeliannya berkontribusi langsung pada
+              program bantuan sosial untuk mereka yg membutuhkan.
+            </p>
+            <!-- <a href="#">Read More</a> -->
+          </div>
+
+          <div class="merch-card">
+            <img src="/img/totebag1.png" alt="Tote Bag" />
+            <h3>Bawa tas sebarkan aksi sosial</h3>
+            <p>
+              Ringan dibawa, besar dampaknya. Tote bag ini menjadi bagian dari
+              gerakan kolektif untuk bantuan sesama. Cocok untuk kamu yang ingin
+              tampil sadar sosial dan penuh aksi.
+            </p>
+            <!-- <a href="#">Read More</a> -->
+          </div>
+
+          <div class="merch-card">
+            <img src="/img/tumbler1.png" alt="Tumbler" />
+            <h3>Tumbler berisi kebaikan</h3>
+            <p>
+              Setiap tegukan dari tumbler punya cerita. Cerita tentang
+              kepedulian, aksi nyata dan harapan yang disalurkan lewat bantuan
+              sosial.
+            </p>
+            <!-- <a href="#">Read More</a> -->
+          </div>
+        </div>
+      </section>
     </div>
 
-    <div class="footer-bottom">
-      <div class="footer-nav">
-        <a href="#">Privacy &amp; Policy</a>
-        <span class="divider">|</span>
-        <a href="#">Terms &amp; Conditions</a>
-      </div>
-      <div class="copyright">
-        &copy; 2025 copyright all right reserved
-      </div>
-      <div class="social-icons">
-        <a href="https://facebook.com" target="_blank">
-          <img src="/img/facebook.png" style="width: 25px; height: 25px;" alt="Facebook">
-        </a>
-        <a href="https://x.com/MapalaFTI_Untar">
-          <img src="/img/twitter.png" alt="Twitter">
-        </a>
-        <a href="https://www.instagram.com/mapalaftiuntar">
-          <img src="/img/instagram.png" alt="Instagram">
-        </a>
-      </div>
-    </div>
-  </footer>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const container = document.getElementById("campaignContainerHome");
-      const form = document.getElementById("search-form");
+    <!-- ====== Footer ====== -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logos">
+            <div class="logo-item">
+              <img src="/img/logo untukkita.png" alt="Logo Hati" />
+            </div>
+            <div class="logo-divider"></div>
+            <div class="logo-item">
+              <img src="/img/logo mapala fti.png" alt="Logo Universitas" />
+            </div>
+          </div>
+        </div>
 
-      // Fungsi untuk render campaign
-      function renderCampaigns(campaigns) {
-        container.innerHTML = ""; // clear existing
-        if (campaigns.length === 0) {
-          container.innerHTML = "<p>Tidak ada campaign ditemukan.</p>";
-          return;
-        }
+        <div class="footer-section">
+          <h4>Quick links</h4>
+          <ul class="quick-links">
+            <li><a href="/home">Beranda</a></li>
+            <li><a href="/about">Tentang</a></li>
+            <li><a href="/campaign">Campaign</a></li>
+            <li><a href="/galeri">Galeri</a></li>
+          </ul>
+        </div>
 
-        const top3 = campaigns.slice(0, 3);
-        top3.forEach(c => {
-          const percentage = Math.floor((c.currentAmount / c.goalAmount) * 100);
-          const card = document.createElement("div");
-          card.className = "card-campaign";
-          card.innerHTML = `
+        <div class="footer-section">
+          <h4>Contact us</h4>
+          <p>Untar 1, Gedung R Lt. 7</p>
+          <p>
+            <a href="mailto:mapalaftiuntar@gmail.com"
+              >mapalaftiuntar@gmail.com</a
+            >
+          </p>
+          <p><a href="tel:+6281292602639">+62 812 9260 2639</a></p>
+        </div>
+
+        <div class="footer-section causes">
+          <h4>Urgent Causes</h4>
+          <ul>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Education</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 60%"></div>
+              </div>
+              <span class="progress-text">60%</span>
+            </li>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Health</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 80%"></div>
+              </div>
+              <span class="progress-text">80%</span>
+            </li>
+            <li>
+              <span class="cause-icon"></span>
+              <span class="cause-title">Human rights</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width: 53%"></div>
+              </div>
+              <span class="progress-text">53%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-nav">
+          <a href="#">Privacy &amp; Policy</a>
+          <span class="divider">|</span>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+        <div class="copyright">&copy; 2025 copyright all right reserved</div>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img
+              src="/img/facebook.png"
+              style="width: 25px; height: 25px"
+              alt="Facebook"
+            />
+          </a>
+          <a href="https://x.com/MapalaFTI_Untar">
+            <img src="/img/twitter.png" alt="Twitter" />
+          </a>
+          <a href="https://www.instagram.com/mapalaftiuntar">
+            <img src="/img/instagram.png" alt="Instagram" />
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("campaignContainerHome");
+        const form = document.getElementById("search-form");
+
+        // Fungsi untuk render campaign
+        function renderCampaigns(campaigns) {
+          container.innerHTML = ""; // clear existing
+          if (campaigns.length === 0) {
+            container.innerHTML = "<p>Tidak ada campaign ditemukan.</p>";
+            return;
+          }
+
+          const top3 = campaigns.slice(0, 3);
+          top3.forEach((c) => {
+            const percentage = Math.floor(
+              (c.currentAmount / c.goalAmount) * 100
+            );
+            const card = document.createElement("div");
+            card.className = "card-campaign";
+            card.innerHTML = `
           <img src="/uploads/${c.image}" alt="${c.title}">
           <div class="card-content">
             <h3>${c.title}</h3>
@@ -306,72 +378,68 @@
             </div>
           </div>
         `;
-          container.appendChild(card);
-        });
-      }
-
-      // Load semua campaign (default)
-      async function loadAllCampaigns() {
-        try {
-          const res = await fetch("http://localhost:4000/api/campaign");
-          const campaigns = await res.json();
-          renderCampaigns(campaigns);
-        } catch (err) {
-          console.error("Gagal memuat campaign:", err);
-          container.innerHTML = "<p style='color: red;'>Gagal memuat data campaign.</p>";
+            container.appendChild(card);
+          });
         }
-      }
 
-      // Handle search
-      // Handle search: redirect ke campaign.html
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const q = form.q.value.trim();
+        // Load semua campaign (default)
+        async function loadAllCampaigns() {
+          try {
+            const res = await fetch("http://localhost:4000/api/campaign");
+            const campaigns = await res.json();
+            renderCampaigns(campaigns);
+          } catch (err) {
+            console.error("Gagal memuat campaign:", err);
+            container.innerHTML =
+              "<p style='color: red;'>Gagal memuat data campaign.</p>";
+          }
+        }
 
-        if (q) {
-          window.location.href = `/campaign?q=${encodeURIComponent(q)}`;
-        } else {
-          window.location.href = `/campaign`;
+        // Handle search
+        // Handle search: redirect ke campaign.html
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const q = form.q.value.trim();
+
+          if (q) {
+            window.location.href = `/campaign?q=${encodeURIComponent(q)}`;
+          } else {
+            window.location.href = `/campaign`;
+          }
+        });
+        // Muat awal
+        loadAllCampaigns();
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const loginBtn = document.getElementById("login-button");
+        const logoutBtn = document.getElementById("logout-button");
+        const profileBtn = document.getElementById("profile-button");
+        const donasiBtn = document.querySelector(".btn-donasi");
+
+        if (isLoggedIn === "true") {
+          if (loginBtn) loginBtn.style.display = "none";
+          if (logoutBtn) logoutBtn.style.display = "inline-block";
+          if (profileBtn) profileBtn.style.display = "inline-block";
+          if (donasiBtn) donasiBtn.style.display = "none";
+        }
+
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("username");
+            localStorage.removeItem("user");
+            alert("Logout berhasil!");
+            window.location.href = "/home";
+          });
         }
       });
-      // Muat awal
-      loadAllCampaigns();
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-      const isLoggedIn = localStorage.getItem("isLoggedIn");
-      const loginBtn = document.getElementById("login-button");
-      const logoutBtn = document.getElementById("logout-button");
-      const profileBtn = document.getElementById("profile-button");
-      const donasiBtn = document.querySelector(".btn-donasi");
 
-      if (isLoggedIn === "true") {
-        if (loginBtn) loginBtn.style.display = "none";
-        if (logoutBtn) logoutBtn.style.display = "inline-block";
-        if (profileBtn) profileBtn.style.display = "inline-block";
-        if (donasiBtn) donasiBtn.style.display = "none";
+      function toggleMenu() {
+        const menu = document.getElementById("mobileMenu");
+        menu.classList.toggle("active");
       }
-
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          localStorage.removeItem("isLoggedIn");
-          localStorage.removeItem("username");
-          localStorage.removeItem("user");
-          alert("Logout berhasil!");
-          window.location.href = "/home";
-        });
-      }
-    });
-
-     function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    if (menu) {
-      menu.classList.toggle("show");
-    }
-  }
-
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

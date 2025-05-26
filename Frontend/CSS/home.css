@@ -14,49 +14,10 @@ body {
 .hamburger {
   display: none; /* sembunyikan secara default */
 }
-/* Sembunyikan mobile-menu secara default */
+
 .mobile-menu {
-  display: none;
-  flex-direction: column;
-  background-color: white;
-  padding: 16px;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  z-index: 9999;
-  width: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.mobile-menu.show {
   display: flex;
-}
-
-
-/* Desktop only */
-.desktop-only {
-  display: flex;
-}
-@media screen and (max-width: 480px) {
-  /* Tampilkan hamburger */
-  .hamburger {
-    display: block;
-  }
-
-  /* Sembunyikan menu desktop */
-  .desktop-only {
-    display: none;
-  }
-
-  /* Tampilkan mobile menu saat toggle */
-  .mobile-menu.show {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #fff;
-    padding: 16px;
-    width: 100%;
-  }
+  justify-content: space-between;
 }
 
 /* Navbar */
@@ -70,8 +31,6 @@ nav {
   padding-bottom: 5px;
 }
 
-
-
 .navbar-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -80,6 +39,29 @@ nav {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+
+.middle-section {
+  flex: 1;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Mobile menu default hidden */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+  display: flex;
 }
 
 /* Logo */
@@ -110,7 +92,7 @@ nav {
   border-radius: 18px;
   padding: 5px 17px;
   background-color: #fff;
-  margin: 0 20px;
+  margin: 0 30px;
   margin-top: 5px;
 }
 
@@ -151,12 +133,9 @@ nav {
 
 .nav-links li.active,
 .nav-links li:hover {
-  color:#9c00bc;
+  color: #9c00bc;
   font-weight: bold;
 }
-
-
-
 
 /* Button styles */
 .btn-links {
@@ -189,10 +168,12 @@ nav {
 
 .btn-login:hover {
   background-color: #eee;
+  transition: background-color 0.3s ease;
 }
 
 .btn-donasi:hover {
   background-color: #7c0099;
+  transition: background-color 0.3s ease;
 }
 .home-content {
   max-width: 1200px;
@@ -298,13 +279,13 @@ nav {
   top: 40px;
   right: 20px;
   border-radius: 20px;
-  border: 2px solid #9C00BC;
+  border: 2px solid #9c00bc;
   background-color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .lihat-lainnya {
-  color: #9C00BC;
+  color: #9c00bc;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -313,12 +294,12 @@ nav {
 }
 
 .lihat-lainnya-container:hover {
-  background-color: #9C00BC;
+  background-color: #9c00bc;
   text-decoration: none;
   transform: scale(1.1);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-.lihat-lainnya:hover{
+.lihat-lainnya:hover {
   color: #f4f4f4;
   text-decoration: none;
 }
@@ -375,7 +356,7 @@ nav {
 
 .card-campaign:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 18px #12121233
+  box-shadow: 0 14px 18px #12121233;
 }
 
 .card-campaign img {
@@ -435,7 +416,7 @@ nav {
   gap: 10px;
 }
 
-.btn-primary{
+.btn-primary {
   flex: 1;
   padding: 8px;
   border-radius: 6px;
@@ -479,6 +460,42 @@ nav {
   .cards {
     flex-direction: column;
     align-items: center;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  /* Nav active style fix */
+  .nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links li.active a,
+  .nav-links li a:hover {
+    color: #9c00bc;
+    font-weight: bold;
   }
 }
 
@@ -619,7 +636,7 @@ nav {
 
 .merch-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 18px #12121233
+  box-shadow: 0 14px 18px #12121233;
 }
 
 .merch-card img {
@@ -856,5 +873,26 @@ nav {
   }
   .social-icons {
     margin-top: 10px;
+  }
+}
+@media screen and (max-width: 480px) {
+  /* Tampilkan hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Sembunyikan menu desktop */
+  .desktop-only {
+    display: none;
+  }
+
+  /* Tampilkan mobile menu saat toggle */
+  .mobile-menu.show {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    padding: 16px;
+    width: 100%;
   }
 }
