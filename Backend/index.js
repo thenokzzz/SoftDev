@@ -4,6 +4,7 @@ const session = require("express-session");
 const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const { midtrans } = require("./controller/midtransController");
 
 const userRoutes = require("./Routes/userRoute");
 const authRoutes = require("./Routes/authRoute");
@@ -16,10 +17,6 @@ const upload = multer({ dest: "uploads/" });
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
-const { midtrans } = require("./controller/midtransController");
-
-
 
 app.use(
   session({
@@ -46,21 +43,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/pay", midtrans);
-
-app.listen(PORT, () => console.log("Running on port", PORT));
-
-
 app.use(express.static(path.join(__dirname, "../Frontend")));
 app.use("/uploads", express.static("uploads"));
 app.use("/api/accounts", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/admin", adminRoutes);
+app.use("/", adminRoutes);
 app.use("/api", campaignRoute);
 
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/home.html"));
 });
 app.get("/campaign", (req, res) => {
+  const searchQuery = req.query.q || '';
   res.sendFile(path.join(__dirname, "../Frontend/HTML/campaign.html"));
 });
 app.get("/galeri", (req, res) => {
@@ -78,12 +72,12 @@ app.get("/register", (req, res) => {
 app.get("/profile", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/profil.html"));
 });
-app.get('/campaign', (req, res) => {
-  const searchQuery = req.query.q || '';
-  res.sendFile(path.join(__dirname, '../Frontend/HTML/campaign.html'));
-});
-app.get("/", (req, res) => {
-  res.send("Server aktif.");
+function ensureAdmin(req, res, next) {
+  if (req.session && req.session.admin) return next();
+  res.redirect("/admin/login");
+}
+app.get("/admin/dashboard", ensureAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/admin_dashboard.html"));
 });
 
 app.get("/api/accounts/:id", async (req, res) => {

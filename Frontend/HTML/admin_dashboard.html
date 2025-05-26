@@ -85,7 +85,7 @@
     <a href="#" data-menu="stats">Dashboard</a>
     <a href="#" data-menu="users">Kelola Akun</a>
     <a href="#" data-menu="campaign">Campaign</a>
-    <a href="#">Donasi</a>
+    <a href="#" data-menu="transparansi">Transparansi Dana</a>
   </div>
 
   <!-- Navbar -->
@@ -93,7 +93,7 @@
     <div class="container-fluid">
       <button class="btn btn-outline-light" id="menuToggle">☰</button>
       <span class="navbar-brand mx-auto">Admin Ganteng</span>
-      <form action="/admin/logout" method="POST" style="display:inline;">
+      <form action="/logout" method="POST" style="display:inline;">
         <button type="submit" class="btn btn-outline-light">Logout</button>
       </form>
     </div>
@@ -102,36 +102,11 @@
   <!-- Main Content -->
   <div id="mainContent" class="container-fluid mt-5">
     <h3>Statistik Donasi</h3>
-    <div class="row g-3 mt-2">
-      <div class="col-md-4">
-        <div class="card bg-primary text-white">
-          <div class="card-body">
-            <h5>Total Donasi</h5>
-            <p>Rp 12.500.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card bg-success text-white">
-          <div class="card-body">
-            <h5>Campaign Aktif</h5>
-            <p>5</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card bg-info text-white">
-          <div class="card-body">
-            <h5>Jumlah Donatur</h5>
-            <p>350</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- JavaScript -->
   <script>
+    window.addEventListener('DOMContentLoaded', renderStats);
     const toggleBtn = document.getElementById("menuToggle");
     const sidebar = document.getElementById("sidebar");
     const mainContent = document.getElementById("mainContent");
@@ -186,35 +161,63 @@
     });
 
     function renderStats() {
-      mainContent.innerHTML = `
+      fetch('/api/admin/dashboard', {
+        credentials: 'include'
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('Gagal mengambil data statistik');
+          return response.json();
+        })
+        .then(data => {
+          // Format angka ke Rupiah
+          const formatRupiah = (number) => {
+            return new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0
+            }).format(number);
+          };
+
+          // Tambahkan kontainer HTML untuk menampilkan statistik
+          mainContent.innerHTML = `
         <h3>Statistik Donasi</h3>
-        <div class="row g-3 mt-2">
+        <div class="row mt-4">
           <div class="col-md-4">
-            <div class="card bg-primary text-white">
+            <div class="card text-white bg-success mb-3">
+              <div class="card-header">Total Donasi</div>
               <div class="card-body">
-                <h5>Total Donasi</h5>
-                <p>Rp 12.500.000</p>
+                <h5 class="card-title" id="stat-donasi">Memuat...</h5>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card bg-success text-white">
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header">Total Campaign</div>
               <div class="card-body">
-                <h5>Campaign Aktif</h5>
-                <p>5</p>
+                <h5 class="card-title" id="stat-campaign">Memuat...</h5>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card bg-info text-white">
+            <div class="card text-white bg-info mb-3">
+              <div class="card-header">Total Donatur</div>
               <div class="card-body">
-                <h5>Jumlah Donatur</h5>
-                <p>350</p>
+                <h5 class="card-title" id="stat-donatur">Memuat...</h5>
               </div>
             </div>
           </div>
         </div>
       `;
+
+          // Setelah elemen tersedia, update nilainya
+          document.querySelector('#stat-donasi').textContent = formatRupiah(data.total_donasi);
+          document.querySelector('#stat-campaign').textContent = data.total_campaign;
+          document.querySelector('#stat-donatur').textContent = data.total_donatur;
+        })
+        .catch(error => {
+          console.error(error);
+          alert("Gagal memuat statistik dashboard");
+        });
     }
 
     function fetchUsers() {
@@ -375,9 +378,6 @@
           form.appendChild(hiddenInput);
         }
         hiddenInput.value = targetAmountNumber;
-
-        // Buang field target_amount asli supaya tidak terkirim (atau biarkan saja kalau backend ignore)
-        // form.querySelector("input[name='target_amount']").disabled = true;
 
         const formData = new FormData(form);
 
