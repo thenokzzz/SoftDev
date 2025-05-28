@@ -18,17 +18,17 @@ router.post("/logout", adminController.logout);
 
 router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
   try {
-    const donasiBulanan = await prisma.donation.groupBy({
-      by: ["created_at"],
+    const donasiBulanan = await prisma.campaign.groupBy({
+      by: ["createdAt"],
       _sum: {
-        amount: true,
+        collected_amount: true,
       },
     });
 
     const formattedDonasiBulanan = {};
 
     donasiBulanan.forEach((d) => {
-      const date = new Date(d.created_at);
+      const date = new Date(d.createdAt);
       const bulan = date.toLocaleString("id-ID", {
         month: "long",
         year: "numeric",
@@ -37,7 +37,7 @@ router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
       if (!formattedDonasiBulanan[bulan]) {
         formattedDonasiBulanan[bulan] = 0;
       }
-      formattedDonasiBulanan[bulan] += Number(d._sum.amount);
+      formattedDonasiBulanan[bulan] += Number(d._sum.collected_amount);
     });
 
     const donasiBulananArray = Object.entries(formattedDonasiBulanan).map(
@@ -46,7 +46,7 @@ router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
         total,
       })
     );
-
+    
     const totalCampaign = await prisma.campaign.count();
     const totalDana = await prisma.campaign.aggregate({
       _sum: { collected_amount: true },
@@ -58,7 +58,6 @@ router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
       where: { role: "admin" },
     });
 
-    // Data response
     res.json({
       total_campaign: totalCampaign,
       total_donasi: totalDana._sum.collected_amount || 0,

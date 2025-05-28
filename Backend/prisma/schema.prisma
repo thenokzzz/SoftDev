@@ -39,8 +39,6 @@ model Campaign {
   image            String?  // Tambahan kolom untuk menyimpan path atau URL gambar
   createdAt        DateTime @default(now())
 }
-
-<<<<<<< Updated upstream
 model Transaksi {
   id         Int      @id @default(autoincrement())
   nama       String
@@ -53,11 +51,7 @@ model Donation {
   id         Int      @id @default(autoincrement())
   amount     Int
   created_at DateTime @default(now())
-  // fields lain...
 }
-
-
-=======
 model Galeri {
   id               Int      @id @default(autoincrement())
   title            String
@@ -65,5 +59,3 @@ model Galeri {
   image            String?  
   startDate        DateTime // ← Input manual oleh user/admin
 }
-
->>>>>>> Stashed changes
