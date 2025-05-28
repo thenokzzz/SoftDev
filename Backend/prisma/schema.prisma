@@ -40,3 +40,19 @@ model Campaign {
   createdAt        DateTime @default(now())
 }
 
+model Transaksi {
+  id         Int      @id @default(autoincrement())
+  nama       String
+  jumlah     Int
+  batasWaktu DateTime
+  status     String   // "pending", "done"
+}
+
+model Donation {
+  id         Int      @id @default(autoincrement())
+  amount     Int
+  created_at DateTime @default(now())
+  // fields lain...
+}
+
+

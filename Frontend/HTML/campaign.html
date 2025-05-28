@@ -217,7 +217,7 @@
           <div class="progress-fill" style="width: ${percentage}%"></div>
         </div>
         <p class="progress-text">${percentage}%</p>
-        <button class="donate-btn">Donasi</button>
+        <button class="donate-btn" onclick="donateNow('${c.id}')">Donasi</button>
       `;
           container.appendChild(card);
         });
@@ -227,6 +227,14 @@
         container.innerHTML = "<p style='color: red;'>Gagal memuat data campaign.</p>";
       }
     });
+    function donateNow(campaignId) {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (!isLoggedIn) {
+        window.location.href = "/login";
+        return;
+      }
+      window.location.href = `/donation?campaignId=${campaignId}`;
+    }
   </script>
 </body>
 

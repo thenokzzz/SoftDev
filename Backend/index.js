@@ -72,12 +72,24 @@ app.get("/register", (req, res) => {
 app.get("/profile", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/profil.html"));
 });
+app.get("/donation", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/donation.html"));
+});
 function ensureAdmin(req, res, next) {
   if (req.session && req.session.admin) return next();
   res.redirect("/admin/login");
 }
 app.get("/admin/dashboard", ensureAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/admin_dashboard.html"));
+});
+
+app.get('/api/transaksi', async (req, res) => {
+  try {
+    const transaksi = await prisma.transaksi.findMany();
+    res.json(transaksi);
+  } catch (error) {
+    res.status(500).json({ error: 'Gagal mengambil data transaksi' });
+  }
 });
 
 app.get("/api/accounts/:id", async (req, res) => {

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donasi</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+
+        .donation-box {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .donation-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .nominal-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .nominal-buttons button {
+            padding: 10px 16px;
+            border: 1px solid #ccc;
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .nominal-buttons button.selected {
+            background: #9c00bc;
+            color: #fff;
+            border-color: #68017c;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 8px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        button.submit {
+            width: 100%;
+            background: #9c00bc;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .partner-logos {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .partner-logos p {
+            margin-bottom: 10px;
+            color: #7d7d7d;
+        }
+
+        .partner-logos-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .partner-logos img {
+            height: 40px;
+        }
+
+        .logo-divider {
+            width: 2px;
+            height: 40px;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="donation-box">
+        <h3>Nominal</h3>
+        <p>Pilih nominal yang tersedia</p>
+        <div class="nominal-buttons">
+            <button type="button" data-value="10000">Rp10.000</button>
+            <button type="button" data-value="50000">Rp50.000</button>
+            <button type="button" data-value="75000">Rp75.000</button>
+            <button type="button" data-value="100000">Rp100.000</button>
+        </div>
+
+        <label for="otherAmount"><strong>Nominal Lainnya</strong></label>
+        <input type="text" id="otherAmount" placeholder="Rp | 0" />
+        <div class="note">Minimum donasi Rp 10.000</div>
+
+        <button class="submit" id="donateBtn">Selanjutnya</button>
+    </div>
+    <div class="partner-logos">
+        <p>Official Partner</p>
+        <div class="partner-logos-row">
+            <img src="/img/logo untukkita.png" alt="UntukKita Logo">
+            <div class="logo-divider"></div>
+            <img src="/img/logo mapala fti.png" alt="Mapala FTI Logo">
+        </div>
+    </div>
+    <!-- Midtrans Snap JS -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="client SB-Mid-client-VZaDJq0aNmWe6v0W
+server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
+
+    <script>
+        // Fungsi format angka jadi Rupiah dengan titik ribuan, contoh 10000 -> Rp10.000
+        function formatRupiah(angka) {
+            if (!angka) return "";
+            const numberString = angka.toString().replace(/[^,\d]/g, '');
+            const split = numberString.split(',');
+            let sisa = split[0].length % 3;
+            let rupiah = split[0].substr(0, sisa);
+            const ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                const separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+            return 'Rp' + rupiah;
+        }
+
+        window.addEventListener("DOMContentLoaded", async () => {
+            try {
+                const res = await fetch("/api/user");
+                const data = await res.json();
+                window.userData = data;
+            } catch (err) {
+                console.error("Gagal mengambil data user:", err);
+            }
+        });
+
+        const nominalButtons = document.querySelectorAll('.nominal-buttons button');
+        const otherAmountInput = document.getElementById('otherAmount');
+        let selectedAmount = 0;
+
+        // Ketika klik nominal button, isi input dan set selectedAmount
+        nominalButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                nominalButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+
+                // Ambil nilai angka tanpa format
+                selectedAmount = parseInt(btn.getAttribute('data-value'));
+                // Set input dengan angka biasa (tanpa Rp atau titik)
+                otherAmountInput.value = formatRupiah(selectedAmount);
+            });
+        });
+
+        // Event input, format ke Rupiah sambil set selectedAmount angka murni
+        otherAmountInput.addEventListener('input', (e) => {
+            // Ambil nilai asli tanpa Rp dan titik
+            let rawValue = otherAmountInput.value.replace(/[^0-9]/g, '');
+            selectedAmount = parseInt(rawValue) || 0;
+
+            // Format input jadi Rp dengan titik ribuan
+            otherAmountInput.value = formatRupiah(rawValue);
+
+            // Posisikan kursor di akhir input supaya nyaman mengetik
+            otherAmountInput.setSelectionRange(otherAmountInput.value.length, otherAmountInput.value.length);
+
+            nominalButtons.forEach(b => b.classList.remove('selected'));
+        });
+
+        document.getElementById('donateBtn').addEventListener('click', async () => {
+            if (selectedAmount < 10000) {
+                alert("Minimal donasi Rp 10.000");
+                return;
+            }
+
+            // Ambil data user dari global window.userData
+            const user = window.userData || {};
+            const nameParts = (user.name || "Donatur").split(" ");
+            const firstName = nameParts[0];
+            const lastName = nameParts.slice(1).join(" ");
+
+            const data = {
+                grossAmount: selectedAmount,
+                firstName: firstName,
+                lastName: lastName,
+                email: user.email,
+                phone: user.phone
+            };
+
+            try {
+                const res = await fetch('/pay', {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const json = await res.json();
+                if (json.transactionToken) {
+                    window.snap.pay(json.transactionToken);
+                } else {
+                    alert("Gagal memproses pembayaran.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan saat memproses donasi.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>

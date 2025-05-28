@@ -18,6 +18,35 @@ router.post("/logout", adminController.logout);
 
 router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
   try {
+    const donasiBulanan = await prisma.donation.groupBy({
+      by: ["created_at"],
+      _sum: {
+        amount: true,
+      },
+    });
+
+    const formattedDonasiBulanan = {};
+
+    donasiBulanan.forEach((d) => {
+      const date = new Date(d.created_at);
+      const bulan = date.toLocaleString("id-ID", {
+        month: "long",
+        year: "numeric",
+      });
+
+      if (!formattedDonasiBulanan[bulan]) {
+        formattedDonasiBulanan[bulan] = 0;
+      }
+      formattedDonasiBulanan[bulan] += Number(d._sum.amount);
+    });
+
+    const donasiBulananArray = Object.entries(formattedDonasiBulanan).map(
+      ([bulan, total]) => ({
+        bulan,
+        total,
+      })
+    );
+
     const totalCampaign = await prisma.campaign.count();
     const totalDana = await prisma.campaign.aggregate({
       _sum: { collected_amount: true },
@@ -34,6 +63,7 @@ router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
       total_campaign: totalCampaign,
       total_donasi: totalDana._sum.collected_amount || 0,
       total_donatur: totalUser + totalAdmin,
+      donasiBulanan: donasiBulananArray,
     });
   } catch (err) {
     console.error(err);

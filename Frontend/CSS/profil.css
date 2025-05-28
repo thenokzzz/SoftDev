@@ -33,7 +33,7 @@ body {
 
 /* navbar ato sidebar */
 .sidebar {
-  width: 240px;
+  width: 220px;
   background-color: #e5c6f0;
   padding: 20px;
   border-right: 1px solid #ccc;
@@ -75,7 +75,7 @@ body {
 }
 
 .sidebar li.logout-button {
-    margin-top: auto;
+    margin: 0 10px;
 }
 
 .main-content {

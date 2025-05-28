@@ -13,6 +13,11 @@ const storage = multer.diskStorage({
   },
 });
 
+function requireLogin(req, res, next) {
+  if (req.session && req.session.user) return next();
+  res.redirect("/login");
+}
+
 const upload = multer({ storage: storage });
 
 // Routes
@@ -32,5 +37,10 @@ router.get("/search", campaignController.searchCampaigns);
 router.get("/campaign", campaignController.getAllCampaigns);
 router.get("/campaign/:id", campaignController.getCampaignById);
 router.delete("/campaign/:id", campaignController.deleteCampaign);
+router.get("/donation", requireLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/donation.html"));
+});
+
+
 
 module.exports = router;

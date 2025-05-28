@@ -149,6 +149,9 @@
           case "campaign":
             fetchCampaigns();
             break;
+          case "transparansi":
+            fetchTransparansi();
+            break;
           default:
             mainContent.innerHTML = `<h3>${link.textContent}</h3><p>Fitur belum tersedia.</p>`;
         }
@@ -219,7 +222,50 @@
           alert("Gagal memuat statistik dashboard");
         });
     }
+    function fetchTransparansi() {
+      fetch('/api/transactions') // ganti URL sesuai API yang kamu punya
+        .then(res => {
+          if (!res.ok) throw new Error('Gagal mengambil data transaksi');
+          return res.json();
+        })
+        .then(data => {
+          let html = `
+        <h3>Transparansi Dana</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID Transaksi</th>
+              <th>Nama Donatur</th>
+              <th>Campaign</th>
+              <th>Jumlah Donasi</th>
+              <th>Status</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
 
+          data.forEach(tx => {
+            html += `
+          <tr>
+            <td>${tx.id}</td>
+            <td>${tx.donatur_name || '-'}</td>
+            <td>${tx.campaign_title || '-'}</td>
+            <td>Rp ${tx.amount.toLocaleString('id-ID')}</td>
+            <td>${tx.status}</td>
+            <td>${new Date(tx.created_at).toLocaleDateString('id-ID')}</td>
+          </tr>
+        `;
+          });
+
+          html += `</tbody></table>`;
+          mainContent.innerHTML = html;
+        })
+        .catch(err => {
+          console.error(err);
+          mainContent.innerHTML = `<p class="text-danger">Gagal mengambil data transaksi.</p>`;
+        });
+    }
     function fetchUsers() {
       fetch("/api/accounts")
         .then(res => res.json())
