@@ -85,6 +85,7 @@
     <a href="#" data-menu="stats">Dashboard</a>
     <a href="#" data-menu="users">Kelola Akun</a>
     <a href="#" data-menu="campaign">Campaign</a>
+    <a href="#" data-menu="galeri">Galeri</a>
     <a href="#" data-menu="transparansi">Transparansi Dana</a>
   </div>
 
@@ -149,8 +150,13 @@
           case "campaign":
             fetchCampaigns();
             break;
+<<<<<<< Updated upstream
           case "transparansi":
             fetchTransparansi();
+=======
+          case "galeri":
+            fetchGallery();
+>>>>>>> Stashed changes
             break;
           default:
             mainContent.innerHTML = `<h3>${link.textContent}</h3><p>Fitur belum tersedia.</p>`;
@@ -547,6 +553,155 @@
         }
       });
     }
+    
+     function fetchGallery() {
+        fetch("/api/galeri")
+          .then(res => res.json())
+          .then(data => {
+            let html = `
+        <h3>Kelola Galeri</h3>
+        <button class="btn btn-primary mb-3" onclick="showCreateGalleryForm()">+ Tambah Galeri</button>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Judul</th>
+              <th>Deskripsi</th>
+              <th>Tanggal</th>
+              <th>Gambar</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+            data.forEach(g => {
+              html += `
+          <tr>
+            <td>${g.id}</td>
+            <td>${g.title}</td>
+            <td>${g.description}</td>
+            <td>${new Date(g).toLocaleDateString("id-ID")}</td>
+            <td>${g.image ? `<img src="/uploads/${g.image}" class="img-fluid" style="max-height:100px;">` : "Tidak ada gambar"}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-1" onclick='editGallery(${JSON.stringify(g)})'>Edit</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteGallery(${g.id})">Hapus</button>
+            </td>
+          </tr>`;
+            });
+
+            html += `</tbody></table>`;
+            mainContent.innerHTML = html;
+          })
+          .catch(err => {
+            mainContent.innerHTML = "<p class='text-danger'>Gagal memuat data galeri.</p>";
+            console.error("Gagal ambil galeri:", err);
+          });
+      }
+
+      function showCreateGalleryForm() {
+  mainContent.innerHTML = `
+    <h3>Tambah Galeri</h3>
+    <form id="createGalleryForm">
+      <div class="mb-2"><label>Judul</label><input type="text" name="title" class="form-control" required></div>
+      <div class="mb-2"><label>Deskripsi</label><textarea name="description" class="form-control" required></textarea></div>
+      <div class="mb-2"><label>Tanggal</label><input type="date" name="startDate" class="form-control" required></div>
+      <div class="mb-2"><label>Gambar</label><input type="file" name="image" accept="image/*" class="form-control"></div>
+      <button type="submit" class="btn btn-success">Simpan</button>
+      <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
+    </form>`;
+
+  document.getElementById("createGalleryForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const res = await fetch("/api/galeri", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Galeri berhasil ditambahkan!");
+      fetchGallery();
+    } else {
+      const err = await res.text();
+      console.error("Gagal menambahkan galeri:", err);
+      alert("Gagal menambahkan galeri");
+    }
+  });
+}
+
+function editGallery(galeri) {
+  mainContent.innerHTML = `
+    <h3>Edit Galeri</h3>
+    <form id="editGalleryForm">
+      <input type="hidden" name="id" value="${galeri.id}">
+      <div class="mb-2">
+        <label>Judul</label>
+        <input type="text" name="title" class="form-control" value="${galeri.title}" required>
+      </div>
+      <div class="mb-2">
+        <label>Deskripsi</label>
+        <textarea name="description" class="form-control" required>${galeri.description}</textarea>
+      </div>
+      <div class="mb-2">
+        <label>Tanggal</label>
+        <input type="date" name="startDate" class="form-control" value="${galeri.startDate.split('T')[0]}" required>
+      </div>
+      <div class="mb-2">
+        <label>Gambar (opsional, upload ulang jika ingin ganti)</label>
+        <input type="file" name="image" accept="image/*" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success">Simpan</button>
+      <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
+    </form>
+  `;
+
+  document.getElementById("editGalleryForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const galeriId = formData.get("id");
+
+    try {
+      const res = await fetch(`/api/galeri/${galeriId}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert("Galeri berhasil diperbarui!");
+        fetchGallery();
+      } else {
+        const errorData = await res.text();
+        console.error("Gagal mengedit galeri:", errorData);
+        alert("Gagal mengedit galeri");
+      }
+    } catch (error) {
+      alert("Terjadi kesalahan saat mengedit galeri.");
+      console.error(error);
+    }
+  });
+}
+
+function deleteGallery(id) {
+  if (confirm("Yakin ingin menghapus galeri ini?")) {
+    fetch(`/api/galeri/${id}`, {
+      method: "DELETE"
+    })
+    .then(res => {
+      if (res.ok) {
+        alert("Galeri berhasil dihapus.");
+        fetchGallery();
+      } else {
+        alert("Gagal menghapus galeri.");
+      }
+    })
+    .catch(err => {
+      console.error("Gagal menghapus galeri:", err);
+      alert("Terjadi kesalahan.");
+    });
+  }
+}
+
   </script>
 </body>
 

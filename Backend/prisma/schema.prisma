@@ -40,6 +40,7 @@ model Campaign {
   createdAt        DateTime @default(now())
 }
 
+<<<<<<< Updated upstream
 model Transaksi {
   id         Int      @id @default(autoincrement())
   nama       String
@@ -56,3 +57,13 @@ model Donation {
 }
 
 
+=======
+model Galeri {
+  id               Int      @id @default(autoincrement())
+  title            String
+  description      String?
+  image            String?  
+  startDate        DateTime // ← Input manual oleh user/admin
+}
+
+>>>>>>> Stashed changes

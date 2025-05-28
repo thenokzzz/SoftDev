@@ -10,6 +10,8 @@ const userRoutes = require("./Routes/userRoute");
 const authRoutes = require("./Routes/authRoute");
 const adminRoutes = require("./Routes/adminRoute");
 const campaignRoute = require("./Routes/campaignRoute");
+const galeriRoute = require("./Routes/galeriRoute");
+
 
 const cors = require("cors");
 const multer = require("multer");
@@ -49,6 +51,8 @@ app.use("/api/accounts", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/", adminRoutes);
 app.use("/api", campaignRoute);
+app.use("/api", galeriRoute);
+
 
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/home.html"));
