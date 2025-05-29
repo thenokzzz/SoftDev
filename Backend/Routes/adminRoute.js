@@ -46,22 +46,20 @@ router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
         total,
       })
     );
-    
+
     const totalCampaign = await prisma.campaign.count();
-    const totalDana = await prisma.campaign.aggregate({
-      _sum: { collected_amount: true },
+    const totalDana = await prisma.donation.aggregate({
+      _sum: { amount: true },
+      where: { status: "berhasil" },
     });
     const totalUser = await prisma.accounts.count({
       where: { role: "user" },
     });
-    const totalAdmin = await prisma.accounts.count({
-      where: { role: "admin" },
-    });
 
     res.json({
       total_campaign: totalCampaign,
-      total_donasi: totalDana._sum.collected_amount || 0,
-      total_donatur: totalUser + totalAdmin,
+      total_donasi: totalDana._sum.amount || 0,
+      total_donatur: totalUser,
       donasiBulanan: donasiBulananArray,
     });
   } catch (err) {

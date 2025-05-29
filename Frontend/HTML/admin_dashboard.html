@@ -151,7 +151,8 @@
             fetchCampaigns();
             break;
           case "transparansi":
-            fetchTransparansi();
+            loadDonations();
+            break;
           case "galeri":
             fetchGallery();
             break;
@@ -165,110 +166,6 @@
         }
       });
     });
-
-    function renderStats() {
-      fetch('/api/admin/dashboard', {
-        credentials: 'include'
-      })
-        .then(response => {
-          if (!response.ok) throw new Error('Gagal mengambil data statistik');
-          return response.json();
-        })
-        .then(data => {
-          // Format angka ke Rupiah
-          const formatRupiah = (number) => {
-            return new Intl.NumberFormat("id-ID", {
-              style: "currency",
-              currency: "IDR",
-              minimumFractionDigits: 0
-            }).format(number);
-          };
-
-          // Tambahkan kontainer HTML untuk menampilkan statistik
-          mainContent.innerHTML = `
-        <h3>Statistik Donasi</h3>
-        <div class="row mt-4">
-          <div class="col-md-4">
-            <div class="card text-white bg-success mb-3">
-              <div class="card-header">Total Donasi</div>
-              <div class="card-body">
-                <h5 class="card-title" id="stat-donasi">Memuat...</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-              <div class="card-header">Total Campaign</div>
-              <div class="card-body">
-                <h5 class="card-title" id="stat-campaign">Memuat...</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card text-white bg-info mb-3">
-              <div class="card-header">Total Donatur</div>
-              <div class="card-body">
-                <h5 class="card-title" id="stat-donatur">Memuat...</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-
-          // Setelah elemen tersedia, update nilainya
-          document.querySelector('#stat-donasi').textContent = formatRupiah(data.total_donasi);
-          document.querySelector('#stat-campaign').textContent = data.total_campaign;
-          document.querySelector('#stat-donatur').textContent = data.total_donatur;
-        })
-        .catch(error => {
-          console.error(error);
-          alert("Gagal memuat statistik dashboard");
-        });
-    }
-    function fetchTransparansi() {
-      fetch('/api/transactions') // ganti URL sesuai API yang kamu punya
-        .then(res => {
-          if (!res.ok) throw new Error('Gagal mengambil data transaksi');
-          return res.json();
-        })
-        .then(data => {
-          let html = `
-        <h3>Transparansi Dana</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>ID Transaksi</th>
-              <th>Nama Donatur</th>
-              <th>Campaign</th>
-              <th>Jumlah Donasi</th>
-              <th>Status</th>
-              <th>Tanggal</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-          data.forEach(tx => {
-            html += `
-          <tr>
-            <td>${tx.id}</td>
-            <td>${tx.donatur_name || '-'}</td>
-            <td>${tx.campaign_title || '-'}</td>
-            <td>Rp ${tx.amount.toLocaleString('id-ID')}</td>
-            <td>${tx.status}</td>
-            <td>${new Date(tx.created_at).toLocaleDateString('id-ID')}</td>
-          </tr>
-        `;
-          });
-
-          html += `</tbody></table>`;
-          mainContent.innerHTML = html;
-        })
-        .catch(err => {
-          console.error(err);
-          mainContent.innerHTML = `<p class="text-danger">Gagal mengambil data transaksi.</p>`;
-        });
-    }
     function fetchUsers() {
       fetch("/api/accounts")
         .then(res => res.json())
@@ -550,12 +447,12 @@
         }
       });
     }
-    
-     function fetchGallery() {
-        fetch("/api/galeri")
-          .then(res => res.json())
-          .then(data => {
-            let html = `
+
+    function fetchGallery() {
+      fetch("/api/galeri")
+        .then(res => res.json())
+        .then(data => {
+          let html = `
         <h3>Kelola Galeri</h3>
         <button class="btn btn-primary mb-3" onclick="showCreateGalleryForm()">+ Tambah Galeri</button>
         <table class="table table-bordered">
@@ -571,8 +468,8 @@
           </thead>
           <tbody>`;
 
-            data.forEach(g => {
-              html += `
+          data.forEach(g => {
+            html += `
           <tr>
             <td>${g.id}</td>
             <td>${g.title}</td>
@@ -584,121 +481,171 @@
               <button class="btn btn-sm btn-danger" onclick="deleteGallery(${g.id})">Hapus</button>
             </td>
           </tr>`;
-            });
+          });
 
-            html += `</tbody></table>`;
-            mainContent.innerHTML = html;
+          html += `</tbody></table>`;
+          mainContent.innerHTML = html;
+        })
+        .catch(err => {
+          mainContent.innerHTML = "<p class='text-danger'>Gagal memuat data galeri.</p>";
+          console.error("Gagal ambil galeri:", err);
+        });
+    }
+
+    function showCreateGalleryForm() {
+      mainContent.innerHTML = `
+      <h3>Tambah Galeri</h3>
+      <form id="createGalleryForm">
+        <div class="mb-2"><label>Judul</label><input type="text" name="title" class="form-control" required></div>
+        <div class="mb-2"><label>Deskripsi</label><textarea name="description" class="form-control" required></textarea></div>
+        <div class="mb-2"><label>Tanggal</label><input type="date" name="startDate" class="form-control" required></div>
+        <div class="mb-2"><label>Gambar</label><input type="file" name="image" accept="image/*" class="form-control"></div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
+      </form>`;
+
+      document.getElementById("createGalleryForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const res = await fetch("/api/galeri", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.ok) {
+          alert("Galeri berhasil ditambahkan!");
+          fetchGallery();
+        } else {
+          const err = await res.text();
+          console.error("Gagal menambahkan galeri:", err);
+          alert("Gagal menambahkan galeri");
+        }
+      });
+    }
+
+    function editGallery(galeri) {
+      mainContent.innerHTML = `
+      <h3>Edit Galeri</h3>
+      <form id="editGalleryForm">
+        <input type="hidden" name="id" value="${galeri.id}">
+        <div class="mb-2">
+          <label>Judul</label>
+          <input type="text" name="title" class="form-control" value="${galeri.title}" required>
+        </div>
+        <div class="mb-2">
+          <label>Deskripsi</label>
+          <textarea name="description" class="form-control" required>${galeri.description}</textarea>
+        </div>
+        <div class="mb-2">
+          <label>Tanggal</label>
+          <input type="date" name="startDate" class="form-control" value="${galeri.startDate.split('T')[0]}" required>
+        </div>
+        <div class="mb-2">
+          <label>Gambar (opsional, upload ulang jika ingin ganti)</label>
+          <input type="file" name="image" accept="image/*" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
+      </form>
+      `;
+
+      document.getElementById("editGalleryForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const galeriId = formData.get("id");
+
+        try {
+          const res = await fetch(`/api/galeri/${galeriId}`, {
+            method: "PUT",
+            body: formData,
+          });
+
+          if (res.ok) {
+            alert("Galeri berhasil diperbarui!");
+            fetchGallery();
+          } else {
+            const errorData = await res.text();
+            console.error("Gagal mengedit galeri:", errorData);
+            alert("Gagal mengedit galeri");
+          }
+        } catch (error) {
+          alert("Terjadi kesalahan saat mengedit galeri.");
+          console.error(error);
+        }
+      });
+    }
+
+    function deleteGallery(id) {
+      if (confirm("Yakin ingin menghapus galeri ini?")) {
+        fetch(`/api/galeri/${id}`, {
+          method: "DELETE"
+        })
+          .then(res => {
+            if (res.ok) {
+              alert("Galeri berhasil dihapus.");
+              fetchGallery();
+            } else {
+              alert("Gagal menghapus galeri.");
+            }
           })
           .catch(err => {
-            mainContent.innerHTML = "<p class='text-danger'>Gagal memuat data galeri.</p>";
-            console.error("Gagal ambil galeri:", err);
+            console.error("Gagal menghapus galeri:", err);
+            alert("Terjadi kesalahan.");
           });
       }
-
-      function showCreateGalleryForm() {
-  mainContent.innerHTML = `
-    <h3>Tambah Galeri</h3>
-    <form id="createGalleryForm">
-      <div class="mb-2"><label>Judul</label><input type="text" name="title" class="form-control" required></div>
-      <div class="mb-2"><label>Deskripsi</label><textarea name="description" class="form-control" required></textarea></div>
-      <div class="mb-2"><label>Tanggal</label><input type="date" name="startDate" class="form-control" required></div>
-      <div class="mb-2"><label>Gambar</label><input type="file" name="image" accept="image/*" class="form-control"></div>
-      <button type="submit" class="btn btn-success">Simpan</button>
-      <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
-    </form>`;
-
-  document.getElementById("createGalleryForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-
-    const res = await fetch("/api/galeri", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (res.ok) {
-      alert("Galeri berhasil ditambahkan!");
-      fetchGallery();
-    } else {
-      const err = await res.text();
-      console.error("Gagal menambahkan galeri:", err);
-      alert("Gagal menambahkan galeri");
     }
-  });
-}
 
-function editGallery(galeri) {
-  mainContent.innerHTML = `
-    <h3>Edit Galeri</h3>
-    <form id="editGalleryForm">
-      <input type="hidden" name="id" value="${galeri.id}">
-      <div class="mb-2">
-        <label>Judul</label>
-        <input type="text" name="title" class="form-control" value="${galeri.title}" required>
-      </div>
-      <div class="mb-2">
-        <label>Deskripsi</label>
-        <textarea name="description" class="form-control" required>${galeri.description}</textarea>
-      </div>
-      <div class="mb-2">
-        <label>Tanggal</label>
-        <input type="date" name="startDate" class="form-control" value="${galeri.startDate.split('T')[0]}" required>
-      </div>
-      <div class="mb-2">
-        <label>Gambar (opsional, upload ulang jika ingin ganti)</label>
-        <input type="file" name="image" accept="image/*" class="form-control">
-      </div>
-      <button type="submit" class="btn btn-success">Simpan</button>
-      <button type="button" class="btn btn-secondary" onclick="fetchGallery()">Batal</button>
-    </form>
-  `;
+    async function loadDonations() {
+      try {
+        const res = await fetch('/api/admin/donations');
+        const data = await res.json();
+        mainContent.innerHTML = `
+          <h3 class="mb-4">Transparansi Donasi</h3>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Campaign</th>
+                  <th scope="col">Nominal</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Tanggal</th>
+                </tr>
+              </thead>
+              <tbody id="donation-table-body"></tbody>
+            </table>
+          </div>
+        `;
 
-  document.getElementById("editGalleryForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const galeriId = formData.get("id");
 
-    try {
-      const res = await fetch(`/api/galeri/${galeriId}`, {
-        method: "PUT",
-        body: formData,
-      });
+        data.donations.forEach(d => {
+          const tr = document.createElement('tr');
+          let statusClass = "";
+          switch (d.status) {
+            case "pending": statusClass = "text-warning"; break;
+            case "berhasil": statusClass = "text-success"; break;
+            case "gagal": statusClass = "text-danger"; break;
+          }
 
-      if (res.ok) {
-        alert("Galeri berhasil diperbarui!");
-        fetchGallery();
-      } else {
-        const errorData = await res.text();
-        console.error("Gagal mengedit galeri:", errorData);
-        alert("Gagal mengedit galeri");
+          tr.innerHTML = `
+            <td>${d.id}</td>
+            <td>${d.user.name}</td>
+            <td>${d.user.email}</td>
+            <td>${d.campaign.title}</td>
+            <td>Rp${d.amount.toLocaleString('id-ID')}</td>
+            <td class="${statusClass} fw-bold text-capitalize">${d.status}</td>
+            <td>${new Date(d.createdAt).toLocaleString('id-ID')}</td>
+          `;
+          document.getElementById('donation-table-body').appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error("Gagal load data donasi:", err);
       }
-    } catch (error) {
-      alert("Terjadi kesalahan saat mengedit galeri.");
-      console.error(error);
     }
-  });
-}
-
-function deleteGallery(id) {
-  if (confirm("Yakin ingin menghapus galeri ini?")) {
-    fetch(`/api/galeri/${id}`, {
-      method: "DELETE"
-    })
-    .then(res => {
-      if (res.ok) {
-        alert("Galeri berhasil dihapus.");
-        fetchGallery();
-      } else {
-        alert("Gagal menghapus galeri.");
-      }
-    })
-    .catch(err => {
-      console.error("Gagal menghapus galeri:", err);
-      alert("Terjadi kesalahan.");
-    });
-  }
-}
-
   </script>
 </body>
 

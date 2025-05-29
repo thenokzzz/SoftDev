@@ -13,7 +13,27 @@ async function createCampaign(data) {
 }
 
 async function getAllCampaigns() {
-  return await prisma.campaign.findMany();
+  const campaigns = await prisma.campaign.findMany({
+    include: {
+      donations: {
+        where: { status: "berhasil" },
+        select: { amount: true },
+      },
+    },
+  });
+
+  return campaigns.map(c => {
+    const totalDonasi = c.donations.reduce((sum, d) => sum + d.amount, 0);
+
+    return {
+      id: c.id,
+      title: c.title,
+      description: c.description,
+      image: c.image,
+      goalAmount: c.target_amount,
+      currentAmount: totalDonasi,
+    };
+  });
 }
 
 async function getCampaignById(id) {

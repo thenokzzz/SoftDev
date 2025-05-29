@@ -118,20 +118,22 @@
 
         <button class="submit" id="donateBtn">Selanjutnya</button>
     </div>
+
     <div class="partner-logos">
         <p>Official Partner</p>
         <div class="partner-logos-row">
-            <img src="/img/logo untukkita.png" alt="UntukKita Logo">
+            <img src="/img/logo untukkita.png" alt="UntukKita Logo" />
             <div class="logo-divider"></div>
-            <img src="/img/logo mapala fti.png" alt="Mapala FTI Logo">
+            <img src="/img/logo mapala fti.png" alt="Mapala FTI Logo" />
         </div>
     </div>
+
     <!-- Midtrans Snap JS -->
-    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="client SB-Mid-client-VZaDJq0aNmWe6v0W
-server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-VZaDJq0aNmWe6v0W"></script>
 
     <script>
-        // Fungsi format angka jadi Rupiah dengan titik ribuan, contoh 10000 -> Rp10.000
+        // Fungsi format angka jadi Rupiah dengan titik ribuan
         function formatRupiah(angka) {
             if (!angka) return "";
             const numberString = angka.toString().replace(/[^,\d]/g, '');
@@ -151,11 +153,17 @@ server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
 
         window.addEventListener("DOMContentLoaded", async () => {
             try {
-                const res = await fetch("/api/user");
+                const res = await fetch("/api/accounts");
                 const data = await res.json();
-                window.userData = data;
+                if (Array.isArray(data) && data.length > 0) {
+                    window.userData = data[0]; // sesuaikan ini dengan user yang login sebenarnya
+                } else {
+                    window.userData = {};
+                }
+
             } catch (err) {
                 console.error("Gagal mengambil data user:", err);
+                window.userData = {};
             }
         });
 
@@ -163,31 +171,21 @@ server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
         const otherAmountInput = document.getElementById('otherAmount');
         let selectedAmount = 0;
 
-        // Ketika klik nominal button, isi input dan set selectedAmount
         nominalButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 nominalButtons.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
 
-                // Ambil nilai angka tanpa format
                 selectedAmount = parseInt(btn.getAttribute('data-value'));
-                // Set input dengan angka biasa (tanpa Rp atau titik)
                 otherAmountInput.value = formatRupiah(selectedAmount);
             });
         });
 
-        // Event input, format ke Rupiah sambil set selectedAmount angka murni
         otherAmountInput.addEventListener('input', (e) => {
-            // Ambil nilai asli tanpa Rp dan titik
             let rawValue = otherAmountInput.value.replace(/[^0-9]/g, '');
             selectedAmount = parseInt(rawValue) || 0;
-
-            // Format input jadi Rp dengan titik ribuan
             otherAmountInput.value = formatRupiah(rawValue);
-
-            // Posisikan kursor di akhir input supaya nyaman mengetik
             otherAmountInput.setSelectionRange(otherAmountInput.value.length, otherAmountInput.value.length);
-
             nominalButtons.forEach(b => b.classList.remove('selected'));
         });
 
@@ -197,22 +195,35 @@ server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
                 return;
             }
 
-            // Ambil data user dari global window.userData
             const user = window.userData || {};
+            if (!user.id) {
+                alert("User belum login atau data user tidak ditemukan.");
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const campaignId = parseInt(urlParams.get("campaignId"));
+            if (!campaignId) {
+                alert("Campaign tidak valid.");
+                return;
+            }
+
             const nameParts = (user.name || "Donatur").split(" ");
             const firstName = nameParts[0];
             const lastName = nameParts.slice(1).join(" ");
 
             const data = {
+                userId: user.id,
+                campaignId: campaignId,
                 grossAmount: selectedAmount,
                 firstName: firstName,
                 lastName: lastName,
                 email: user.email,
-                phone: user.phone
+                phone: user.number_phone
             };
 
             try {
-                const res = await fetch('/pay', {
+                const res = await fetch('/api/donation', {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
@@ -222,7 +233,7 @@ server SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh"></script>
                 if (json.transactionToken) {
                     window.snap.pay(json.transactionToken);
                 } else {
-                    alert("Gagal memproses pembayaran.");
+                    alert("Pembayaran melebihi target donasi");
                 }
             } catch (error) {
                 console.error("Error:", error);

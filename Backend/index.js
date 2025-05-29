@@ -11,7 +11,7 @@ const authRoutes = require("./Routes/authRoute");
 const adminRoutes = require("./Routes/adminRoute");
 const campaignRoute = require("./Routes/campaignRoute");
 const galeriRoute = require("./Routes/galeriRoute");
-
+const donationRoute = require("./Routes/donationRoute");
 
 const cors = require("cors");
 const multer = require("multer");
@@ -52,6 +52,7 @@ app.use("/api/auth", authRoutes);
 app.use("/", adminRoutes);
 app.use("/api", campaignRoute);
 app.use("/api", galeriRoute);
+app.use("/api", donationRoute);
 
 
 app.get("/home", (req, res) => {

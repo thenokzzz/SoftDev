@@ -96,36 +96,6 @@
         <p><a href="mailto:mapalaftiuntar@gmail.com">mapalaftiuntar@gmail.com</a></p>
         <p><a href="tel:+6281292602639">+62 812 9260 2639</a></p>
       </div>
-
-      <div class="footer-section causes">
-        <h4>Urgent Causes</h4>
-        <ul>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Education</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:60%;"></div>
-            </div>
-            <span class="progress-text">60%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Health</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:80%;"></div>
-            </div>
-            <span class="progress-text">80%</span>
-          </li>
-          <li>
-            <span class="cause-icon"></span>
-            <span class="cause-title">Human rights</span>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width:53%;"></div>
-            </div>
-            <span class="progress-text">53%</span>
-          </li>
-        </ul>
-      </div>
     </div>
 
     <div class="footer-bottom">
@@ -207,18 +177,24 @@
 
         campaigns.forEach(c => {
           const percentage = Math.floor((c.currentAmount / c.goalAmount) * 100);
+          const formatRupiah = (angka) => {
+            return "Rp " + Number(angka).toLocaleString("id-ID");
+          };
           const card = document.createElement("div");
           card.className = "campaign-card";
           card.innerHTML = `
-        <img src="/uploads/${c.image}" alt="${c.title}" />
-        <h3><a href="#">${c.title}</a></h3>
-        <p>${c.description}</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${percentage}%"></div>
-        </div>
-        <p class="progress-text">${percentage}%</p>
-        <button class="donate-btn" onclick="donateNow('${c.id}')">Donasi</button>
-      `;
+          <img src="/uploads/${c.image}" alt="${c.title}" />
+          <h3><a href="#">${c.title}</a></h3>
+          <p>${c.description}</p>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${percentage}%"></div>
+          </div>
+          <p class="amount">
+            <span class="collected">${formatRupiah(c.currentAmount)}</span>
+            terkumpul dari ${formatRupiah(c.goalAmount)}
+          </p>
+          <button class="donate-btn" onclick="donateNow('${c.id}')">Donasi</button>
+        `;
           container.appendChild(card);
         });
 
