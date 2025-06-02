@@ -3,6 +3,7 @@ const router = express.Router();
 const midtransClient = require("midtrans-client");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const { auth } = require("../controller/authController");
 
 // Inisialisasi Snap Midtrans
 const snap = new midtransClient.Snap({
@@ -10,17 +11,11 @@ const snap = new midtransClient.Snap({
   serverKey: "SB-Mid-server-cVagPDP8gc4My0M62bBlqlnh",
 });
 
-router.post("/donation", async (req, res) => {
+router.post("/donation", auth, async (req, res) => {
   try {
-    const {
-      userId,
-      campaignId,
-      grossAmount,
-      firstName,
-      lastName,
-      email,
-      phone,
-    } = req.body;
+    const userId = req.user.id;
+    const { campaignId, grossAmount, firstName, lastName, email, phone } =
+      req.body;
 
     // Validasi nominal donasi
     if (!grossAmount || isNaN(grossAmount) || grossAmount < 10000) {
@@ -32,7 +27,9 @@ router.post("/donation", async (req, res) => {
       where: { id: Number(campaignId) },
       include: {
         donations: {
-          where: { status: "berhasil" },
+          where: {
+            status: "berhasil",
+          },
           select: { amount: true },
         },
       },
@@ -48,6 +45,12 @@ router.post("/donation", async (req, res) => {
     );
     const targetCampaign = campaign.target_amount;
     const sisa = targetCampaign - totalDonasiSekarang;
+    console.log({
+      targetCampaign,
+      totalDonasiSekarang,
+      sisa,
+      grossAmount,
+    });
 
     // Cek apakah donasi akan melebihi target
     if (grossAmount > sisa) {
@@ -79,7 +82,7 @@ router.post("/donation", async (req, res) => {
     await prisma.donation.create({
       data: {
         amount: grossAmount,
-        status: "berhasil", // ← status awal sebelum sukses bayar
+        status: "berhasil",
         orderId: orderId,
         user: {
           connect: { id: userId },

@@ -101,7 +101,6 @@
 </head>
 
 <body>
-
     <div class="donation-box">
         <h3>Nominal</h3>
         <p>Pilih nominal yang tersedia</p>
@@ -115,7 +114,6 @@
         <label for="otherAmount"><strong>Nominal Lainnya</strong></label>
         <input type="text" id="otherAmount" placeholder="Rp | 0" />
         <div class="note">Minimum donasi Rp 10.000</div>
-
         <button class="submit" id="donateBtn">Selanjutnya</button>
     </div>
 
@@ -128,12 +126,10 @@
         </div>
     </div>
 
-    <!-- Midtrans Snap JS -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="SB-Mid-client-VZaDJq0aNmWe6v0W"></script>
 
     <script>
-        // Fungsi format angka jadi Rupiah dengan titik ribuan
         function formatRupiah(angka) {
             if (!angka) return "";
             const numberString = angka.toString().replace(/[^,\d]/g, '');
@@ -141,51 +137,65 @@
             let sisa = split[0].length % 3;
             let rupiah = split[0].substr(0, sisa);
             const ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
             if (ribuan) {
                 const separator = sisa ? '.' : '';
                 rupiah += separator + ribuan.join('.');
             }
-
             rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
             return 'Rp' + rupiah;
         }
 
-        window.addEventListener("DOMContentLoaded", async () => {
+        function isTokenExpired(token) {
             try {
-                const res = await fetch("/api/accounts");
-                const data = await res.json();
-                if (Array.isArray(data) && data.length > 0) {
-                    window.userData = data[0]; // sesuaikan ini dengan user yang login sebenarnya
-                } else {
-                    window.userData = {};
-                }
-
-            } catch (err) {
-                console.error("Gagal mengambil data user:", err);
-                window.userData = {};
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const now = Math.floor(Date.now() / 1000);
+                return payload.exp < now;
+            } catch {
+                return true;
             }
-        });
+        }
 
+        async function fetchUserData() {
+            const token = localStorage.getItem('token');
+            if (!token || isTokenExpired(token)) {
+                alert("Sesi Anda telah berakhir. Silakan login ulang.");
+                window.location.href = "/login";
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost:4000/api/auth/profile-data", {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error("Gagal ambil data user");
+                const user = await res.json();
+                console.log("User:", user);
+                return user;
+            } catch (err) {
+                console.error("Gagal fetch user:", err);
+                alert("Gagal mengambil data user. Silakan login ulang.");
+                window.location.href = "/login";
+            }
+        }
+
+        let selectedAmount = 0;
         const nominalButtons = document.querySelectorAll('.nominal-buttons button');
         const otherAmountInput = document.getElementById('otherAmount');
-        let selectedAmount = 0;
 
         nominalButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 nominalButtons.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
-
                 selectedAmount = parseInt(btn.getAttribute('data-value'));
                 otherAmountInput.value = formatRupiah(selectedAmount);
             });
         });
 
-        otherAmountInput.addEventListener('input', (e) => {
+        otherAmountInput.addEventListener('input', () => {
             let rawValue = otherAmountInput.value.replace(/[^0-9]/g, '');
             selectedAmount = parseInt(rawValue) || 0;
             otherAmountInput.value = formatRupiah(rawValue);
-            otherAmountInput.setSelectionRange(otherAmountInput.value.length, otherAmountInput.value.length);
             nominalButtons.forEach(b => b.classList.remove('selected'));
         });
 
@@ -195,9 +205,13 @@
                 return;
             }
 
-            const user = window.userData || {};
-            if (!user.id) {
-                alert("User belum login atau data user tidak ditemukan.");
+            const user = await fetchUserData();
+            if (!user || !user.email) return;
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Token tidak ditemukan. Silakan login ulang.");
+                window.location.href = "/login";
                 return;
             }
 
@@ -213,19 +227,21 @@
             const lastName = nameParts.slice(1).join(" ");
 
             const data = {
-                userId: user.id,
-                campaignId: campaignId,
+                campaignId,
                 grossAmount: selectedAmount,
-                firstName: firstName,
-                lastName: lastName,
+                firstName,
+                lastName,
                 email: user.email,
                 phone: user.number_phone
             };
 
             try {
-                const res = await fetch('/api/donation', {
+                const res = await fetch("http://localhost:4000/api/donation", {
                     method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     body: JSON.stringify(data)
                 });
 
@@ -233,15 +249,15 @@
                 if (json.transactionToken) {
                     window.snap.pay(json.transactionToken);
                 } else {
-                    alert("Pembayaran melebihi target donasi");
+                    alert(json.message || "Gagal membuat transaksi.");
                 }
-            } catch (error) {
-                console.error("Error:", error);
+            } catch (err) {
+                console.error("Error donasi:", err);
                 alert("Terjadi kesalahan saat memproses donasi.");
             }
         });
-    </script>
 
+    </script>
 </body>
 
 </html>

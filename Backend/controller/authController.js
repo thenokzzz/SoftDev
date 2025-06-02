@@ -12,8 +12,8 @@ exports.profileData = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await prisma.accounts.findUnique({
-      where: { id: decoded.id },
-      select: { name: true, email: true },
+      where: { id: req.user.id },
+      select: { id: true, name: true, email: true },
     });
 
     if (!user) return res.status(404).json({ error: "User tidak ditemukan" });
@@ -50,15 +50,6 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-
-    req.session.userId = user.id;
-
-    req.session.user = {
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    };
-
     res.json({ token, role: user.role, name: user.name });
   } catch (err) {
     res.status(500).json({ error: "Gagal login", detail: err.message });
@@ -117,5 +108,26 @@ exports.register = async (req, res) => {
     res
       .status(500)
       .json({ error: "Gagal melakukan registrasi", detail: err.message });
+  }
+};
+
+exports.auth = function (req, res, next) {
+  const authHeader = req.headers.authorization;
+  console.log("Auth header:", authHeader); // debug
+
+  const token = authHeader?.split(" ")[1];
+  if (!token) {
+    console.log("Token tidak ditemukan");
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    console.log("Token valid, user:", decoded);
+    next();
+  } catch (err) {
+    console.log("Token tidak valid", err.message);
+    return res.status(401).json({ error: "Token tidak valid" });
   }
 };

@@ -166,6 +166,65 @@
         }
       });
     });
+    function renderStats() {
+      fetch('/api/admin/dashboard', {
+        credentials: 'include'
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('Gagal mengambil data statistik');
+          return response.json();
+        })
+        .then(data => {
+          // Format angka ke Rupiah
+          const formatRupiah = (number) => {
+            return new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0
+            }).format(number);
+          };
+
+          // Tambahkan kontainer HTML untuk menampilkan statistik
+          mainContent.innerHTML = `
+        <h3>Statistik Donasi</h3>
+        <div class="row mt-4">
+          <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+              <div class="card-header">Total Donasi</div>
+              <div class="card-body">
+                <h5 class="card-title" id="stat-donasi">Memuat...</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header">Total Campaign</div>
+              <div class="card-body">
+                <h5 class="card-title" id="stat-campaign">Memuat...</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+              <div class="card-header">Total Donatur</div>
+              <div class="card-body">
+                <h5 class="card-title" id="stat-donatur">Memuat...</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+          // Setelah elemen tersedia, update nilainya
+          document.querySelector('#stat-donasi').textContent = formatRupiah(data.total_donasi);
+          document.querySelector('#stat-campaign').textContent = data.total_campaign;
+          document.querySelector('#stat-donatur').textContent = data.total_donatur;
+        })
+        .catch(error => {
+          console.error(error);
+          alert("Gagal memuat statistik dashboard");
+        });
+    }
     function fetchUsers() {
       fetch("/api/accounts")
         .then(res => res.json())
