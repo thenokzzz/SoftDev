@@ -15,15 +15,16 @@ datasource db {
 }
 
 model Accounts {
-  id           Int      @id @default(autoincrement())
-  name         String   @db.VarChar(100)
-  email        String   @unique @db.VarChar(100)
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(100)
+  email        String         @unique @db.VarChar(100)
   password     String
-  number_phone String   @db.VarChar(13)
-  role         Role     @default(user)
-  created_at   DateTime @default(now())
-  updated_at   DateTime @default(now())
+  number_phone String         @db.VarChar(13)
+  role         Role           @default(user)
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @default(now())
   donations    Donation[]
+  
 }
 
 enum Role {
@@ -32,33 +33,35 @@ enum Role {
 }
 
 model Campaign {
-  id               Int      @id @default(autoincrement())
+  id               Int            @id @default(autoincrement())
   title            String
   description      String?
   target_amount    Int
-  collected_amount Int      @default(0)
-  image            String?  // Tambahan kolom untuk menyimpan path atau URL gambar
-  createdAt        DateTime @default(now())
-  donations    Donation[]
+  collected_amount Int            @default(0)
+  image            String? // Tambahan kolom untuk menyimpan path atau URL gambar
+  createdAt        DateTime       @default(now())
+  donations        Donation[]
 }
 
+
 model Galeri {
-  id               Int      @id @default(autoincrement())
-  title            String
-  description      String?
-  image            String?  
-  startDate        DateTime // ← Input manual oleh user/admin
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  image       String?
+  startDate   DateTime // ← Input manual oleh user/admin
 }
+
 model Donation {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   amount     Int
-  createdAt  DateTime  @default(now())
-  status     Status    @default(pending) // pending, done, expired
-  orderId     String?
+  createdAt  DateTime @default(now())
+  status     Status   @default(pending) // pending, done, expired
+  orderId    String?
   userId     Int
   campaignId Int
-  user       Accounts  @relation(fields: [userId], references: [id])
-  campaign   Campaign  @relation(fields: [campaignId], references: [id])
+  user       Accounts @relation(fields: [userId], references: [id])
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
 }
 
 enum Status {
@@ -66,4 +69,3 @@ enum Status {
   berhasil
   gagal
 }
-

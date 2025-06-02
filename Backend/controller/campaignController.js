@@ -1,8 +1,29 @@
 const campaignModel = require("../model/campaignModel");
+const { auth } = require("../controller/authController");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+
+// Fungsi untuk mengambil campaign yang dipilih oleh user
+async function getUserCampaigns(req, res) {
+  try {
+    const campaignsDonated = await prisma.donation.findMany({
+      where: { userId: req.user.id },
+      distinct: ["campaignId"],
+      include: {
+        campaign: true,
+      },
+    });
+    const campaigns = campaignsDonated.map((d) => d.campaign);
+    res.json(campaigns);
+  } catch (error) {
+    res.status(500).json({ error: "Terjadi kesalahan", detail: error.message });
+  }
+}
 
 async function createCampaign(req, res) {
   try {
     const { title, description, target_amount } = req.body;
+    const userId = req.user.id;
     if (!title || !target_amount)
       return res
         .status(400)
@@ -26,6 +47,7 @@ async function createCampaign(req, res) {
       description,
       target_amount: targetAmount,
       image: imageFile.filename,
+      userId,
     });
 
     res.status(201).json(newCampaign);
@@ -115,7 +137,6 @@ async function searchCampaigns(req, res) {
   }
 }
 
-
 module.exports = {
   createCampaign,
   getAllCampaigns,
@@ -123,4 +144,5 @@ module.exports = {
   updateCampaign,
   deleteCampaign,
   searchCampaigns,
+  getUserCampaigns,
 };

@@ -2,15 +2,26 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function createCampaign(data) {
-  return await prisma.campaign.create({
+  const campaign = await prisma.campaign.create({
     data: {
       title: data.title,
       description: data.description,
       image: data.image,
-      target_amount: data.target_amount, // pastikan sudah Number sebelum dikirim
+      target_amount: data.target_amount,
     },
   });
+
+  // Tambahkan relasi ke tabel userCampaign
+  await prisma.userCampaign.create({
+    data: {
+      userId: data.userId,
+      campaignId: campaign.id,
+    },
+  });
+
+  return campaign;
 }
+
 
 async function getAllCampaigns() {
   const campaigns = await prisma.campaign.findMany({
@@ -86,6 +97,33 @@ async function searchCampaigns(q) {
 }
 
 
+
+async function getUserCampaigns(userId) {
+  try {
+  const campaigns = await prisma.userCampaign.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      campaign: {
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          image: true,
+          target_amount: true,
+        },
+      },
+    },
+  });
+
+  // Mengembalikan data campaign jika ditemukan
+  return campaigns.map((userCampaign) => userCampaign.campaign);
+} catch (error) {
+  console.error('Error fetching campaigns:', error);
+  throw new Error('Gagal mengambil data campaign');
+}
+}
 module.exports = {
   createCampaign,
   getAllCampaigns,
@@ -93,4 +131,5 @@ module.exports = {
   updateCampaign,
   deleteCampaign,
   searchCampaigns,
+  getUserCampaigns,
 };

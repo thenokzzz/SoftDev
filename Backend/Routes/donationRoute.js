@@ -117,5 +117,26 @@ router.get("/admin/donations", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+// Endpoint untuk mengambil riwayat donasi berdasarkan user yang login
+router.get("/user/donations", auth, async (req, res) => {
+  try {
+    const userId = req.user.id; // Mendapatkan ID user dari token yang sudah terverifikasi
+    
+    // Mengambil data donasi hanya milik user yang sedang login
+    const donations = await prisma.donation.findMany({
+      where: { userId: userId }, // Filter berdasarkan userId
+      include: {
+        campaign: { select: { id: true, title: true } }, // Include data campaign terkait donasi
+      },
+      orderBy: { createdAt: "desc" }, // Mengurutkan berdasarkan waktu donasi (terbaru di atas)
+    });
+
+    // Mengembalikan data donasi user
+    res.json({ donations });
+  } catch (error) {
+    console.error("Gagal mengambil riwayat donasi:", error);
+    res.status(500).json({ error: "Terjadi kesalahan saat mengambil riwayat donasi" });
+  }
+});
 
 module.exports = router;

@@ -3,16 +3,29 @@ const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// Middleware auth
+exports.auth = function (req, res, next) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // ✅ Simpan decoded ke req.user
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Token tidak valid" });
+  }
+};
+
+// GET /profile
 exports.profileData = async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.status(401).json({ error: "Token dibutuhkan" });
-
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
     const user = await prisma.accounts.findUnique({
-      where: { id: req.user.id },
+      where: { id: req.user.id }, // ✅ req.user diambil dari middleware
       select: { id: true, name: true, email: true },
     });
 
@@ -20,10 +33,11 @@ exports.profileData = async (req, res) => {
 
     res.json(user);
   } catch (error) {
-    res.status(401).json({ error: "Token tidak valid atau expired" });
+    res.status(500).json({ error: "Terjadi kesalahan", detail: error.message });
   }
 };
 
+// POST /login
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -32,9 +46,7 @@ exports.login = async (req, res) => {
   }
 
   try {
-    const user = await prisma.accounts.findUnique({
-      where: { email },
-    });
+    const user = await prisma.accounts.findUnique({ where: { email } });
 
     if (!user) {
       return res.status(404).json({ error: "Email tidak ditemukan" });
@@ -50,15 +62,17 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
     res.json({ token, role: user.role, name: user.name });
   } catch (err) {
     res.status(500).json({ error: "Gagal login", detail: err.message });
   }
 };
 
+// POST /register
 exports.register = async (req, res) => {
   const { name, email, password, confirm_password, number_phone } = req.body;
-  const role = "user"; // default
+  const role = "user";
 
   if (!name || !email || !password || !confirm_password || !number_phone) {
     return res.status(400).json({ error: "Semua field wajib diisi" });
@@ -73,9 +87,7 @@ exports.register = async (req, res) => {
   }
 
   try {
-    const existingUser = await prisma.accounts.findUnique({
-      where: { email },
-    });
+    const existingUser = await prisma.accounts.findUnique({ where: { email } });
 
     if (existingUser) {
       return res.status(409).json({ error: "Email sudah terdaftar" });
@@ -104,30 +116,6 @@ exports.register = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ error: "Gagal melakukan registrasi", detail: err.message });
-  }
-};
-
-exports.auth = function (req, res, next) {
-  const authHeader = req.headers.authorization;
-  console.log("Auth header:", authHeader); // debug
-
-  const token = authHeader?.split(" ")[1];
-  if (!token) {
-    console.log("Token tidak ditemukan");
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    console.log("Token valid, user:", decoded);
-    next();
-  } catch (err) {
-    console.log("Token tidak valid", err.message);
-    return res.status(401).json({ error: "Token tidak valid" });
+    res.status(500).json({ error: "Gagal registrasi", detail: err.message });
   }
 };

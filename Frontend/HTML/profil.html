@@ -3,25 +3,22 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dasbor - UntukKita</title>
-  <link rel="icon" type="image/png" href="/img/logo untukkita.png">
+  <link rel="icon" type="image/png" href="/img/logo untukkita.png" />
   <link rel="stylesheet" href="/CSS/profil.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
 </head>
 
 <body>
   <div class="container">
     <aside class="sidebar">
-        <!-- Logo -->
       <a href="/home" class="logo">
         <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
         <span>Untuk<span class="highlight">Kita</span></span>
       </a>
 
-      <!-- navbar -->
       <nav>
         <ul>
           <li class="">Beranda</li>
@@ -35,7 +32,6 @@
       </nav>
     </aside>
 
-    <!-- profil -->
     <main class="main-content">
       <header class="topbar">
         <div class="user-info">
@@ -47,70 +43,120 @@
         </div>
       </header>
 
-     <section class="stats">
-  <div class="stat-box">
-    <div class="icon"><span class="material-symbols-outlined">monitoring</span></div>
-    <div>
-      <strong>Rp.0</strong>
-      <p>Total Donasi</p>
-    </div>
-  </div>
-  <div class="stat-box">
-    <div class="icon"><span class="material-symbols-outlined">table_chart</span></div>
-    <div>
-      <strong>0</strong>
-      <p>Total Campaign</p>
-    </div>
-  </div>
-</section>
+      <section class="stats">
+        <div class="stat-box">
+          <div class="icon"><span class="material-symbols-outlined">monitoring</span></div>
+          <div>
+            <strong id="totalDonasi">Rp.0</strong>
+            <p>Total Donasi</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="icon"><span class="material-symbols-outlined">table_chart</span></div>
+          <div>
+            <strong id="totalCampaign">0</strong>
+            <p>Total Campaign</p>
+          </div>
+        </div>
+      </section>
 
-<!-- Riwayat Donasi -->
-<section class="donation-history">
-  <h2>Riwayat Donasi Terakhir Anda</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Tanggal</th>
-        <th>Jumlah Donasi</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>21-May-2025</td><td>Rp.0</td></tr>
-      <tr><td>20-May-2025</td><td>Rp.0</td></tr>
-      <tr><td>19-May-2025</td><td>Rp.0</td></tr>
-      <tr><td>18-May-2025</td><td>Rp.0</td></tr>
-    </tbody>
-  </table>
-</section>
+      <section class="donation-history">
+        <h2>Riwayat Donasi Terakhir Anda</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Jumlah Donasi</th>
+            </tr>
+          </thead>
+          <tbody id="donationTableBody">
+            <!-- Table will be populated here -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 
-<script>
-  // Ambil token dari localStorage
+  <script>
   const token = localStorage.getItem('token');
 
   if (!token) {
-    // Jika token tidak ada, arahkan ke login
-    window.location.href = '/login.html';
-  } else {
-    fetch('/api/auth/profile-data', {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    .then(response => {
-      if (!response.ok) throw new Error('Token tidak valid atau session habis, silakan login ulang');
+    window.location.href = '/login'; // Redirect if no token found
+  }
+
+  function formatRupiah(angka) {
+    if (!angka || isNaN(angka)) return "Rp0";
+    return "Rp " + angka.toLocaleString('id-ID');
+  }
+
+  // Check if response is JSON and parse it
+  async function checkForJSONResponse(response) {
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
       return response.json();
-    })
-    .then(user => {
-      // Tampilkan data user di halaman profil
+    } else {
+      const text = await response.text();
+      throw new Error("Expected JSON, but received: " + text);
+    }
+  }
+
+  async function loadUserData() {
+    try {
+      const [resUser, resDonasi, resCampaign] = await Promise.all([
+        fetch('/api/auth/profile-data', {
+          headers: { Authorization: 'Bearer ' + token }
+        }),
+        fetch('/api/user/donations', {
+          headers: { Authorization: 'Bearer ' + token }
+        }),
+        fetch('/api/user/campaign', {
+          headers: { Authorization: 'Bearer ' + token }
+        })
+      ]);
+
+      if (!resUser.ok) throw new Error('Gagal mengambil data user: ' + resUser.status);
+      if (!resDonasi.ok) throw new Error('Gagal mengambil riwayat donasi: ' + resDonasi.status);
+      if (!resCampaign.ok) throw new Error('Gagal mengambil campaign: ' + resCampaign.status);
+
+      const user = await checkForJSONResponse(resUser);
+      let donations = await checkForJSONResponse(resDonasi);
+      const campaigns = await checkForJSONResponse(resCampaign);
+
+      // Pastikan donations adalah array
+      if (donations.donations) donations = donations.donations; // fallback jika nested
+      if (!Array.isArray(donations)) donations = [];
+
+      // Update user info
       document.querySelector('.user-info strong').innerText = user.name;
       document.querySelector('.user-info small').innerText = `(${user.email})`;
-    })
-    .catch(error => {
-      alert(error.message);
+
+      // Hitung total donasi
+      let totalDonasi = donations.reduce((sum, d) => sum + Number(d.amount), 0);
+      document.getElementById('totalDonasi').innerText = formatRupiah(totalDonasi);
+
+      // Update total campaign count
+      document.getElementById('totalCampaign').innerText = Array.isArray(campaigns) ? campaigns.length : 0;
+
+      // Update riwayat donasi (5 terbaru)
+      const tbody = document.getElementById('donationTableBody');
+      tbody.innerHTML = '';
+      donations.slice(0, 5).forEach(donasi => {
+        const tr = document.createElement('tr');
+        const tanggal = new Date(donasi.createdAt).toLocaleString('id-ID');
+        tr.innerHTML = `<td>${tanggal}</td><td>${formatRupiah(Number(donasi.amount))}</td>`;
+        tbody.appendChild(tr);
+      });
+
+    } catch (error) {
+      console.error("Error detail:", error);
+      alert(error.message || 'Terjadi masalah saat mengambil data.');
       localStorage.removeItem('token');
-      window.location.href = '/login'
-    });
+      window.location.href = '/login';
+    }
   }
+
+  loadUserData();
 </script>
+</body>
 
 </html>
