@@ -6,44 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tentang - UntukKita</title>
   <link rel="icon" type="image/png" href="/img/logo untukkita.png">
-  <link rel="stylesheet" href="/CSS/style.css">
+  <link rel="stylesheet" href="/CSS/about.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
-  <nav>
+
+  <!-- Navbar -->
+  <nav class="navbar">
     <div class="navbar-inner">
-      <div class="left-section">
-        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">&#9776;</button>
-        <div class="logo">
-          <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
-          <span>Untuk<span class="highlight">Kita</span></span>
-        </div>
-        <form id="search-form" class="campaign-search" action="/campaign" method="GET">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
-          <button type="submit" hidden></button>
-        </form>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
+        <span>Untuk<span class="highlight">Kita</span></span>
       </div>
 
-      <div class="btn-links right-section" id="nav-menu">
-        <ul class="nav-links">
-          <li class="active"><a href="/">Beranda</a></li>
-          <li><a href="/about">Tentang</a></li>
-          <li><a href="/campaign">Campaign</a></li>
-          <li><a href="/galeri">Galeri</a></li>
-        </ul>
+      <!-- Search Bar -->
+      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+        <button type="submit" hidden></button>
+      </form>
 
-        <div class="btn-links">
-          <a href="/login" id="login-button"><button class="btn-login">Login</button></a>
-          <a href="/login" id="logout-button" style="display: none"><button class="btn-login">Logout</button></a>
-          <a href="/profile" id="profile-button" style="display: none">
-            <span class="material-symbols-outlined" style="font-size: 36px; color: #9c00bc">account_circle</span>
-          </a>
-          <a href="/register"><button class="btn-donasi">Berdonasi</button></a>
-        </div>
-      </div>
+      <!-- Nav Links -->
+      <ul class="nav-links">
+        <li><a href="/home">Beranda</a></li>
+        <li class="active">Tentang</li>
+        <li><a href="/campaign">Campaign</a></li>
+        <li><a href="/galeri">Galeri</a></li>
+        <!-- <li><a href="#">Blog</a></li> -->
+      </ul>
+
+      <!-- Buttons -->
+      <ul class="btn-links">
+        <a href="/HTML/login.html" id="login-button">
+          <button class="btn-login">Login</button>
+        </a>
+        <a href="/HTML/login.html" id="logout-button" style="display: none;">
+          <button class="btn-login">Logout</button>
+        </a>
+        <a href="/HTML/profile.html" id="profile-button" style="display: none;">
+          <span class="material-symbols-outlined"
+            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+        </a>
+        <a href="/HTML/regist.html">
+          <button class="btn-donasi">Berdonasi</button>
+        </a>
+      </ul>
     </div>
   </nav>
 
@@ -99,35 +110,24 @@
     <section class="values">
       <div class="values-section">
         <div class="image-stack">
-          <img src="/img/baksos about isi 3.jpg" alt="Nilai Kami" class="image image-front" />
+          <img src="/img/baksos about isi 3.jpg" class="image image-front" alt="Anak-anak 1">
+          <img src="/img/baksos about isi 3.jpg" class="image image-back" alt="Anak-anak 2">
         </div>
         <div class="values-content">
-          <h2><span class="highlight">Nilai-Nilai</span> Kita.</h2>
-
+          <h2>Nilai-Nilai <span class="highlight">Kita.</h2>
           <div class="value-item">
-            <h4><span class="dot"></span> Kepedulian</h4>
-            <p>
-              Kami percaya bahwa perubahan besar dimulai dari rasa peduli terhadap
-              sesama, terutama di lingkungan terdekat.
-            </p>
+            <p><strong>🟣 Kepedulian</strong><br>Kami percaya bahwa perubahan besar dimulai dari rasa peduli terhadap
+              sesama, terutama di lingkungan terdekat.</p>
           </div>
-
           <div class="value-item">
-            <h4><span class="dot"></span> Transparansi</h4>
-            <p>
-              Kami menjunjung tinggi kejujuran dan keterbukaan dalam setiap langkah
-              yang kami ambil. Informasi yang jelas dan komunikasi terbuka menjadi
-              dasar membangun kepercayaan dengan tim dan masyarakat.
-            </p>
+            <p><strong>🟣 Transparansi</strong><br>Kami menjunjung tinggi kejujuran dan keterbukaan dalam setiap langkah
+              yang kami ambil. Informasi yang jelas dan komunikasi yang terbuka menjadi landasan kami dalam membangun
+              kepercayaan dengan sesama anggota tim dan masyarakat.</p>
           </div>
-
           <div class="value-item">
-            <h4><span class="dot"></span> Kolaborasi</h4>
-            <p>
-              Kami percaya kerja sama adalah kunci keberhasilan. Dengan saling
-              mendukung dan menghargai, kami menciptakan sinergi yang kuat untuk
-              mencapai tujuan bersama.
-            </p>
+            <p><strong>🟣 Kolaborasi</strong><br>Kami percaya bahwa kerja sama adalah kunci keberhasilan. Dengan saling
+              mendukung dan menghargai peran masing-masing, kami menciptakan sinergi yang kuat untuk mencapai tujuan
+              bersama.</p>
           </div>
         </div>
       </div>
@@ -239,9 +239,6 @@
       </div>
     </footer>
     <script>
-      function toggleMenu() {
-        document.getElementById("nav-menu").classList.toggle("show");
-      }
       document.addEventListener("DOMContentLoaded", function () {
         const isLoggedIn = localStorage.getItem("isLoggedIn");
         const loginBtn = document.getElementById("login-button");
@@ -274,11 +271,6 @@
           });
         }
       });
-
-      function toggleMenu() {
-        const navMenu = document.getElementById('nav-menu');
-        navMenu.classList.toggle('show');
-      }
     </script>
 
 </body>

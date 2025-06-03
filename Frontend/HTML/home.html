@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Beranda - UntukKita</title>
   <link rel="icon" type="image/png" href="/img/logo untukkita.png" />
-  <link rel="stylesheet" href="/CSS/style.css" />
+  <link rel="stylesheet" href="/CSS/home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
@@ -23,6 +23,9 @@
           <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
           <span>Untuk<span class="highlight">Kita</span></span>
         </div>
+      </div>
+
+      <div class="middle-section">
         <form id="search-form" class="campaign-search" action="/campaign" method="GET">
           <span class="material-symbols-outlined search-icon">search</span>
           <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
@@ -30,9 +33,9 @@
         </form>
       </div>
 
-      <div class="right-section" id="nav-menu">
+      <div class="right-section desktop-menu">
         <ul class="nav-links">
-          <li class="active"><a href="/home">Beranda</a></li>
+          <li class="active"><a href="/">Beranda</a></li>
           <li><a href="/about">Tentang</a></li>
           <li><a href="/campaign">Campaign</a></li>
           <li><a href="/galeri">Galeri</a></li>
@@ -46,6 +49,21 @@
           </a>
           <a href="/register"><button class="btn-donasi">Berdonasi</button></a>
         </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="nav-links">
+        <li class="active"><a href="/">Beranda</a></li>
+        <li><a href="/about">Tentang</a></li>
+        <li><a href="/campaign">Campaign</a></li>
+        <li><a href="/galeri">Galeri</a></li>
+      </ul>
+
+      <div class="btn-links">
+        <a href="/login"><button class="btn-login">Login</button></a>
+        <a href="/register"><button class="btn-donasi">Berdonasi</button></a>
       </div>
     </div>
   </nav>
@@ -67,25 +85,25 @@
     <div class="kategori">
       <div class="kategori-item">
         <div class="kategori-icon">
-          <img src="/img/heart (3).png" alt="Sosial" />
+          <img src="/img/heart (3).png" alt="" />
         </div>
         <p>Sosial</p>
       </div>
       <div class="kategori-item">
         <div class="kategori-icon">
-          <img src="/img/plant.png" alt="Lingkungan" />
+          <img src="/img/plant.png" alt="" />
         </div>
         <p>Lingkungan</p>
       </div>
       <div class="kategori-item">
         <div class="kategori-icon">
-          <img src="/img/earthquake.png" alt="Bencana Alam" />
+          <img src="/img/earthquake.png" alt="" />
         </div>
         <p>Bencana Alam</p>
       </div>
       <div class="kategori-item">
         <div class="kategori-icon">
-          <img src="/img/merchandise.png" alt="Merchandise" />
+          <img src="/img/merchandise.png" alt="" />
         </div>
         <p>Merchandise</p>
       </div>
@@ -96,7 +114,6 @@
       <button class="lihat-lainnya-container">
         <a href="/campaign" class="lihat-lainnya">Lihat lainnya</a>
       </button>
-
       <div class="campaign-header">
         <h2 class="judul-campaign">Campaign <span>Pilihan</span></h2>
         <p>Kami membantu mereka yang tidak memiliki harapan</p>
@@ -126,6 +143,7 @@
             Kami hadir dengan komitmen nyata untuk membantu secara transparan,
             tepat sasaran, dan berkelanjutan.
           </p>
+          <!-- <button class="btn">Learn More</button> -->
         </div>
       </div>
     </section>
@@ -137,20 +155,17 @@
           <h2>Bagaimana kita bekerja</h2>
           <ul>
             <li>
-              <span class="dot"></span>
-              <strong>Menyalurkan Bantuan</strong><br />
+              <span class="dot"></span><strong>Menyalurkan Bantuan</strong><br />
               Bantuan dikirim langsung ke pihak yang membutuhkan secara aman,
               cepat dan transparan.
             </li>
             <li>
-              <span class="dot"></span>
-              <strong>Menggalang Dukungan</strong><br />
+              <span class="dot"></span><strong>Menggalang Dukungan</strong><br />
               Kami membuka donasi atau menjual merchandise untuk mengumpulkan
               dana dan dukungan dari masyarakat.
             </li>
             <li>
-              <span class="dot"></span>
-              <strong>Memberikan Laporan</strong><br />
+              <span class="dot"></span><strong>Memberikan Laporan</strong><br />
               Semua proses disertai laporan dan dokumentasi, agar semua pihak
               tahu kemana bantuannya disalurkan.
             </li>
@@ -161,13 +176,11 @@
         </div>
       </div>
     </section>
-
-    <!-- Section Merchandise -->
     <section class="merchandise">
       <h2 class="judul-merch">Merchandise</h2>
       <p>
-        Penjualan merchandise ini hasil penjualannya digunakan untuk mendukung
-        kegiatan sosial dan kemanusiaan.
+        Donatur terpilih akan menerima merchandise eksklusif sebagai 
+        bentuk terima kasih atas semangat mereka dalam mendukung kegiatan kemanusiaan
       </p>
 
       <div class="merch-cards">
@@ -175,10 +188,10 @@
           <img src="/img/kaosorangutan1.png" alt="Kaos" />
           <h3>Bersama kita bantu sesama</h3>
           <p>
-            Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah solidaritas.
-            Setiap pembeliannya berkontribusi langsung pada program bantuan sosial
-            untuk mereka yang membutuhkan.
+            Kaos ini bukan sekedar pakaian, tapi simbol dari sebuah
+            solidaritas
           </p>
+          <!-- <a href="#">Read More</a> -->
         </div>
 
         <div class="merch-card">
@@ -189,19 +202,23 @@
             gerakan kolektif untuk bantuan sesama. Cocok untuk kamu yang ingin
             tampil sadar sosial dan penuh aksi.
           </p>
+          <!-- <a href="#">Read More</a> -->
         </div>
 
         <div class="merch-card">
           <img src="/img/tumbler1.png" alt="Tumbler" />
           <h3>Tumbler berisi kebaikan</h3>
           <p>
-            Setiap tegukan dari tumbler punya cerita. Cerita tentang kepedulian,
-            aksi nyata, dan harapan yang disalurkan lewat bantuan sosial.
+            Setiap tegukan dari tumbler punya cerita. Cerita tentang
+            kepedulian, aksi nyata dan harapan yang disalurkan lewat bantuan
+            sosial.
           </p>
+          <!-- <a href="#">Read More</a> -->
         </div>
       </div>
     </section>
   </div>
+
   <!-- ====== Footer ====== -->
   <footer class="site-footer">
     <div class="footer-top">
@@ -353,7 +370,8 @@
     });
 
     function toggleMenu() {
-      document.getElementById("nav-menu").classList.toggle("show");
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("active");
     }
     function donateNow(campaignId) {
       const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";

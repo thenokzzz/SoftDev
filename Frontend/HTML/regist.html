@@ -1,141 +1,75 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registrasi - UntukKita</title>
-  <link rel="icon" href="/img/logo untukkita.png" type="image/png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #f4f4f4;
-      font-family: "Segoe UI", sans-serif;
-    }
-
-    .register-container {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .register-box {
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      padding: 40px;
-      width: 100%;
-      max-width: 600px;
-    }
-
-    .register-box h2 {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .register-box p {
-      color: #555;
-      margin-bottom: 30px;
-    }
-
-    .form-control {
-      margin-bottom: 20px;
-    }
-
-    .btn-primary {
-      background-color: #9c00bc;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background-color: #7a0095;
-    }
-
-    .partner-logos {
-      margin-top: 40px;
-    }
-
-    .partner-logos-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
-    }
-
-    .partner-logos-row img {
-      height: 40px;
-    }
-
-    .logo-divider {
-      width: 2px;
-      height: 40px;
-      background: #9c00bc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/regist.css">
+    <link rel="icon" type="image/png" href="/img/logo untukkita.png">
+    <title>Registrasi - UntukKita</title>
 </head>
 
 <body>
-  <div class="container register-container">
-    <div class="register-box">
-      <h2 class="text-center">Silahkan Registrasi!</h2>
-      <form id="registerForm">
-        <input type="text" name="name" placeholder="Nama Lengkap" class="form-control" required />
-        <input type="email" name="email" placeholder="Email" class="form-control" required />
-        <input type="password" name="password" placeholder="Kata Sandi" class="form-control" required />
-        <input type="password" name="confirm_password" placeholder="Ketik Ulang Kata Sandi" class="form-control" required />
-        <input type="text" name="number_phone" placeholder="Nomor Telepon" class="form-control" required />
-        <button type="submit" class="btn btn-primary w-100">Daftar</button>
-      </form>
-
-      <div class="partner-logos text-center">
-        <p class="fw-bold">Official Partner</p>
-        <div class="partner-logos-row">
-          <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
-          <div class="logo-divider"></div>
-          <img src="/img/logo mapala fti.png" alt="Logo Mapala FTI" />
+    <div class="container">
+        <div class="right-section">
+            <h2>Silahkan Registrasi!</h2>
+            <form>
+                <input type="text" name="name" placeholder="Nama Lengkap" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Kata Sandi" required>
+                <input type="password" name="confirm_password" placeholder="Ketik Ulang Kata Sandi" required>
+                <input type="text" name="number_phone" placeholder="Nomor Telepon" required>
+                <button type="submit">Daftar</button>
+            </form>
+            <div class="partner-logos">
+                <p>Official Partner</p>
+                <div class="partner-logos-row">
+                    <img src="/img/logo untukkita.png" alt="Logo UntukKita">
+                    <div class="logo-divider"></div>
+                    <img src="/img/logo mapala fti.png" alt="Logo Mapala FTI">
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <script>
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-  <script>
-    document.getElementById("registerForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+            const name = document.querySelector('input[name="name"]').value.trim();
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const confirm_password = document.querySelector('input[name="confirm_password"]').value;
+            const number_phone = document.querySelector('input[name="number_phone"]').value;
 
-      const name = e.target.name.value.trim();
-      const email = e.target.email.value.trim();
-      const password = e.target.password.value;
-      const confirm_password = e.target.confirm_password.value;
-      const number_phone = e.target.number_phone.value.trim();
+            if (password !== confirm_password) {
+                alert("Password dan konfirmasi password tidak cocok.");
+                return;
+            }
 
-      if (password !== confirm_password) {
-        alert("Password dan konfirmasi password tidak cocok.");
-        return;
-      }
+            try {
+                const response = await fetch("http://localhost:4000/api/auth/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ name, email, password, confirm_password, number_phone }),
+                });
 
-      try {
-        const response = await fetch("http://localhost:4000/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password, confirm_password, number_phone }),
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Registrasi berhasil!");
+                    localStorage.setItem("user", JSON.stringify(data.user)); // opsional
+                    window.location.href = "/login"; // redirect
+                } else {
+                    alert(data.error || "Registrasi gagal.");
+                }
+            } catch (err) {
+                alert("Terjadi kesalahan pada server.");
+                console.error(err);
+            }
         });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          alert("Registrasi berhasil!");
-          localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.href = "/login";
-        } else {
-          alert(data.error || "Registrasi gagal.");
-        }
-      } catch (err) {
-        alert("Terjadi kesalahan pada server.");
-        console.error(err);
-      }
-    });
-  </script>
+    </script>
 </body>
+
 </html>

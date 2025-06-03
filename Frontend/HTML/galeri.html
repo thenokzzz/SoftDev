@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Galeri - UntukKita</title>
-  <link rel="stylesheet" href="/CSS/style.css">
+  <link rel="stylesheet" href="/CSS/galeri.css">
   <link rel="icon" type="image/png" href="/img/logo untukkita.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -16,38 +16,47 @@
 <body>
 
   <!-- Navbar -->
-  <nav>
+  <nav class="navbar">
     <div class="navbar-inner">
-      <div class="left-section">
-        <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">&#9776;</button>
-        <div class="logo">
-          <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
-          <span>Untuk<span class="highlight">Kita</span></span>
-        </div>
-        <form id="search-form" class="campaign-search" action="/campaign" method="GET">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
-          <button type="submit" hidden></button>
-        </form>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="/img/logo untukkita.png" alt="Logo UntukKita" />
+        <span>Untuk<span class="highlight">Kita</span></span>
       </div>
 
-      <div class="btn-links right-section" id="nav-menu">
-        <ul class="nav-links">
-          <li class="active"><a href="/home">Beranda</a></li>
-          <li><a href="/about">Tentang</a></li>
-          <li><a href="/campaign">Campaign</a></li>
-          <li><a href="/galeri">Galeri</a></li>
-        </ul>
+      <!-- Search Bar -->
+      <form id="search-form" class="campaign-search" action="/campaign" method="GET">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" placeholder="Cari campaign.." class="search-input" name="q" />
+        <button type="submit" hidden></button>
+      </form>
 
-        <div class="btn-links">
-          <a href="/login" id="login-button"><button class="btn-login">Login</button></a>
-          <a href="/login" id="logout-button" style="display: none"><button class="btn-login">Logout</button></a>
-          <a href="/profile" id="profile-button" style="display: none">
-            <span class="material-symbols-outlined" style="font-size: 36px; color: #9c00bc">account_circle</span>
-          </a>
-          <a href="/register"><button class="btn-donasi">Berdonasi</button></a>
-        </div>
-      </div>
+      <!-- Nav Links -->
+      <ul class="nav-links">
+        <li><a href="/home">Beranda</a></li>
+        <li><a href="/about">Tentang</a></li>
+        <li><a href="/campaign">Campaign</a></li>
+        <li class="active">Galeri</li>
+        <!-- <li><a href="#">Blog</a></li> -->
+      </ul>
+
+      <!-- Buttons -->
+      <ul class="btn-links">
+        <a href="/login" id="login-button">
+          <button class="btn-login">Login</button>
+        </a>
+        <a href="/login" id="logout-button" style="display: none;">
+          <button class="btn-login">Logout</button>
+        </a>
+        <a href="/profile" id="profile-button" style="display: none;">
+          <span class="material-symbols-outlined"
+            style="font-size: 36px; color: #9c00bc; padding: 0 10px;">account_circle</span>
+        </a>
+        <a href="/register">
+          <button class="btn-donasi">Berdonasi</button>
+        </a>
+      </ul>
     </div>
   </nav>
 
@@ -55,59 +64,6 @@
   <section class="galeri-section">
     <h2>Dokumentasi <span class="highlight">Kegiatan</span></h2>
     <div class="galeri-grid" id="galeriContainer">
-
-      <!-- Galeri 1 -->
-      <!-- <div class="galeri-card">
-        <div class="galeri-image">
-          <img src="/img/galeribanjir.jpg" alt="Donasi Bencana Alam">
-          <span class="badge">DAMPAK KEBAIKAN
-        </div>
-        <div class="galeri-content">
-          <h3>Donasi Bencana Alam</h3>
-          <p class="deskripsi">Distribusi bantuan kepada korban banjir di Jakarta Timur.</p>
-          <p class="tanggal">1 Juni 2025</p>
-        </div>
-      </div> -->
-
-      <!-- Galeri 2 -->
-      <!-- <div class="galeri-card">
-        <div class="galeri-image">
-          <img src="/img/galeritanampohon.jpg" alt="Aksi Tanam Pohon">
-          <span class="badge">DAMPAK KEBAIKAN
-        </div>
-        <div class="galeri-content">
-          <h3>Aksi Tanam Pohon</h3>
-          <p class="deskripsi">Kegiatan pelestarian lingkungan bersama MAPALA FTI.</p>
-          <p class="tanggal">17 Agustus 2024</p>
-        </div>
-      </div> -->
-
-      <!-- Galeri 3 -->
-      <!-- <div class="galeri-card">
-        <div class="galeri-image">
-          <img src="/img/galeripendidikan.jpg" alt="Penggalangan Dana Pendidikan">
-          <span class="badge">DAMPAK KEBAIKAN
-        </div>
-        <div class="galeri-content">
-          <h3>Penggalangan Dana Pendidikan</h3>
-          <p class="deskripsi"> Membantu anak-anak untuk mendapatkan pendidikan yang lebih baik.</p>
-          <p class="tanggal">7 Juni 2024</p>
-        </div>
-      </div> -->
-
-      <!-- Galeri 4 -->
-      <!-- <div class="galeri-card">
-        <div class="galeri-image">
-          <img src="/img/galeribahasaisyarat.jpg" alt="Belajar Bahasa Isyarat">
-          <span class="badge">DAMPAK KEBAIKAN
-        </div>
-        <div class="galeri-content">
-          <h3>Belajar Bahasa Isyarat</h3>
-          <p class="deskripsi">Membantu penderita penyakit tuli dengan bahasa isyarat dasar untuk berkomunikasi.</p>
-          <p class="tanggal">19 Februari 2024</p>
-        </div>
-      </div> -->
-
     </div>
   </section>
 
@@ -168,9 +124,6 @@
     </div>
   </footer>
   <script>
-    function toggleMenu() {
-      document.getElementById("nav-menu").classList.toggle("show");
-    }
     document.addEventListener("DOMContentLoaded", function () {
       const isLoggedIn = localStorage.getItem("isLoggedIn");
       const loginBtn = document.getElementById("login-button");
