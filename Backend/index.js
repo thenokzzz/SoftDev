@@ -1,11 +1,9 @@
 const express = require("express");
 require("dotenv").config();
-const session = require("express-session");
 const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { midtrans } = require("./controller/midtransController");
-
 const userRoutes = require("./Routes/userRoute");
 const authRoutes = require("./Routes/authRoute");
 const adminRoutes = require("./Routes/adminRoute");
@@ -19,19 +17,6 @@ const upload = multer({ dest: "uploads/" });
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "default_secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-      maxAge: 1000 * 60 * 60, // 1 jam
-    },
-  })
-);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -79,11 +64,7 @@ app.get("/profile", (req, res) => {
 app.get("/donation", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/donation.html"));
 });
-function ensureAdmin(req, res, next) {
-  if (req.session && req.session.admin) return next();
-  res.redirect("/admin/login");
-}
-app.get("/admin/dashboard", ensureAdmin, (req, res) => {
+app.get("/admin/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/admin_dashboard.html"));
 });
 

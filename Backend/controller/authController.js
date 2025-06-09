@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const SESSION_SECRET = process.env.SESSION_SECRET;
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const path = require("path");
 
 // Middleware auth
 exports.auth = function (req, res, next) {
@@ -14,7 +16,7 @@ exports.auth = function (req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // ✅ Simpan decoded ke req.user
+    req.user = decoded;
     next();
   } catch (err) {
     return res.status(401).json({ error: "Token tidak valid" });
@@ -25,7 +27,7 @@ exports.auth = function (req, res, next) {
 exports.profileData = async (req, res) => {
   try {
     const user = await prisma.accounts.findUnique({
-      where: { id: req.user.id }, // ✅ req.user diambil dari middleware
+      where: { id: req.user.id }, 
       select: { id: true, name: true, email: true },
     });
 
@@ -58,12 +60,16 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      { id: user.id, role: user.role }, // sertakan role di token
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    res.json({ token, role: user.role, name: user.name });
+    res.json({
+      token,
+      role: user.role,
+      name: user.name,
+    });
   } catch (err) {
     res.status(500).json({ error: "Gagal login", detail: err.message });
   }

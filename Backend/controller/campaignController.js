@@ -22,37 +22,35 @@ async function getUserCampaigns(req, res) {
 
 async function createCampaign(req, res) {
   try {
-    const { title, description, target_amount } = req.body;
+    const { title, description, target_amount_raw } = req.body;
     const userId = req.user.id;
-    if (!title || !target_amount)
-      return res
-        .status(400)
-        .json({ error: "title and target_amount required" });
 
-    // cek file gambar dari multer
+    if (!title || !target_amount_raw) {
+      return res.status(400).json({ error: "title and target_amount required" });
+    }
+
     const imageFile = req.file;
-    if (!imageFile) {
-      return res.status(400).json({ error: "Image is required" });
+    const imageFilename = imageFile ? imageFile.filename : null;
+
+    const targetAmount = Number(target_amount_raw);
+    if (isNaN(targetAmount)) {
+      return res.status(400).json({ error: "Valid target_amount required" });
     }
 
-    const targetAmount = Number(req.body.target_amount_raw);
-    if (!title || isNaN(targetAmount)) {
-      return res
-        .status(400)
-        .json({ error: "Title and valid target_amount required" });
-    }
-
-    const newCampaign = await campaignModel.createCampaign({
+    const campaign = await campaignModel.createCampaign({
       title,
       description,
       target_amount: targetAmount,
-      image: imageFile.filename,
+      image: imageFilename,
       userId,
     });
-
-    res.status(201).json(newCampaign);
+    res.status(201).json({
+      message: "Campaign berhasil ditambahkan",
+      campaign,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("ERROR:", err);
+    res.status(500).json({ error: "Terjadi kesalahan server" });
   }
 }
 
@@ -87,18 +85,11 @@ async function updateCampaign(req, res) {
         .status(400)
         .json({ error: "Title and valid target_amount required" });
     }
-
-    const imageFile = req.file;
-
     const updatedData = {
       title,
       description,
       target_amount: targetAmount,
     };
-
-    if (imageFile) {
-      updatedData.image = imageFile.filename;
-    }
 
     const updatedCampaign = await campaignModel.updateCampaign(id, updatedData);
 

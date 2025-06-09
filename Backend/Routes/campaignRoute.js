@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { auth } = require("../controller/authController");
+const adminController = require("../controller/adminController");
 const campaignController = require("../controller/campaignController");
 
 // konfigurasi storage multer
@@ -24,6 +25,7 @@ const upload = multer({ storage: storage });
 // Routes
 router.post(
   "/campaign",
+  adminController.verifyAdmin,
   upload.single("image"),
   campaignController.createCampaign
 );

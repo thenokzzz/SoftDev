@@ -5,18 +5,13 @@ const adminController = require("../controller/adminController");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-function ensureAdmin(req, res, next) {
-  if (req.session && req.session.admin) return next();
-  res.status(401).json({ message: "Unauthorized" });
-}
-
 router.get("/admin/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../../Frontend/HTML/admin_login.html"));
 });
-router.post("/login", adminController.login);
+router.post("/api/admin/login", adminController.login);
 router.post("/logout", adminController.logout);
 
-router.get("/api/admin/dashboard", ensureAdmin, async (req, res) => {
+router.get("/api/admin/dashboard", adminController.verifyAdmin, async (req, res) => {
   try {
     const donasiBulanan = await prisma.campaign.groupBy({
       by: ["createdAt"],

@@ -10,15 +10,6 @@ async function createCampaign(data) {
       target_amount: data.target_amount,
     },
   });
-
-  // Tambahkan relasi ke tabel userCampaign
-  await prisma.userCampaign.create({
-    data: {
-      userId: data.userId,
-      campaignId: campaign.id,
-    },
-  });
-
   return campaign;
 }
 

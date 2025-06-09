@@ -117,25 +117,74 @@ router.get("/admin/donations", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-// Endpoint untuk mengambil riwayat donasi berdasarkan user yang login
+
 router.get("/user/donations", auth, async (req, res) => {
   try {
-    const userId = req.user.id; // Mendapatkan ID user dari token yang sudah terverifikasi
-    
-    // Mengambil data donasi hanya milik user yang sedang login
+    const userId = req.user.id;
     const donations = await prisma.donation.findMany({
-      where: { userId: userId }, // Filter berdasarkan userId
+      where: { userId: userId },
       include: {
-        campaign: { select: { id: true, title: true } }, // Include data campaign terkait donasi
+        campaign: { select: { id: true, title: true } }, 
       },
-      orderBy: { createdAt: "desc" }, // Mengurutkan berdasarkan waktu donasi (terbaru di atas)
+      orderBy: { createdAt: "desc" }, 
     });
-
-    // Mengembalikan data donasi user
     res.json({ donations });
   } catch (error) {
     console.error("Gagal mengambil riwayat donasi:", error);
     res.status(500).json({ error: "Terjadi kesalahan saat mengambil riwayat donasi" });
+  }
+});
+
+router.get("/admin/donations/stats", async (req, res) => {
+  try {
+    const stats = await prisma.donation.groupBy({
+      by: ['campaignId'],
+      _sum: { amount: true },
+      where: { status: 'berhasil' },
+    });
+    const campaignIds = stats.map(s => s.campaignId);
+    const campaigns = await prisma.campaign.findMany({
+      where: { id: { in: campaignIds } },
+      select: { id: true, title: true }
+    });
+    const result = stats.map(s => {
+      const campaign = campaigns.find(c => c.id === s.campaignId);
+      return {
+        campaignTitle: campaign ? campaign.title : "Unknown",
+        totalDonation: s._sum.amount
+      };
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Gagal mengambil statistik donasi" });
+  }
+});
+
+router.get("/admin/donations-per-month", async (req, res) => {
+  try {
+    const donations = await prisma.donation.findMany({
+      where: {
+        status: "berhasil"
+      },
+      select: {
+        amount: true,
+        createdAt: true
+      }
+    });
+
+    const monthlyStats = Array(12).fill(0); // index 0 = Jan, 11 = Des
+
+    donations.forEach((donation) => {
+      const month = donation.createdAt.getMonth(); // 0-based
+      monthlyStats[month] += donation.amount;
+    });
+
+    res.json({ monthlyStats });
+  } catch (error) {
+    console.error("Gagal ambil donasi per bulan:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
