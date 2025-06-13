@@ -7,152 +7,144 @@
     <link rel="icon" type="image/png" href="/img/logo untukkita.png" />
     <title>Donasi</title>
     <style>
-           body {
-            font-family: sans-serif;
-            background: #f7f7f7;
-            padding: 20px;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(180deg, #f6f2fa, #fff);
+            color: #333;
         }
 
         .main-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
             max-width: 1200px;
-            margin: auto;
+            margin: 40px auto;
+            display: flex;
+            gap: 32px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .campaign-box,
+        .donation-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .campaign-box:hover,
+        .donation-box:hover {
+            transform: translateY(-4px);
         }
 
         .campaign-box {
             flex: 2;
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .donation-box {
             flex: 1;
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .campaign-box img {
             width: 100%;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            border-radius: 12px;
+            margin: 20px 0;
         }
 
         #campaign-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 12px;
-            color: #333;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4b006e;
         }
 
         #campaign-description {
             font-size: 1rem;
-            line-height: 1.6;
-            color: #555;
+            line-height: 1.7;
             margin-bottom: 16px;
         }
 
         #campaign-target {
+            display: inline-block;
             color: #9c00bc;
             font-weight: bold;
-            margin-bottom: 12px;
-            display: block;
+            margin-top: 6px;
         }
 
-        .progress-container {
-            background-color: #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            height: 16px;
-            margin-bottom: 16px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background-color: #9c00bc;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .progress-info {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 16px;
-        }
-
-        .btn-donasi {
-            background-color: #9c00bc;
-            color: #fff;
-            border: none;
-            padding: 12px 16px;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-donasi:hover {
-            background-color: #7b029c;
-        }
-
-        .donation-box h3 {
+        h3 {
+            color: #4b006e;
             margin-bottom: 8px;
         }
 
         .nominal-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 16px;
         }
 
         .nominal-buttons button {
-            padding: 10px 16px;
+            padding: 10px 20px;
+            border-radius: 24px;
+            background: #f0ebf4;
             border: 1px solid #ccc;
-            background: #fff;
-            border-radius: 20px;
+            font-size: 0.95rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .nominal-buttons button.selected {
+        .nominal-buttons button:hover {
+            background: #e4d5ee;
+        }
+
+        .nominal-buttons .selected {
             background: #9c00bc;
-            color: #fff;
+            color: white;
             border-color: #68017c;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 10px;
             border: 1px solid #ccc;
+            font-size: 1rem;
             margin-bottom: 8px;
         }
 
         .note {
-            font-size: 12px;
-            color: #888;
+            font-size: 0.85rem;
+            color: #777;
             margin-bottom: 16px;
         }
 
         button.submit {
             width: 100%;
             background: #9c00bc;
-            color: #fff;
+            color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
             font-weight: bold;
-            border-radius: 8px;
+            font-size: 1rem;
+            border-radius: 10px;
             cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button.submit:hover {
+            background: #7b029c;
         }
 
         .partner-logos {
-            margin-top: 30px;
+            margin-top: 32px;
             text-align: center;
+        }
+
+        .partner-logos p {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 12px;
         }
 
         .partner-logos-row {
@@ -169,31 +161,52 @@
         .logo-divider {
             width: 2px;
             height: 40px;
-            background-color: purple;
+            background-color: #9c00bc;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
-<div class="main-container">
-
+<body>
+    <div class="main-container">
         <!-- Kiri: Informasi Campaign -->
         <div class="campaign-box">
             <h1 id="campaign-title">Memuat Judul Campaign...</h1>
-            <img id="campaign-image" src="" alt="Campaign Image">
+            <img id="campaign-image" src="" alt="Campaign Image" />
             <p id="campaign-description">Memuat deskripsi campaign...</p>
-            <p><strong>Target Donasi:</strong> Rp <span id="campaign-target">-</span></p>
+            <p><strong>Target Donasi:</strong> <span id="campaign-target">-</span></p>
+            <div style="margin-top: 24px;">
+                <p>Bagikan campaign ini:</p>
+                <button onclick="shareTo('whatsapp')"
+                    style="background: #25D366; color: white; border: none; padding: 8px 12px; border-radius: 6px;">WhatsApp</button>
+                <button onclick="shareTo('twitter')"
+                    style="background: #1DA1F2; color: white; border: none; padding: 8px 12px; border-radius: 6px;">Twitter</button>
+            </div>
 
-            <button id="donate-btn" class="btn-donasi">Donasi Sekarang</button>
+            <!-- Catatan Transparansi -->
+            <p style="margin-top: 24px; font-size: 13px; color: #999;">
+                🔒 Transaksi aman via Midtrans. Laporan penyaluran akan diumumkan setelah campaign selesai.
+            </p>
         </div>
 
         <!-- Kanan: Form Donasi -->
         <div class="donation-box">
             <h3>Nominal</h3>
-            <p>Pilih nominal yang tersedia</p>
+            <p>Pilih nominal yang tersedia:</p>
             <div class="nominal-buttons">
                 <button type="button" data-value="10000">Rp10.000</button>
                 <button type="button" data-value="50000">Rp50.000</button>
-                <button type="button" data-value="75000">Rp75.000</button>
                 <button type="button" data-value="100000">Rp100.000</button>
             </div>
 
@@ -205,20 +218,26 @@
             <div class="partner-logos">
                 <p>Official Partner</p>
                 <div class="partner-logos-row">
-                    <img src="/img/logo untukkita.png" alt="UntukKita Logo" />
+                    <img src="/img/logo untukkita.png" alt="Logo Untuk Kita" />
                     <div class="logo-divider"></div>
-                    <img src="/img/logo mapala fti.png" alt="Mapala FTI Logo" />
+                    <img src="/img/logo mapala fti.png" alt="Logo Mapala FTI" />
                 </div>
             </div>
         </div>
-
     </div>
-
-</body>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="SB-Mid-client-VZaDJq0aNmWe6v0W"></script>
 
     <script>
+        function shareTo(platform) {
+            const url = window.location.href;
+            const text = encodeURIComponent("Yuk bantu campaign ini!");
+            if (platform === "whatsapp") {
+                window.open(`https://wa.me/?text=${text}%20${url}`);
+            } else if (platform === "twitter") {
+                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+            }
+        }
         function formatRupiah(angka) {
             if (!angka) return "";
             const numberString = angka.toString().replace(/[^,\d]/g, '');
@@ -345,32 +364,37 @@
                 alert("Terjadi kesalahan saat memproses donasi.");
             }
         });
-          const params = new URLSearchParams(window.location.search);
-    const campaignId = params.get("campaignId");
+        const params = new URLSearchParams(window.location.search);
+        const campaignId = params.get("campaignId");
 
-    if (!campaignId) {
-      document.body.innerHTML = "<h2>Campaign tidak ditemukan.</h2>";
-      throw new Error("Campaign ID tidak ditemukan di URL.");
-    }
+        if (!campaignId) {
+            document.body.innerHTML = "<h2>Campaign tidak ditemukan.</h2>";
+            throw new Error("Campaign ID tidak ditemukan di URL.");
+        }
 
-    const apiUrl = `http://localhost:4000/api/campaign/${campaignId}`;
+        const apiUrl = `http://localhost:4000/api/campaign/${campaignId}`;
 
-    fetch(apiUrl)
-      .then(res => res.json())
-      .then(campaign => {
-        document.getElementById("campaign-title").textContent = campaign.title;
-        document.getElementById("campaign-description").textContent = campaign.description;
-        document.getElementById("campaign-target").textContent = Number(campaign.goalAmount).toLocaleString("id-ID");
-        document.getElementById("campaign-image").src = `/uploads/${campaign.image}`;
+        fetch(apiUrl)
+            .then(res => res.json())
+            .then(campaign => {
+                console.log("Campaign:", campaign);
+                const collected = campaign.currentAmount
+                const target = campaign.target_amount
 
-        document.getElementById("donate-btn").onclick = () => {
-          window.location.href = `/donation?campaignId=${campaign.id}`;
-        };
-      })
-      .catch(err => {
-        console.error(err);
-        document.body.innerHTML = "<h2>Gagal memuat campaign.</h2>";
-      });
+                document.getElementById("campaign-title").textContent = campaign.title;
+                document.getElementById("campaign-description").textContent = campaign.description;
+                if (target == null || isNaN(target)) {
+                    console.warn("Target tidak valid:", target);
+                    document.getElementById("campaign-target").textContent = "Data tidak tersedia";
+                } else {
+                    document.getElementById("campaign-target").textContent = formatRupiah(target);
+                }
+                document.getElementById("campaign-image").src = `/uploads/${campaign.image}`;
+                loadRecentDonations(campaign.id);
+            })
+            .catch(err => {
+                console.error(err);
+            });
 
     </script>
 </body>

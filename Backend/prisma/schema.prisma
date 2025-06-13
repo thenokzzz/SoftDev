@@ -24,7 +24,6 @@ model Accounts {
   created_at   DateTime       @default(now())
   updated_at   DateTime       @default(now())
   donations    Donation[]
-  
 }
 
 enum Role {

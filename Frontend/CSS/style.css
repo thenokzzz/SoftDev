@@ -37,6 +37,7 @@ nav {
 /* Logo */
 .logo {
   display: flex;
+  text-decoration: none;
   align-items: center;
   font-size: 22px;
   font-weight: bold;
