@@ -179,7 +179,7 @@
           card.className = "campaign-card";
           card.innerHTML = `
           <img src="/uploads/${c.image}" alt="${c.title}" />
-          <h3><a href="#">${c.title}</a></h3>
+          <h3><a href="/campaign_detail.html?id=${c.id}">${c.title}</a></h3>
           <p>${c.description}</p>
           <div class="progress-bar">
             <div class="progress-fill" style="width: ${percentage}%"></div>

@@ -41,6 +41,7 @@ model Campaign {
   image            String? // Tambahan kolom untuk menyimpan path atau URL gambar
   createdAt        DateTime       @default(now())
   donations        Donation[]
+
 }
 
 
