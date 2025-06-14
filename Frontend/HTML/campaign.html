@@ -156,8 +156,8 @@
 
       try {
         const apiUrl = keyword
-          ? `http://localhost:4000/api/search?q=${encodeURIComponent(keyword)}`
-          : "http://localhost:4000/api/campaign";
+          ? `https://untukkita.up.railway.app/api/search?q=${encodeURIComponent(keyword)}`
+          : "https://untukkita.up.railway.app/api/campaign";
 
         const response = await fetch(apiUrl);
         const campaigns = await response.json();

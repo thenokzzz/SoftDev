@@ -302,7 +302,7 @@
       // Load semua campaign (default)
       async function loadAllCampaigns() {
         try {
-          const res = await fetch("http://localhost:4000/api/campaign");
+          const res = await fetch("https://untukkita.up.railway.app/api/campaign");
           const campaigns = await res.json();
           renderCampaigns(campaigns);
         } catch (err) {
