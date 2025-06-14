@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/pay", midtrans);
 app.use(express.static(path.join(__dirname, "../Frontend")));
-app.use("/uploads", express.static(path.join(__dirname, "Backend/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/accounts", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/", adminRoutes);
