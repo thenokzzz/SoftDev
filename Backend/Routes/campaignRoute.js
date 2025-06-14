@@ -9,7 +9,7 @@ const path = require("path");
 // konfigurasi storage multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../Frontend/public/uploads"));
+    cb(null, path.join(__dirname, "../Backend/uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
