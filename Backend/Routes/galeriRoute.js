@@ -6,7 +6,7 @@ const galleryController = require("../controller/galeriController"); // controll
 // konfigurasi storage multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads"); // folder tempat gambar disimpan
+    cb(null, path.join(__dirname, "../Frontend/public/uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
@@ -16,11 +16,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Routes untuk galeri
-router.post(
-  "/galeri",
-  upload.single("image"),
-  galleryController.createGallery
-);
+router.post("/galeri", upload.single("image"), galleryController.createGallery);
 
 router.put(
   "/galeri/:id",

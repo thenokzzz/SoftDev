@@ -4,11 +4,12 @@ const multer = require("multer");
 const { auth } = require("../controller/authController");
 const adminController = require("../controller/adminController");
 const campaignController = require("../controller/campaignController");
+const path = require("path");
 
 // konfigurasi storage multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads"); // folder tempat gambar disimpan
+    cb(null, path.join(__dirname, "../Frontend/public/uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname);
@@ -42,9 +43,7 @@ router.get("/campaign", campaignController.getAllCampaigns);
 router.get("/campaign/:id", campaignController.getCampaignById);
 router.delete("/campaign/:id", campaignController.deleteCampaign);
 router.get("/donation", requireLogin, (req, res) => {
-res.sendFile(path.join(__dirname, "../Frontend/HTML/donation.html"));
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/donation.html"));
 });
-
-
 
 module.exports = router;
