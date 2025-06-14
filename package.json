@@ -1,8 +1,12 @@
 {
   "name": "softdev",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node Backend/index.js",
+    "postinstall": "npx prisma generate",
+    "migrate": "npx prisma migrate deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +39,5 @@
   },
   "devDependencies": {
     "prisma": "^6.8.2"
-  },
-  "description": ""
+  }
 }
