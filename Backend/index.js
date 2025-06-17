@@ -37,7 +37,7 @@ app.use("/api", galeriRoute);
 app.use("/api", donationRoute);
 
 app.get("/", (req, res) => {
-  res.send("Server aktif.");
+  res.sendFile(path.join(__dirname, "../Frontend/HTML/login.html"));
 });
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/HTML/home.html"));
